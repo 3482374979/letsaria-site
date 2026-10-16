@@ -1,0 +1,67 @@
+:root{
+  --bg:#ffffff; --surface:#f5f5f7; --ink:#1d1d1f; --ink-2:#6e6e73; --line:#d2d2d7;
+  --accent:#2563eb; --notice-bg:#fff7e6; --notice-line:#f5a623; --draft-bg:#fde8e8; --draft-ink:#9b1c1c;
+  --radius:12px; --measure:44rem;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#1c1c1e; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#38383a;
+    --accent:#6b9bff; --notice-bg:#2b2410; --notice-line:#c98a12; --draft-bg:#3a1414; --draft-ink:#ffb4b4;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#1c1c1e; --ink:#f5f5f7; --ink-2:#a1a1a6; --line:#38383a;
+  --accent:#6b9bff; --notice-bg:#2b2410; --notice-line:#c98a12; --draft-bg:#3a1414; --draft-ink:#ffb4b4;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--accent)}
+.top{max-width:var(--measure);margin:0 auto;padding:16px 16px 8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.brand{font-weight:700;font-size:20px;text-decoration:none;color:var(--ink);margin-right:auto}
+.lang{font-size:15px;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--ink)}
+.top nav{width:100%;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:15px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.top nav a{text-decoration:none;color:var(--ink-2);padding:4px 0}
+.top nav a[aria-current=page]{color:var(--ink);font-weight:600}
+.doc{max-width:var(--measure);margin:0 auto;padding:8px 16px 40px}
+h1{font-size:28px;line-height:1.3;margin:20px 0 12px}
+h2{font-size:21px;line-height:1.4;margin:36px 0 10px;padding-top:4px}
+h3{font-size:18px;margin:24px 0 8px}
+p,li{margin:0 0 10px}
+ul,ol{padding-left:1.4em;margin:0 0 12px}
+li>ul,li>ol{margin-top:6px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:var(--surface);padding:1px 5px;border-radius:6px}
+hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+.notice{background:var(--notice-bg);border-left:4px solid var(--notice-line);border-radius:8px;padding:12px 14px;margin:16px 0}
+.notice p{margin:0}
+.draft{background:var(--draft-bg);color:var(--draft-ink);border-radius:8px;padding:10px 14px;font-size:15px;font-weight:600}
+.toc{background:var(--surface);border-radius:var(--radius);padding:10px 16px;margin:12px 0 8px}
+.toc summary{cursor:pointer;font-weight:600}
+.toc ol{margin:10px 0 4px;font-size:15px}
+.table{margin:12px 0 18px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.55}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface);font-weight:600}
+footer{border-top:1px solid var(--line);background:var(--surface)}
+.biz{max-width:var(--measure);margin:0 auto;padding:20px 16px 32px;font-size:13px;line-height:1.7;color:var(--ink-2)}
+.biz span{display:inline-block;margin-right:14px}
+.biz b{font-weight:600;color:var(--ink)}
+.bizcheck{margin-left:4px;font-size:12px}
+.langpick{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.langpick a{display:block;min-width:140px;text-align:center;padding:14px 18px;border-radius:var(--radius);background:var(--surface);text-decoration:none;color:var(--ink);font-weight:600}
+@media (max-width: 640px){
+  body{font-size:16px}
+  h1{font-size:24px}
+  .table.grid table,.table.grid thead,.table.grid tbody,.table.grid tr,.table.grid td{display:block;width:100%}
+  .table.grid thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .table.grid tr{border:1px solid var(--line);border-radius:var(--radius);margin:0 0 12px;overflow:hidden}
+  .table.grid td{border:0;border-top:1px solid var(--line);padding:8px 12px}
+  .table.grid td:first-child{border-top:0;background:var(--surface);font-weight:600}
+  .table.grid td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:2px}
+  .table.kv th:first-child,.table.kv td:first-child{width:38%}
+}
+@media print{.top nav,.lang,.toc{display:none}body{font-size:12pt}}
