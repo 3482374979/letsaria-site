@@ -1,55 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://aria.lipson.kr/ko/</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aria.lipson.kr/"/>
+    <loc>https://letsaria.com/ko/</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://letsaria.com/"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/ko/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/privacy.html"/>
+    <loc>https://letsaria.com/ko/privacy.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/privacy.html"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/ko/terms.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/terms.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/terms.html"/>
+    <loc>https://letsaria.com/ko/terms.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/terms.html"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/ko/ai-notice.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/ai-notice.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/ai-notice.html"/>
+    <loc>https://letsaria.com/ko/ai-notice.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/ai-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/ai-notice.html"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/ko/support.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/support.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/support.html"/>
+    <loc>https://letsaria.com/ko/support.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/support.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/support.html"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/en/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://aria.lipson.kr/"/>
+    <loc>https://letsaria.com/en/</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://letsaria.com/"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/en/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/privacy.html"/>
+    <loc>https://letsaria.com/en/privacy.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/privacy.html"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/en/terms.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/terms.html"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/terms.html"/>
+    <loc>https://letsaria.com/en/terms.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/terms.html"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/en/ai-notice.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/ai-notice.html"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/ai-notice.html"/>
+    <loc>https://letsaria.com/en/ai-notice.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/ai-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/ai-notice.html"/>
   </url>
   <url>
-    <loc>https://aria.lipson.kr/en/support.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://aria.lipson.kr/en/support.html"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://aria.lipson.kr/ko/support.html"/>
+    <loc>https://letsaria.com/en/support.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://letsaria.com/en/support.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/support.html"/>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/iphone-calendar-app/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/ai-schedule-assistant/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/todo-list-app/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/calendar-planner-app/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/routine-habit-app/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/iphone-todo-alarm/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/photo-to-schedule/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/meeting-recording-summary/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/add-tasks-by-voice/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/iphone-todo-widget/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/import-apple-reminders/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/notifications-not-working/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/calendar-not-showing/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/sync-not-working/</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://letsaria.com/ko/guide/faq/</loc>
+    <lastmod>2026-10-17</lastmod>
   </url>
 </urlset>
