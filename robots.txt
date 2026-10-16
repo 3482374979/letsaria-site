@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://letsaria.com/sitemap.xml
+Sitemap: https://letsaria.com/sitemap-guide.xml
