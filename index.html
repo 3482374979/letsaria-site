@@ -2,6 +2,16 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<script>
+(function(){var d=document,l=location,K='aria-lang',cur=l.pathname.indexOf('/en/')===0?'en':'ko',t=null,m=/[?&]lang=(ko|en)(&|$)/.exec(l.search);
+function g(){try{return localStorage.getItem(K)}catch(e){return null}}
+function s(v){try{localStorage.setItem(K,v)}catch(e){}}
+d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lang]');if(a)s(a.getAttribute('data-lang'))});
+if(navigator.webdriver||/bot|crawl|spider|slurp|google|bing|yeti|naver|daum|baidu|duckduck|facebookexternalhit|preview|lighthouse/i.test(navigator.userAgent))return;
+if(m){t=m[1];s(t)}else if(l.hash){s(cur);return}else{t=g();if(t!=='ko'&&t!=='en'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'';t=/^ko/i.test(n)?'ko':'en'}}
+if(t!==cur)l.replace(t==='en'?'/en/':'/');
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="referrer" content="no-referrer">
@@ -66,7 +76,7 @@
   <div class="wrap">
     <a class="brand" href="/"><img src="/start/aria-icon.png" width="28" height="28" alt="">Aria</a>
     <a class="nav" href="/ko/guide/">가이드</a>
-    <a class="nav" href="/en/" hreflang="en" lang="en">English</a>
+    <a class="nav" href="/en/" hreflang="en" lang="en" data-lang="en">English</a>
   </div>
 </header>
 
@@ -322,7 +332,7 @@
       <a href="/ko/privacy.html">개인정보 처리방침</a>
       <a href="/ko/terms.html">이용약관</a>
       <a href="/ko/ai-notice.html">AI 이용 안내</a>
-      <a href="/en/" hreflang="en" lang="en">English</a>
+      <a href="/en/" hreflang="en" lang="en" data-lang="en">English</a>
     </nav>
     <p>문의 <a href="mailto:support@letsaria.com">support@letsaria.com</a></p>
     <p>주식회사 립슨 · 대표 김현기 · 사업자등록번호 259-86-00120 · 통신판매업 신고 2015-서울강남-01818호 · (06048) 서울특별시 강남구 언주로147길 16 (논현동) 3층</p>

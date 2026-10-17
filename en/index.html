@@ -2,48 +2,340 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+(function(){var d=document,l=location,K='aria-lang',cur=l.pathname.indexOf('/en/')===0?'en':'ko',t=null,m=/[?&]lang=(ko|en)(&|$)/.exec(l.search);
+function g(){try{return localStorage.getItem(K)}catch(e){return null}}
+function s(v){try{localStorage.setItem(K,v)}catch(e){}}
+d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lang]');if(a)s(a.getAttribute('data-lang'))});
+if(navigator.webdriver||/bot|crawl|spider|slurp|google|bing|yeti|naver|daum|baidu|duckduck|facebookexternalhit|preview|lighthouse/i.test(navigator.userAgent))return;
+if(m){t=m[1];s(t)}else if(l.hash){s(cur);return}else{t=g();if(t!=='ko'&&t!=='en'){var n=(navigator.languages&&navigator.languages[0])||navigator.language||'';t=/^ko/i.test(n)?'ko':'en'}}
+if(t!==cur)l.replace(t==='en'?'/en/':'/');
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Say it and Aria turns it into tasks, events and notes. An AI planner that keeps your to-do list, calendar and daily planner in one conversation.">
 <meta name="referrer" content="no-referrer">
-<title>Aria — AI Planner, To-Do List &amp; Calendar for iPhone, iPad and Mac</title>
-<link rel="stylesheet" href="../style.css">
+<title>Aria — AI assistant for tasks and calendar, just say it</title>
+<meta name="description" content="Aria is an AI assistant that turns one spoken or typed sentence into tasks and events. Morning briefing, tasks and calendar in one view, routines and widgets on iPhone, iPad, Mac and Apple Watch. Free to start.">
+<meta name="robots" content="index,follow">
 <link rel="canonical" href="https://letsaria.com/en/">
+<link rel="alternate" hreflang="ko" href="https://letsaria.com/">
 <link rel="alternate" hreflang="en" href="https://letsaria.com/en/">
-<link rel="alternate" hreflang="ko" href="https://letsaria.com/ko/">
 <link rel="alternate" hreflang="x-default" href="https://letsaria.com/">
 <meta name="apple-itunes-app" content="app-id=6776524212">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Aria">
-<meta property="og:title" content="Aria — AI Planner, To-Do List &amp; Calendar for iPhone, iPad and Mac">
-<meta property="og:description" content="Say it and Aria turns it into tasks, events and notes. An AI planner that keeps your to-do list, calendar and daily planner in one conversation.">
-<meta property="og:url" content="https://letsaria.com/en/">
 <meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="ko_KR">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aria — AI Planner, To-Do List &amp; Calendar for iPhone, iPad and Mac">
-<meta name="twitter:description" content="Say it and Aria turns it into tasks, events and notes. An AI planner that keeps your to-do list, calendar and daily planner in one conversation.">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Aria: AI Task Manager", "alternateName": "Aria", "description": "Say it and Aria turns it into tasks, events and notes. An AI planner that keeps your to-do list, calendar and daily planner in one conversation.", "url": "https://letsaria.com/en/", "applicationCategory": "ProductivityApplication", "operatingSystem": "iOS, iPadOS, macOS", "inLanguage": ["ko", "en"], "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Lipson Inc.", "email": "support@letsaria.com", "url": "https://letsaria.com/en/"}, "installUrl": "https://apps.apple.com/app/id6776524212"}</script>
+<meta property="og:url" content="https://letsaria.com/en/">
+<meta property="og:title" content="Aria — AI assistant for tasks and calendar, just say it">
+<meta property="og:description" content="One sentence becomes tasks and events. Free to start on iPhone, iPad, Mac and Apple Watch.">
+<meta property="og:image" content="https://letsaria.com/assets/og-guide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/start/aria-icon.png">
+<link rel="apple-touch-icon" href="/start/aria-icon.png">
+<link rel="stylesheet" href="/home.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MobileApplication",
+      "@id": "https://letsaria.com/en/#app",
+      "name": "Aria",
+      "alternateName": "Aria: AI assistant for tasks and calendar",
+      "description": "An AI assistant app that turns one spoken or typed sentence into tasks and events.",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "iOS, iPadOS, macOS, watchOS",
+      "inLanguage": ["en", "ko"],
+      "url": "https://letsaria.com/en/",
+      "downloadUrl": "https://apps.apple.com/app/id6776524212",
+      "installUrl": "https://apps.apple.com/app/id6776524212",
+      "image": "https://letsaria.com/start/aria-icon.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@id": "https://letsaria.com/en/#org" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://letsaria.com/en/#org",
+      "name": "LIPSON Inc.",
+      "alternateName": "주식회사 립슨",
+      "url": "https://letsaria.com/en/",
+      "logo": "https://letsaria.com/start/aria-icon.png",
+      "email": "support@letsaria.com"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header class="top">
-<a class="brand" href="index.html">Aria</a>
-<a class="lang" href="../ko/index.html" hreflang="ko" lang="ko">한국어</a>
-<nav aria-label="Documents"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="ai-notice.html">AI Notice</a><a href="support.html">Support</a></nav>
+  <div class="wrap">
+    <a class="brand" href="/en/"><img src="/start/aria-icon.png" width="28" height="28" alt="">Aria</a>
+    <a class="nav" href="/" hreflang="ko" lang="ko" data-lang="ko">한국어</a>
+  </div>
 </header>
-<main class="doc">
 
-<h1 id="aria">Aria</h1>
-<p>Aria is an AI planner for iPhone, iPad and Mac. Say it, and it becomes tasks, events and notes — your to-do list, calendar and daily planner in one conversation.</p>
-<p><a href="https://apps.apple.com/app/id6776524212" rel="noopener">Download on the App Store</a></p>
-<h2 id="what-aria-does">What Aria does</h2>
-<ul><li>Type or speak, and Aria files it as tasks, events or scraps. Undo right on the card.</li><li>A morning briefing of two or three sentences on what matters today, and an evening look at what’s left and what comes first tomorrow.</li><li>Today, Upcoming, Someday and Inbox, plus Day, 3-Day, Week and Month calendar views. Drag a task onto the grid to schedule it.</li><li>Repeating tasks, subtasks, categories, routines with streaks, deadline alerts that step up, and location reminders.</li><li>Scraps, Time Capsule and Synapse connect what you save. Search by meaning, not just exact words.</li><li>Home and Lock Screen widgets, Siri and Shortcuts. Sign in with Apple to sync iPhone, iPad and Mac.</li></ul>
-<p>Everything except AI is free, and AI is free up to a daily allowance. Aria is built on generative AI, and nothing is sent to an AI provider until you agree.</p>
-<h2 id="documents">Documents</h2>
-<ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="ai-notice.html">Generative AI Notice</a></li><li><a href="support.html">Support</a></li></ul>
-<h2 id="contact">Contact</h2>
-<p>support@letsaria.com</p>
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <img class="hero-icon" src="/start/aria-icon.png" width="76" height="76" alt="Aria app icon">
+      <h1><span class="h1-name">Aria</span><span class="h1-line">Just say it.<br>Tasks and events, sorted.</span></h1>
+      <p class="hero-sub">Tasks and calendar in one AI assistant. One sentence is all it takes.</p>
+      <div class="cta">
+        <a class="btn" href="https://apps.apple.com/app/id6776524212">Get it on the App Store</a>
+        <p class="cta-note">Free to start · iPhone · iPad · Mac · Apple Watch</p>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="/assets/home/en/home-chat.webp" width="800" height="1353" decoding="async" style="display:block;width:100%;height:auto;border-radius:36px" alt="Aria chat screen: one sentence split into task and event cards">
+    </div>
+  </div>
+</section>
+
+<section class="feat" id="talk">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Just say it</p>
+      <h2>One sentence.<br>Tasks and events.</h2>
+      <p class="lead">“Report by Friday, team meeting tomorrow at 3 pm.” Say it or type it, and Aria turns it into one task and one event.</p>
+      <ul class="points">
+        <li>A long message becomes task suggestions you can add all at once with Add all.</li>
+        <li>When you need fresh information, Aria searches the web and answers with sources.</li>
+        <li>Record a meeting or lecture to get a transcript, a summary and to-dos.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-chat.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria chat screen: one sentence split into task and event cards"></figure>
+  </div>
+</section>
+
+<section class="feat" id="morning">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Morning briefing · Dashboard</p>
+      <h2>Mornings:<br>only what matters.</h2>
+      <p class="lead">Your briefing gives today’s schedule and what to do first in two or three sentences. You can listen to it, too.</p>
+      <ul class="points">
+        <li>Start your first task with a single timer from Start today. The time left shows on your Lock Screen and in the Dynamic Island.</li>
+        <li>The Today dashboard shows your day as a flow graph. Switch to a timeline in Settings.</li>
+        <li>In the evening, review what is left and what slipped, then reschedule everything at once. A weekly briefing looks back when the week ends.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-briefing.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria dashboard: the day-flow graph and morning briefing"></figure>
+  </div>
+</section>
+
+<section class="feat" id="plan">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Tasks · Calendar</p>
+      <h2>Tasks and calendar,<br>together.</h2>
+      <p class="lead">Move between Today, Upcoming, Someday and Inbox lists and Day, 3-Day, Week and Month calendars, and see tasks and events side by side.</p>
+      <ul class="points">
+        <li>Drag a task onto the timetable to give it a time, and drag events to move them.</li>
+        <li>Write “tomorrow at 3 pm” and Aria understands.</li>
+        <li>Sort tasks with an Eisenhower matrix: four boxes of important and urgent.</li>
+        <li>See your device calendar events alongside, and import Apple Reminders.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-calendar.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria calendar: month view with the day’s tasks and events below"></figure>
+  </div>
+</section>
+
+<section class="feat" id="remind">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Subtasks · Reminders</p>
+      <h2>Big tasks, small steps.<br>Reminders that stick.</h2>
+      <p class="lead">Break a big task into subtasks. Set the due date and reminder right below.</p>
+      <ul class="points">
+        <li>Check off subtasks right from the list.</li>
+        <li>A task that must ring can sound as an alarm, even on silent or in a Focus.</li>
+        <li>Set reminders for each stage of a deadline, and for when you arrive at or leave a place.</li>
+        <li>Slide a ruler to pick the alarm time and date in one go.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-subtasks.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria task detail: subtasks with due date and reminder"></figure>
+  </div>
+</section>
+
+<section class="feat" id="routine">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Routines</p>
+      <h2>Routines,<br>step by step.</h2>
+      <p class="lead">Turn what you do every day into a routine, and your streak builds.</p>
+      <ul class="points">
+        <li>A timer for each step leads you to the next one.</li>
+        <li>Check routines off right from a widget, and look back on the week in your weekly briefing.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-routine.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria routine walkthrough: a step timer"></figure>
+  </div>
+</section>
+
+<section class="feat" id="photo">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Photo and screenshot to plan</p>
+      <h2>From a photo<br>to a plan.</h2>
+      <p class="lead">Share a flyer photo, a screenshot of a notice or a PDF schedule with Aria. It finds the dates and suggests events and reminders.</p>
+      <ul class="points">
+        <li>Share it to Aria and it sorts the content into events, tasks and scraps. You can also save it as is to your scraps.</li>
+        <li>Aria can look at photos you attach and turn them into tasks, even on the free plan.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-photo-schedule.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria screen: three events found in a shared photo with an Add all button"></figure>
+  </div>
+</section>
+
+<section class="feat" id="memory">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Memory · Synapse</p>
+      <h2>Your notes,<br>connected.</h2>
+      <p class="lead">Keep notes, links and files in one place with Scrap. Synapse maps the people, topics and ideas in them.</p>
+      <ul class="points">
+        <li>Search by meaning even when the words differ, and jump straight to anything on the Synapse map.</li>
+        <li>People in your Synapse appear on the dashboard under People, with their related events and tasks.</li>
+        <li>Reopen today as it was 1 week to 1 year ago with Time Capsule.</li>
+        <li>What you tell Aria carries into later chats, and you can view, edit and delete memories in Settings.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-synapse.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria dashboard: the Synapse map and Scrap"></figure>
+  </div>
+</section>
+
+<section class="feat" id="widgets">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">Widgets · Shortcuts</p>
+      <h2>Before you open the app,<br>on your Home Screen.</h2>
+      <p class="lead">Put task, routine, D-day and monthly calendar widgets on your Home Screen and Lock Screen, and finish tasks right from a widget.</p>
+      <ul class="points">
+        <li>Reach Aria from Control Center, the Action button, Siri and Shortcuts.</li>
+        <li>Press and hold the app icon for the Ask Aria and Add task quick actions.</li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="/assets/home/en/home-widgets.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria task, routine and D-day widgets on an iPhone Home Screen"></figure>
+  </div>
+</section>
+
+<section class="feat" id="devices">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="eyebrow">iPhone · iPad · Mac · Apple Watch</p>
+      <h2>All the way to your wrist,<br>one shared record.</h2>
+      <p class="lead">Sign in with Apple and your devices share the same record. Aria supports Korean and English.</p>
+      <ul class="devices">
+        <li><b>iPhone</b><span>Home Screen and Lock Screen widgets, Control Center, Action button, Dynamic Island</span></li>
+        <li><b>iPad</b><span>Tasks and calendar together on a bigger screen</span></li>
+        <li><b>Mac</b><span>Aria one click away in the menu bar</span></li>
+        <li><b>Apple Watch<em>New</em></b><span>Check off today’s tasks on your wrist and ask Aria by voice</span></li>
+      </ul>
+    </div>
+    <figure class="shot shot-watch"><img src="/assets/home/home-watch.webp" width="720" height="1008" loading="lazy" decoding="async" alt="Aria on Apple Watch: all of today’s tasks done"></figure>
+  </div>
+</section>
+
+<section class="feat band" id="privacy">
+  <div class="wrap feat-in solo">
+    <p class="eyebrow">Privacy · AI</p>
+    <h2>Only after you agree,<br>only what is needed.</h2>
+    <ul class="points">
+      <li>When you start, Aria first explains what goes where, and uses AI only after you agree.</li>
+      <li>Chat, briefings, automatic organizing and Synapse use Anthropic (Claude). Search by meaning uses OpenAI embeddings. You can withdraw consent anytime in Settings › AI.</li>
+      <li>Only what a request needs is sent, over an encrypted connection, and never your account identifier or email. Aria and its AI providers do not use your data to train AI models.</li>
+      <li>There are no ads in the app. You can start without signing in, and delete your account and data right in the app.</li>
+    </ul>
+    <p class="more"><a href="/en/ai-notice.html">AI Notice ›</a><a href="/en/privacy.html">Privacy Policy ›</a></p>
+  </div>
+</section>
+
+<section class="feat" id="pricing">
+  <div class="wrap feat-in solo">
+    <p class="eyebrow">Pricing</p>
+    <h2>Start free.</h2>
+    <p class="lead">Every feature that is not AI is free. Choose Aria Pro only when you want to do more.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>Free</h3>
+        <p class="tag">Yours the moment you download</p>
+        <ul class="points">
+          <li>Every non-AI feature is free</li>
+          <li>20 AI questions a day, refilled daily</li>
+          <li>AI looks at photos you attach and turns them into tasks</li>
+          <li>Web search and Look it up, 3 times a day</li>
+        </ul>
+      </div>
+      <div class="plan pro">
+        <h3>Aria Pro</h3>
+        <p class="tag">Monthly or yearly, auto-renewing subscription</p>
+        <ul class="points">
+          <li>Up to 200 AI questions a day</li>
+          <li>Web search and Look it up, 10 times a day</li>
+          <li>Multiple alarms per task</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">Prices are shown in your local currency in the app and on the App Store before you buy. A daily fair-use limit keeps the service reliable. Manage or cancel your subscription in the Subscriptions section of your Apple Account settings.</p>
+  </div>
+</section>
+
+<section class="feat" id="faq">
+  <div class="wrap feat-in solo">
+    <p class="eyebrow">FAQ</p>
+    <h2>Questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Is it really free?</summary>
+        <p>Yes. You can download it free from the App Store, and every non-AI feature is free. AI questions are free up to 20 a day, refilled every day.</p>
+      </details>
+      <details>
+        <summary>Do I have to sign in?</summary>
+        <p>You can start right away without signing in. Sign in with Apple and your devices share the same record.</p>
+      </details>
+      <details>
+        <summary>Is my data used to train AI?</summary>
+        <p>No. Aria and its AI providers do not use your data to train AI models. What is sent and where is described in the <a href="/en/ai-notice.html">AI Notice</a>.</p>
+      </details>
+      <details>
+        <summary>What about my existing calendar and reminders?</summary>
+        <p>Aria shows your device calendar events alongside your own, and can import your Apple Reminders lists. It only reads Reminders and never deletes or changes them. Need help? Write to <a href="/en/support.html">Support</a>.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <img class="hero-icon" src="/start/aria-icon.png" width="76" height="76" loading="lazy" alt="">
+    <h2>Start today’s to-dos<br>by saying them.</h2>
+    <div class="cta">
+      <a class="btn" href="https://apps.apple.com/app/id6776524212">Get it on the App Store</a>
+      <p class="cta-note">Free to start</p>
+    </div>
+  </div>
+</section>
 </main>
-<footer><p class="biz"><span><b>Company</b> Lipson Inc.</span><span><b>Representative</b> KIM HYUNGI</span><span><b>Business registration no.</b> 259-86-00120 <a class="bizcheck" href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2598600120" rel="noopener">Verify business</a></span><span><b>Mail-order business report no.</b> 2015-서울강남-01818호</span><span><b>Address</b> 3F, 16 Eonju-ro 147-gil, Gangnam-gu, Seoul 06048, Republic of Korea</span><span><b>Phone</b> +82-10-6215-7769</span><span><b>Email</b> <a href="mailto:support@letsaria.com">support@letsaria.com</a></span><span><b>Privacy officer</b> KIM HYUNGI</span><span><b>Hosting provider</b> GitHub, Inc.</span></p></footer>
+
+<footer class="foot">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <a href="/en/support.html">Support</a>
+      <a href="/en/privacy.html">Privacy Policy</a>
+      <a href="/en/terms.html">Terms of Use</a>
+      <a href="/en/ai-notice.html">AI Notice</a>
+      <a href="/" hreflang="ko" lang="ko" data-lang="ko">한국어</a>
+    </nav>
+    <p>Contact <a href="mailto:support@letsaria.com">support@letsaria.com</a></p>
+    <p>LIPSON Inc. · 3F, 16 Eonju-ro 147-gil, Gangnam-gu, Seoul 06048, Republic of Korea</p>
+    <p>© 2026 LIPSON Inc.</p>
+  </div>
+</footer>
 </body>
 </html>
