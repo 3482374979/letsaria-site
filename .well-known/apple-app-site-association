@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["7AX6U4DAYN.ko.aria.app"],
+        "components": [
+          { "/": "/open/*", "comment": "aria://<host>/<rest> 와 같은 모양 (AriaLink)" },
+          { "/": "/app", "comment": "앱만 열기 (광고 · 문자 「앱 열기」)" },
+          { "/": "/app/*", "comment": "앱만 열기" }
+        ]
+      }
+    ]
+  }
+}
