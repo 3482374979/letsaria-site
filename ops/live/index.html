@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-AHBKrd6PZrjGLmvH5zjEznNBRByJD1xpdjHL8V4rwTM='; style-src 'sha256-LPekbCuLmy5adaqA4oZMYc5piNtvokw9EqTrN3l9ipE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-lQaVZtSv2z0xuWgSAIM3llc/SRF/7nEUbIzTjIVLvAY='; style-src 'sha256-/8y9h76Wb/GsvD1fZo7L7zeevc7jyReJHn0vLv2Ain0='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -128,6 +128,7 @@ body[data-view="stats"] #lock { display: none; }
 .line { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); font-size: 14px; color: var(--ink-2); }
 .line b { color: var(--ink); font-weight: 600; }
 .chart { margin-top: 14px; }
+.chart.chart-top { margin-top: 0; }
 .chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .chart-head .sub { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
 .legend { display: flex; gap: 12px; margin-top: 6px; font-size: 12px; color: var(--ink-2); }
@@ -185,6 +186,32 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     <p class="sub" id="lockSub">등록한 기기의 Face ID · Touch ID로 열어요.</p>
     <button id="unlock" class="primary" type="button"><span id="unlockLabel">Face ID로 열기</span></button>
     <p class="msg" id="lockMsg" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card block" aria-labelledby="hNow">
+    <h2 id="hNow">지금 · 오늘</h2>
+    <div class="tiles">
+      <div class="tile">
+        <div class="label">지금 쓰는 사람</div>
+        <div class="mid"><span class="num" id="a5">–</span><span class="unit">명</span></div>
+        <div class="sub">5분 · 15분 <b id="a15">–</b> · 1시간 <b id="a60">–</b></div>
+      </div>
+      <div class="tile">
+        <div class="label">오늘 가입</div>
+        <div class="mid"><span class="num" id="su">–</span><span class="unit">명</span></div>
+        <div class="sub">애플 <b id="suA">–</b> · 게스트 <b id="suG">–</b></div>
+      </div>
+      <div class="tile">
+        <div class="label">오늘 질문</div>
+        <div class="mid"><span class="num" id="q">–</span><span class="unit">개</span></div>
+        <div class="sub">물어본 사람 <b id="qa">–</b> · 1시간 <b id="qa1">–</b></div>
+      </div>
+    </div>
+    <div class="line">구독 중 <b id="subNow">–</b>명 · 월간 <b id="subM">–</b> · 연간 <b id="subY">–</b></div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">오늘 시간별 질문</div><div class="sub" id="chHrcap">&nbsp;</div></div>
+      <svg id="chHr" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="오늘 0시부터 시간별 질문 수 막대 그래프"></svg>
+    </div>
   </section>
 
   <section class="card block" aria-labelledby="hRev">
@@ -258,19 +285,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 
   <section class="card block" aria-labelledby="hFlow">
     <h2 id="hFlow">유입</h2>
-    <div class="pair pair-top">
-      <div>
-        <div class="label">오늘 가입</div>
-        <div class="mid"><span class="num" id="su">–</span><span class="unit">명</span></div>
-        <div class="sub">애플 <b id="suA">–</b> · 게스트 <b id="suG">–</b></div>
-      </div>
-      <div>
-        <div class="label">지금 쓰는 사람 · 5분</div>
-        <div class="mid"><span class="num" id="a5">–</span><span class="unit">명</span></div>
-        <div class="sub">1시간 <b id="a60">–</b> · 오늘 질문 <b id="q">–</b></div>
-      </div>
-    </div>
-    <div class="chart">
+    <div class="chart chart-top">
       <div class="chart-head"><div class="label">가입 · 30일</div><div class="sub" id="chSucap">&nbsp;</div></div>
       <div class="legend"><span class="key"><i class="sw"></i>애플</span><span class="key"><i class="sw s2"></i>게스트</span></div>
       <svg id="chSu" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 30일 날마다 가입 수 막대 그래프 — 애플과 게스트"></svg>
@@ -593,7 +608,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     c.sel = i >= 0 && i < c.n ? i : null;
     caption(c);
   }
-  for (const id of ["chRev", "chRet", "chTr", "chSu"]) {
+  for (const id of ["chHr", "chRev", "chRet", "chTr", "chSu"]) {
     const s = $(id);
     s.addEventListener("pointerdown", pick);
     s.addEventListener("pointermove", pick);
@@ -773,6 +788,16 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     for (let i = sn - 1; i >= 0; i--) rows.push([sl(i), fmt(sd.apple[i]), fmt(sd.guest[i]), fmt(t.daily[i] || 0)]);
     tableRows("tDay", rows);
   }
+  // 오늘 시간별 — 0시~23시 24칸 고정 · 아직 안 온 시간은 빈 칸 · 짚으면 그 시간 질문 · 가입.
+  function hourChart(h) {
+    const hq = (h && h.questions) || [], hs = (h && h.signups) || [], now = hq.length - 1;
+    const cols = [];
+    for (let i = 0; i < 24; i++) cols.push({ segs: [i <= now ? hq[i] || 0 : 0], label: i + "시" });
+    colChart("chHr", cols, {
+      classes: ["s1"], peak: fmt, start: now >= 0 ? now : null, ticks: [0, 6, 12, 18, 23],
+      caption: (i) => i > now ? i + "시 · 아직" : (i === now ? "지금 " : "") + i + "시 · 질문 " + fmt(hq[i] || 0) + " · 가입 " + fmt(hs[i] || 0),
+    });
+  }
   function render(s) {
     last = s;
     setText("day", kstDayLabel(s.kst_day));
@@ -780,8 +805,15 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     setText("suA", fmt(s.signups.apple));
     setText("suG", fmt(s.signups.guest));
     setText("a5", fmt(s.active.m5));
+    setText("a15", fmt(s.active.m15));
     setText("a60", fmt(s.active.h1));
     setText("q", fmt(s.chat.questions));
+    setText("qa", fmt(s.chat.askers_today));
+    setText("qa1", fmt(s.chat.askers_1h));
+    setText("subNow", fmt(s.subs.active));
+    setText("subM", fmt(s.subs.monthly));
+    setText("subY", fmt(s.subs.yearly));
+    hourChart(s.hourly);
     renderBiz(s.biz || null);
   }
   async function load() {
