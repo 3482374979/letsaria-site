@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-AHBKrd6PZrjGLmvH5zjEznNBRByJD1xpdjHL8V4rwTM='; style-src 'sha256-LPekbCuLmy5adaqA4oZMYc5piNtvokw9EqTrN3l9ipE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aria 현황">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Aria 현황</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --ink: #000000;
+  --ink-2: #6e6e73;
+  --hair: #e5e5ea;
+  --s1: #2a78d6;
+  --s1-exp: #86b6ef;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --hl: #f2f2f7;
+  --live: #1f9d55;
+  --stale: #b26a00;
+  --btn: #000000;
+  --btn-ink: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #000000;
+    --card: #1c1c1e;
+    --ink: #ffffff;
+    --ink-2: #98989d;
+    --hair: #38383a;
+    --s1: #3987e5;
+    --s1-exp: #1c5cab;
+    --s2: #d95926;
+    --s3: #199e70;
+    --hl: #2c2c2e;
+    --live: #30d158;
+    --stale: #ff9f0a;
+    --btn: #ffffff;
+    --btn-ink: #000000;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --card: #1c1c1e;
+  --ink: #ffffff;
+  --ink-2: #98989d;
+  --hair: #38383a;
+  --s1: #3987e5;
+  --s1-exp: #1c5cab;
+  --s2: #d95926;
+  --s3: #199e70;
+  --hl: #2c2c2e;
+  --live: #30d158;
+  --stale: #ff9f0a;
+  --btn: #ffffff;
+  --btn-ink: #000000;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: calc(12px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));
+}
+header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h1 { margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
+h2 { margin: 0 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+.day { margin: 2px 0 16px; color: var(--ink-2); font-size: 15px; min-height: 20px; }
+.status {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 0; border-radius: 999px; padding: 6px 10px;
+  background: var(--card); color: var(--ink-2);
+  font: inherit; font-size: 13px; font-variant-numeric: tabular-nums;
+  cursor: pointer; white-space: nowrap;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-2); }
+body[data-state="live"] .dot { background: var(--live); }
+body[data-state="stale"] .dot { background: var(--stale); }
+body[data-state="stale"] .num { opacity: 0.45; }
+body[data-view="lock"] .block, body[data-view="lock"] .note, body[data-view="lock"] #status, body[data-view="lock"] .foot { display: none; }
+body[data-view="stats"] #lock { display: none; }
+.card { background: var(--card); border-radius: 18px; padding: 16px; }
+.card + .card { margin-top: 12px; }
+.lock { margin-top: 18vh; text-align: center; padding: 28px 20px; }
+.lock-title { margin: 0; font-size: 22px; font-weight: 700; }
+.lock .sub { margin: 6px 0 22px; font-size: 15px; }
+.primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 56px; border: 0; border-radius: 14px;
+  background: var(--btn); color: var(--btn-ink);
+  font: inherit; font-size: 19px; font-weight: 600; cursor: pointer;
+}
+.primary:disabled { opacity: 0.5; }
+.msg { margin: 14px 0 0; min-height: 20px; color: var(--ink-2); font-size: 14px; }
+.label { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.sub { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+.sub b { font-weight: 600; color: var(--ink); }
+.unit { font-size: 17px; font-weight: 600; color: var(--ink-2); margin-left: 3px; }
+.num { font-weight: 700; letter-spacing: -0.02em; }
+.hero { font-size: clamp(38px, 12vw, 52px); line-height: 1.05; margin-top: 2px; overflow-wrap: anywhere; }
+.mid { font-size: 28px; line-height: 1.15; margin-top: 2px; }
+.mid .num { font-weight: 650; }
+.mid .unit { font-size: 14px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); }
+.pair.pair-top { margin-top: 0; padding-top: 0; border-top: 0; }
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.tile .mid { font-size: 26px; }
+.line { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair); font-size: 14px; color: var(--ink-2); }
+.line b { color: var(--ink); font-weight: 600; }
+.chart { margin-top: 14px; }
+.chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.chart-head .sub { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.legend { display: flex; gap: 12px; margin-top: 6px; font-size: 12px; color: var(--ink-2); }
+.key { display: inline-flex; align-items: center; gap: 5px; }
+.sw { width: 10px; height: 10px; border-radius: 3px; background: var(--s1); }
+.sw.exp { background: var(--s1-exp); }
+.sw.s2 { background: var(--s2); }
+.ln { width: 14px; height: 2px; border-radius: 1px; background: var(--s1); }
+.ln.s2 { background: var(--s2); }
+.ln.s3 { background: var(--s3); }
+.lp { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lp.k1 { stroke: var(--s1); }
+.lp.k2 { stroke: var(--s2); }
+.lp.k3 { stroke: var(--s3); }
+.pt { stroke: var(--card); stroke-width: 2; }
+.pt.k1 { fill: var(--s1); }
+.pt.k2 { fill: var(--s2); }
+.pt.k3 { fill: var(--s3); }
+.grid-line { stroke: var(--hair); stroke-width: 1; }
+.empty { margin: 8px 0 0; font-size: 13px; color: var(--ink-2); }
+svg { display: block; width: 100%; height: auto; margin-top: 6px; touch-action: pan-y; outline: none; }
+svg:focus-visible { box-shadow: 0 0 0 2px var(--s1); border-radius: 6px; }
+.s1 { fill: var(--s1); }
+.exp { fill: var(--s1-exp); }
+.s2 { fill: var(--s2); }
+.hl { fill: var(--hl); }
+.track { fill: var(--hair); }
+.axis { stroke: var(--hair); stroke-width: 1; }
+.tick { fill: var(--ink-2); font-size: 11px; font-family: inherit; }
+.val { fill: var(--ink); font-size: 11px; font-weight: 600; font-family: inherit; }
+.flabel { fill: var(--ink); font-size: 14px; font-family: inherit; }
+.fval { fill: var(--ink-2); font-size: 13px; font-family: inherit; font-variant-numeric: tabular-nums; }
+details { margin-top: 10px; }
+summary { color: var(--ink-2); font-size: 13px; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: 4px 4px; border-bottom: 1px solid var(--hair); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
+.note { margin: 16px 4px 0; color: var(--ink-2); font-size: 12px; line-height: 1.5; }
+.note p { margin: 0 0 4px; }
+.foot { margin-top: 12px; text-align: center; }
+.link { border: 0; background: none; color: var(--ink-2); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 8px; }
+</style>
+</head>
+<body data-view="lock" data-state="idle">
+<main>
+  <header>
+    <h1>Aria 현황</h1>
+    <button id="status" class="status" type="button" aria-live="polite"><i class="dot"></i><span id="state">불러오는 중</span></button>
+  </header>
+  <p class="day" id="day">&nbsp;</p>
+
+  <section id="lock" class="card lock">
+    <p class="lock-title" id="lockTitle">회장님만 볼 수 있어요</p>
+    <p class="sub" id="lockSub">등록한 기기의 Face ID · Touch ID로 열어요.</p>
+    <button id="unlock" class="primary" type="button"><span id="unlockLabel">Face ID로 열기</span></button>
+    <p class="msg" id="lockMsg" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card block" aria-labelledby="hRev">
+    <h2 id="hRev">수익</h2>
+    <div class="label">이번 달 예상 · 수수료 뺀 금액</div>
+    <div class="hero"><span class="num" id="revHero">–</span><span class="unit">원</span></div>
+    <div class="sub">결제 <b id="revPaid">–</b> + 체험 끝 결제 예상 <b id="revExp">–</b></div>
+    <div class="sub">수수료(15%) 전 총액 <b id="revGross">–</b></div>
+    <div class="pair">
+      <div>
+        <div class="label">월 반복 매출</div>
+        <div class="mid"><span class="num" id="mrr">–</span><span class="unit">원</span></div>
+        <div class="sub">총액 <b id="mrrGross">–</b></div>
+      </div>
+      <div>
+        <div class="label">결제 중</div>
+        <div class="mid"><span class="num" id="paying">–</span><span class="unit">명</span></div>
+        <div class="sub">월간 <b id="payM">–</b> · 연간 <b id="payY">–</b></div>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">달별 순수익</div><div class="sub" id="chRevcap">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="sw"></i>결제됨</span><span class="key"><i class="sw exp"></i>예상(체험 중 · 갱신 켜짐)</span></div>
+      <svg id="chRev" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 6달 순수익 막대 그래프 — 결제됨과 예상"></svg>
+      <details>
+        <summary>표로 보기</summary>
+        <table><thead><tr><th>달</th><th>결제 건</th><th>새 결제</th><th>순수익</th><th>예상</th></tr></thead><tbody id="tRev"></tbody></table>
+      </details>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hKeep">
+    <h2 id="hKeep">유지</h2>
+    <div class="tiles">
+      <div class="tile">
+        <div class="label">체험→결제</div>
+        <div class="mid"><span class="num" id="conv">–</span></div>
+        <div class="sub" id="convSub">&nbsp;</div>
+      </div>
+      <div class="tile">
+        <div class="label">체험 중 해지</div>
+        <div class="mid"><span class="num" id="cancel">–</span></div>
+        <div class="sub" id="cancelSub">&nbsp;</div>
+      </div>
+      <div class="tile">
+        <div class="label">다음 날 재방문</div>
+        <div class="mid"><span class="num" id="d1">–</span></div>
+        <div class="sub" id="d1Sub">&nbsp;</div>
+      </div>
+    </div>
+    <div class="line">체험 중 <b id="trialNow">–</b>명 · 자동 갱신 켜짐 <b id="trialOn">–</b>명 · 환불 <b id="refunds">–</b>건(30일)</div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">가입 주별 재방문</div><div class="sub" id="chRetcap">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="ln"></i>다음 날</span><span class="key"><i class="ln s2"></i>7일째</span><span class="key"><i class="ln s3"></i>30일째<span id="d30note"></span></span></div>
+      <svg id="chRet" viewBox="0 0 336 130" role="img" tabindex="0" aria-label="가입한 주별 다음 날 · 7일째 · 30일째 재방문 비율 선 그래프"></svg>
+      <details>
+        <summary>표로 보기</summary>
+        <table><thead><tr><th>가입 주</th><th>가입</th><th>다음 날</th><th>7일째</th><th>30일째</th></tr></thead><tbody id="tRet"></tbody></table>
+      </details>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">결제 유지 · 첫 결제 달 기준</div><div class="sub" id="paidSum">&nbsp;</div></div>
+      <table id="paidTable"><thead><tr><th>첫 결제</th><th>명</th><th>1달 뒤</th><th>2달 뒤</th><th>3달 뒤</th></tr></thead><tbody id="tPaid"></tbody></table>
+      <p class="empty" id="paidEmpty"></p>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">체험 시작 · 30일</div><div class="sub" id="chTrcap">&nbsp;</div></div>
+      <svg id="chTr" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 30일 날마다 체험 시작 수 막대 그래프"></svg>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hFlow">
+    <h2 id="hFlow">유입</h2>
+    <div class="pair pair-top">
+      <div>
+        <div class="label">오늘 가입</div>
+        <div class="mid"><span class="num" id="su">–</span><span class="unit">명</span></div>
+        <div class="sub">애플 <b id="suA">–</b> · 게스트 <b id="suG">–</b></div>
+      </div>
+      <div>
+        <div class="label">지금 쓰는 사람 · 5분</div>
+        <div class="mid"><span class="num" id="a5">–</span><span class="unit">명</span></div>
+        <div class="sub">1시간 <b id="a60">–</b> · 오늘 질문 <b id="q">–</b></div>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">가입 · 30일</div><div class="sub" id="chSucap">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="sw"></i>애플</span><span class="key"><i class="sw s2"></i>게스트</span></div>
+      <svg id="chSu" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 30일 날마다 가입 수 막대 그래프 — 애플과 게스트"></svg>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">최근 7일 가입한 사람의 흐름</div></div>
+      <svg id="chFun" viewBox="0 0 336 240" role="img" aria-label="최근 7일 가입자 단계별 사람 수"></svg>
+      <details>
+        <summary>표로 보기</summary>
+        <table><thead><tr><th>날</th><th>애플</th><th>게스트</th><th>체험 시작</th></tr></thead><tbody id="tDay"></tbody></table>
+      </details>
+    </div>
+  </section>
+
+  <div class="note">
+    <p>숫자만 보여요. 이름·이메일·대화 내용은 없어요. 1분마다 새로 고침.</p>
+    <p>수익 = 애플 가격(월 9,800원 · 연 98,000원) × 결제 건 · 순수익 = 애플 수수료 15%(소규모 사업자) 뺀 값 · 환불은 빼지 않고 따로 셈. 예상 = 체험 중이고 자동 갱신이 켜진 구독이 체험 끝에 모두 결제될 때.</p>
+    <p>체험→결제 = 최근 30일 안에 체험이 끝난 것 중 결제된 비율 · 체험 중 해지 = 최근 30일 시작한 체험 중 끝나기 전에 자동 갱신을 끈 비율. 10월 16일 전 구독은 알림 기록이 없어 구독 시작을 체험 시작으로 봐요.</p>
+    <p>재방문 = 가입 다음 날(D1) · 7일째(D7) · 30일째(D30)에 AI를 쓴 사람(UTC 날짜 · 주는 월요일 시작 · 앱만 열고 AI를 안 쓴 날은 빠짐). 그날이 아직 안 온 사람은 빼고 계산 · 비어 있으면 아직 그날이 안 온 것.</p>
+    <p>결제 유지 = 첫 결제 달별로 1·2·3달 뒤에도 결제가 이어진 비율(환불 제외 · 연간은 낸 1년 동안 이어진 것으로 셈) · 「–」 = 아직 그 차례가 안 옴.</p>
+    <p>흐름 = 최근 7일 가입한 사람 중 한 번이라도 그 단계를 한 사람. 첫 질문 · 첫 할 일은 서버에 남은 기록 기준이라 조금 덜 셀 수 있어요. 오늘 = 한국 시간 0시부터.</p>
+  </div>
+  <div class="foot"><button id="logout" class="link" type="button">이 기기에서 잠그기</button></div>
+</main>
+<script>
+(() => {
+  "use strict";
+  const API = "https://chcxqojugeuzusmjspdp.supabase.co/functions/v1/live-stats";
+  const REFRESH_MS = 60000;
+  const SESSION_MAX_MS = 12 * 3600000;
+  const SKEY = "aria-ops-session";
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const $ = (id) => document.getElementById(id);
+  const nf = new Intl.NumberFormat("ko-KR");
+  const pad = (n) => String(n).padStart(2, "0");
+  const fmt = (n) => nf.format(Number(n) || 0);
+  const won = (n) => fmt(n) + "원";
+  const man = (n) => {
+    n = Number(n) || 0;
+    if (n < 10000) return fmt(n);
+    const v = n / 10000;
+    return nf.format(v >= 100 ? Math.round(v) : Math.round(v * 10) / 10) + "만";
+  };
+  const pct = (r) => (typeof r === "number" && isFinite(r) ? Math.round(r * 100) + "%" : "–");
+  const setText = (id, t) => { $(id).textContent = t; };
+
+  // 주소의 # 뒤(#register=… · 옛 #토큰)는 읽자마자 지운다 — 주소창 · 방문 기록 · 공유에 남지 않게.
+  let regToken = "";
+  if (location.hash) {
+    const h = location.hash.slice(1);
+    if (h.startsWith("register=")) { try { regToken = decodeURIComponent(h.slice(9)); } catch (e) { regToken = ""; } }
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* 그대로 둔다 */ }
+  }
+
+  // ── 세션(12시간 · 이 기기에만) ──────────────────────────────────────────
+  let session = null;
+  function dropSession() {
+    session = null;
+    try { localStorage.removeItem(SKEY); } catch (e) { /* 저장소 없음 */ }
+  }
+  function readSession() {
+    let s = null;
+    try { s = JSON.parse(localStorage.getItem(SKEY) || "null"); } catch (e) { s = null; }
+    const now = Date.now();
+    if (!s || typeof s.t !== "string" || typeof s.e !== "number" || s.e <= now + 30000 || s.e > now + SESSION_MAX_MS + 300000) {
+      dropSession();
+      return null;
+    }
+    return s;
+  }
+  function keepSession(t, e) {
+    session = { t: t, e: Math.min(Number(e) || 0, Date.now() + SESSION_MAX_MS) };
+    try { localStorage.setItem(SKEY, JSON.stringify(session)); } catch (e2) { /* 메모리에만 */ }
+  }
+
+  // ── 화면 상태 ───────────────────────────────────────────────────────────
+  const setState = (kind, text) => { document.body.dataset.state = kind; setText("state", text); };
+  const lockMsg = (t) => setText("lockMsg", t || "");
+  function lockUI(msg) {
+    const reg = !!regToken;
+    setText("lockTitle", reg ? "이 기기 등록" : "회장님만 볼 수 있어요");
+    setText("lockSub", reg ? "Face ID · Touch ID로 이 기기를 등록해요. 최대 2대(폰 · 맥)." : "등록한 기기의 Face ID · Touch ID로 열어요.");
+    setText("unlockLabel", reg ? "Face ID로 등록" : "Face ID로 열기");
+    setText("day", " ");
+    document.body.dataset.view = "lock";
+    setState("idle", "잠김");
+    lockMsg(msg);
+    prefetch();
+  }
+
+  // ── WebAuthn JSON ↔ 바이트 ──────────────────────────────────────────────
+  function b64uToBuf(s) {
+    s = String(s).replace(/-/g, "+").replace(/_/g, "/");
+    const bin = atob(s + "===".slice((s.length + 3) % 4));
+    const u = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+    return u.buffer;
+  }
+  function bufToB64u(b) {
+    const u = new Uint8Array(b);
+    let s = "";
+    for (let i = 0; i < u.length; i++) s += String.fromCharCode(u[i]);
+    return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function creationOptions(o) {
+    return Object.assign({}, o, {
+      challenge: b64uToBuf(o.challenge),
+      user: Object.assign({}, o.user, { id: b64uToBuf(o.user.id) }),
+      excludeCredentials: (o.excludeCredentials || []).map((c) => Object.assign({}, c, { id: b64uToBuf(c.id) })),
+    });
+  }
+  function requestOptions(o) {
+    return Object.assign({}, o, {
+      challenge: b64uToBuf(o.challenge),
+      allowCredentials: (o.allowCredentials || []).map((c) => Object.assign({}, c, { id: b64uToBuf(c.id) })),
+    });
+  }
+  const extResults = (c) => { try { return c.getClientExtensionResults() || {}; } catch (e) { return {}; } };
+  function regJSON(c) {
+    const r = c.response;
+    let transports;
+    try { transports = typeof r.getTransports === "function" ? r.getTransports() : undefined; } catch (e) { transports = undefined; }
+    return {
+      id: c.id, rawId: bufToB64u(c.rawId), type: c.type,
+      authenticatorAttachment: c.authenticatorAttachment || undefined,
+      clientExtensionResults: extResults(c),
+      response: { clientDataJSON: bufToB64u(r.clientDataJSON), attestationObject: bufToB64u(r.attestationObject), transports: transports },
+    };
+  }
+  function authJSON(c) {
+    const r = c.response;
+    return {
+      id: c.id, rawId: bufToB64u(c.rawId), type: c.type,
+      authenticatorAttachment: c.authenticatorAttachment || undefined,
+      clientExtensionResults: extResults(c),
+      response: {
+        clientDataJSON: bufToB64u(r.clientDataJSON),
+        authenticatorData: bufToB64u(r.authenticatorData),
+        signature: bufToB64u(r.signature),
+        userHandle: r.userHandle ? bufToB64u(r.userHandle) : undefined,
+      },
+    };
+  }
+
+  // ── 서버 ────────────────────────────────────────────────────────────────
+  async function post(path, body, extra) {
+    const r = await fetch(API + path, {
+      method: "POST",
+      headers: Object.assign({ "content-type": "application/json" }, extra || {}),
+      body: JSON.stringify(body || {}),
+      cache: "no-store",
+      credentials: "omit",
+      referrerPolicy: "no-referrer",
+    });
+    let j = null;
+    try { j = await r.json(); } catch (e) { j = null; }
+    return { status: r.status, ok: r.ok, j: j };
+  }
+  function fail(code) { const e = new Error(code); e.code = code; return e; }
+  // 사파리는 Face ID 창을 「누른 순간」 가까이에서만 띄운다 → 옵션(챌린지)은 잠금 화면이 뜰 때 미리 받아 둔다(8분 안이면 그대로 씀).
+  let pre = null;
+  async function prefetch() {
+    const reg = !!regToken;
+    pre = null;
+    try {
+      const a = reg ? await post("/passkey/register/options", {}, { "x-live-reg": regToken }) : await post("/passkey/login/options", {});
+      if (a.ok && a.j && a.j.options && typeof a.j.state === "string") pre = { reg: reg, at: Date.now(), a: a };
+      else if (reg && (a.status === 404 || a.status === 409)) {
+        const m = explain(fail(a.status === 404 ? "reg_link" : "full"), true);
+        if (regToken) lockMsg(m); else lockUI(m); // 이미 2대 → 로그인 화면으로(한 번만 — 등록 문은 비웠다)
+      }
+    } catch (e) { /* 누를 때 다시 받는다 */ }
+  }
+  function takePre(reg) {
+    const p = pre;
+    pre = null;
+    return p && p.reg === reg && Date.now() - p.at < 8 * 60000 ? p.a : null;
+  }
+  async function doLogin() {
+    const a = takePre(false) || await post("/passkey/login/options", {});
+    if (a.status === 429) throw fail("slow");
+    if (!a.ok || !a.j || !a.j.options || typeof a.j.state !== "string") throw fail("server");
+    const cred = await navigator.credentials.get({ publicKey: requestOptions(a.j.options) });
+    if (!cred) throw fail("cancel");
+    const b = await post("/passkey/login/verify", { state: a.j.state, response: authJSON(cred) });
+    if (b.status === 404) throw fail("denied");
+    if (b.status === 429) throw fail("slow");
+    if (!b.ok || !b.j || typeof b.j.session !== "string") throw fail("server");
+    keepSession(b.j.session, b.j.exp);
+  }
+  async function doRegister() {
+    const hdr = { "x-live-reg": regToken };
+    const a = takePre(true) || await post("/passkey/register/options", {}, hdr);
+    if (a.status === 404) throw fail("reg_link");
+    if (a.status === 409) throw fail("full");
+    if (a.status === 429) throw fail("slow");
+    if (!a.ok || !a.j || !a.j.options || typeof a.j.state !== "string") throw fail("server");
+    const cred = await navigator.credentials.create({ publicKey: creationOptions(a.j.options) });
+    if (!cred) throw fail("cancel");
+    const b = await post("/passkey/register/verify", { state: a.j.state, response: regJSON(cred) }, hdr);
+    if (b.status === 409) throw fail(b.j && b.j.error === "exists" ? "exists" : "full");
+    if (b.status === 404) throw fail("reg_link");
+    if (b.status === 429) throw fail("slow");
+    if (!b.ok || !b.j || typeof b.j.session !== "string") throw fail("server");
+    regToken = "";
+    keepSession(b.j.session, b.j.exp);
+  }
+  function explain(e, reg) {
+    const name = e && e.name, code = e && e.code;
+    if (name === "NotAllowedError" || name === "AbortError" || code === "cancel") return "취소됐어요. 다시 눌러 주세요.";
+    if (name === "InvalidStateError" || code === "exists") { regToken = ""; return "이 기기는 이미 등록돼 있어요. 「Face ID로 열기」를 눌러 주세요."; }
+    if (code === "full") { regToken = ""; return "이미 2대가 등록돼 있어요."; }
+    if (code === "reg_link") return "등록 주소가 맞지 않아요.";
+    if (code === "denied") return "등록된 패스키가 아니에요.";
+    if (code === "slow") return "잠시 뒤에 다시 해 주세요.";
+    if (name === "SecurityError") return "letsaria.com 주소에서만 열 수 있어요.";
+    if (e instanceof TypeError) return "연결이 안 돼요. 인터넷을 확인해 주세요.";
+    return reg ? "등록하지 못했어요. 다시 해 주세요." : "열지 못했어요. 다시 해 주세요.";
+  }
+  let authBusy = false;
+  async function unlock() {
+    if (authBusy) return;
+    if (!window.PublicKeyCredential || !navigator.credentials) { lockMsg("이 브라우저에선 패스키를 쓸 수 없어요. 사파리로 열어 주세요."); return; }
+    const reg = !!regToken;
+    authBusy = true;
+    $("unlock").disabled = true;
+    lockMsg(reg ? "등록하는 중…" : "확인하는 중…");
+    try {
+      if (reg) await doRegister(); else await doLogin();
+      lockMsg("");
+      document.body.dataset.view = "stats";
+      load();
+    } catch (e) {
+      const m = explain(e, reg);
+      lockUI(m);
+    } finally {
+      authBusy = false;
+      $("unlock").disabled = false;
+    }
+  }
+
+  // ── 그래프(인라인 SVG · 바깥 라이브러리 없음) ────────────────────────────
+  const CW = 336, CH = 120, CTOP = 18, CBOT = 18;
+  const charts = {};
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(SVGNS, tag);
+    for (const k in attrs) e.setAttribute(k, String(attrs[k]));
+    parent.appendChild(e);
+    return e;
+  }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function txt(parent, x, y, text, cls, anchor) {
+    const t = el("text", { x: x, y: y, class: cls, "text-anchor": anchor || "start" }, parent);
+    t.textContent = text;
+    return t;
+  }
+  // 위만 둥근(4px) 막대 · 바닥은 직각.
+  function barPath(x, y, w, b) {
+    const r = Math.min(4, b - y, w / 2);
+    return "M" + x + "," + b + "V" + (y + r) + "Q" + x + "," + y + " " + (x + r) + "," + y +
+      "H" + (x + w - r) + "Q" + (x + w) + "," + y + " " + (x + w) + "," + (y + r) + "V" + b + "Z";
+  }
+  // cols = [{ segs: [아래, 위], label }] · o = { classes, caption(i), peak(v), ticks: [i…], start }
+  function colChart(id, cols, o) {
+    const svg = $(id);
+    clear(svg);
+    const base = CH - CBOT, plotH = base - CTOP;
+    const n = Math.max(1, cols.length), band = CW / n, bw = Math.max(3, Math.min(24, band * 0.62));
+    const tot = cols.map((c) => c.segs.reduce((a, v) => a + (Number(v) || 0), 0));
+    const max = Math.max(1, ...tot);
+    const hl = el("rect", { x: 0, y: 2, width: band, height: base - 2, rx: 6, class: "hl", visibility: "hidden" }, svg);
+    el("line", { x1: 0, x2: CW, y1: base + 0.5, y2: base + 0.5, class: "axis" }, svg);
+    let peak = 0;
+    tot.forEach((v, i) => { if (v > tot[peak]) peak = i; });
+    cols.forEach((c, i) => {
+      const x = i * band + (band - bw) / 2;
+      const segs = c.segs.map((v) => Math.max(0, Number(v) || 0));
+      let last = -1;
+      segs.forEach((v, j) => { if (v > 0) last = j; });
+      let y = base;
+      segs.forEach((v, j) => {
+        if (v <= 0) return;
+        const h = Math.max(2, (v / max) * plotH);
+        const bottom = y === base ? base : y - 2; // 쌓인 칸 사이 2px 틈
+        const top = y - h;
+        if (bottom - top >= 1) {
+          if (j === last) el("path", { d: barPath(x, top, bw, bottom), class: o.classes[j] }, svg);
+          else el("rect", { x: x, y: top, width: bw, height: bottom - top, class: o.classes[j] }, svg);
+        }
+        y = top;
+      });
+    });
+    if (tot[peak] > 0) {
+      const px = peak * band + band / 2;
+      txt(svg, Math.min(CW - 2, Math.max(2, px)), base - (tot[peak] / max) * plotH - 5, o.peak(tot[peak]), "val",
+        px < 20 ? "start" : px > CW - 20 ? "end" : "middle");
+    }
+    (o.ticks || cols.map((_, i) => i)).forEach((i) => {
+      if (!cols[i]) return;
+      const cx = i * band + band / 2;
+      const anchor = n > 8 && i === 0 ? "start" : n > 8 && i === n - 1 ? "end" : "middle";
+      txt(svg, anchor === "start" ? 0 : anchor === "end" ? CW : cx, CH - 3, cols[i].label, "tick", anchor);
+    });
+    const prev = charts[id];
+    const c = { id: id, svg: svg, hl: hl, band: band, n: cols.length, o: o, start: o.start, sel: prev && prev.sel != null && prev.sel < cols.length ? prev.sel : null };
+    charts[id] = c;
+    caption(c);
+  }
+  function caption(c) {
+    const i = c.sel == null ? c.start : c.sel;
+    setText(c.id + "cap", i == null || i < 0 ? " " : c.o.caption(i));
+    if (c.sel == null) c.hl.setAttribute("visibility", "hidden");
+    else { c.hl.setAttribute("x", String(c.sel * c.band)); c.hl.setAttribute("visibility", "visible"); }
+  }
+  function pick(ev) {
+    const c = charts[ev.currentTarget.id];
+    if (!c) return;
+    const r = c.svg.getBoundingClientRect();
+    const i = Math.floor(((ev.clientX - r.left) / r.width) * c.n);
+    c.sel = i >= 0 && i < c.n ? i : null;
+    caption(c);
+  }
+  for (const id of ["chRev", "chRet", "chTr", "chSu"]) {
+    const s = $(id);
+    s.addEventListener("pointerdown", pick);
+    s.addEventListener("pointermove", pick);
+    s.addEventListener("pointerleave", (ev) => { const c = charts[ev.currentTarget.id]; if (c) { c.sel = null; caption(c); } });
+    s.addEventListener("keydown", (ev) => {
+      const c = charts[id];
+      if (!c || (ev.key !== "ArrowLeft" && ev.key !== "ArrowRight")) return;
+      const cur = c.sel == null ? c.start : c.sel;
+      c.sel = Math.max(0, Math.min(c.n - 1, cur + (ev.key === "ArrowLeft" ? -1 : 1)));
+      caption(c);
+      ev.preventDefault();
+    });
+    s.addEventListener("blur", () => { const c = charts[id]; if (c) { c.sel = null; caption(c); } });
+  }
+  // 선 그래프 — 주 8칸 · 0% 바닥 · 위 눈금 하나 · 빈 값(아직)은 끊는다.
+  const LH = 130, LTOP = 14, LBOT = 18;
+  function lineChart(id, pts, series, o) {
+    const svg = $(id);
+    clear(svg);
+    const base = LH - LBOT, plotH = base - LTOP;
+    const n = Math.max(1, pts.length), band = CW / n;
+    let mx = 0;
+    pts.forEach((p) => series.forEach((s) => { const v = p[s.key]; if (typeof v === "number" && v > mx) mx = v; }));
+    const top = Math.min(1, Math.max(0.1, Math.ceil(mx * 10) / 10));
+    const yOf = (v) => base - (v / top) * plotH;
+    const hl = el("rect", { x: 0, y: 2, width: band, height: base - 2, rx: 6, class: "hl", visibility: "hidden" }, svg);
+    el("line", { x1: 0, x2: CW, y1: LTOP + 0.5, y2: LTOP + 0.5, class: "grid-line" }, svg);
+    el("line", { x1: 0, x2: CW, y1: base + 0.5, y2: base + 0.5, class: "axis" }, svg);
+    txt(svg, 0, LTOP - 3, Math.round(top * 100) + "%", "tick");
+    series.forEach((s) => {
+      let d = "", pen = false;
+      pts.forEach((p, i) => {
+        const v = p[s.key];
+        if (typeof v !== "number") { pen = false; return; }
+        d += (pen ? "L" : "M") + (i * band + band / 2).toFixed(1) + "," + yOf(v).toFixed(1);
+        pen = true;
+      });
+      if (d) el("path", { d: d, class: "lp " + s.cls }, svg);
+    });
+    series.forEach((s) => pts.forEach((p, i) => {
+      const v = p[s.key];
+      if (typeof v === "number") el("circle", { cx: i * band + band / 2, cy: yOf(v), r: 4, class: "pt " + s.cls }, svg);
+    }));
+    pts.forEach((p, i) => txt(svg, i * band + band / 2, LH - 3, p.label, "tick", "middle"));
+    const prev = charts[id];
+    const c = { id: id, svg: svg, hl: hl, band: band, n: pts.length, o: o, start: o.start, sel: prev && prev.sel != null && prev.sel < pts.length ? prev.sel : null };
+    charts[id] = c;
+    caption(c);
+  }
+  function paidTable(pr) {
+    const months = (pr && pr.months) || [];
+    const cell = (m, i) => (m.due[i] > 0 ? pct(m.rate[i]) + " (" + fmt(m.kept[i]) + "/" + fmt(m.due[i]) + ")" : "–");
+    tableRows("tPaid", months.map((m) => [m.m.slice(0, 4) + "." + m.m.slice(5), fmt(m.n), cell(m, 0), cell(m, 1), cell(m, 2)]));
+    $("paidTable").hidden = months.length === 0;
+    const fr = pr ? pr.first_renewal : null;
+    setText("paidSum", fr && fr.base > 0 ? "첫 갱신 유지 " + pct(fr.rate) : "\u00a0");
+    setText("paidEmpty", months.length === 0 ? "아직 결제한 구독이 없어요." : fr && fr.base > 0 ? "" : "아직 갱신 차례가 온 구독이 없어요(첫 결제 한 달 뒤부터 채워져요).");
+  }
+  function funnel(f) {
+    const svg = $("chFun");
+    clear(svg);
+    const rows = [["가입", f.signups], ["AI 동의", f.consent], ["첫 질문", f.asked], ["첫 할 일", f.task], ["결제 화면 봄", f.paywall], ["체험 시작", f.trial]];
+    const RH = 40;
+    svg.setAttribute("viewBox", "0 0 " + CW + " " + rows.length * RH);
+    const max = Math.max(1, f.signups);
+    rows.forEach((row, i) => {
+      const y = i * RH, v = Number(row[1]) || 0;
+      txt(svg, 0, y + 15, row[0], "flabel");
+      txt(svg, CW, y + 15, fmt(v) + "명" + (i && f.signups ? " · " + Math.round((v / f.signups) * 100) + "%" : ""), "fval", "end");
+      el("rect", { x: 0, y: y + 22, width: CW, height: 8, rx: 4, class: "track" }, svg);
+      if (v > 0) el("rect", { x: 0, y: y + 22, width: Math.max(8, Math.min(1, v / max) * CW), height: 8, rx: 4, class: "s1" }, svg);
+    });
+  }
+
+  // ── 그리기 ──────────────────────────────────────────────────────────────
+  let last = null, lastOkAt = 0, timer = 0, busy = false;
+  const kstClock = (iso) => {
+    const d = new Date(Date.parse(iso) + 9 * 3600000);
+    return pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes()) + ":" + pad(d.getUTCSeconds());
+  };
+  const kstDayLabel = (day) => {
+    const p = day.split("-").map(Number);
+    const wd = "일월화수목금토"[new Date(Date.UTC(p[0], p[1] - 1, p[2])).getUTCDay()];
+    return p[1] + "월 " + p[2] + "일 " + wd + "요일";
+  };
+  const dayAt = (from, i) => {
+    const p = from.split("-").map(Number);
+    const d = new Date(Date.UTC(p[0], p[1] - 1, p[2] + i));
+    return { m: d.getUTCMonth() + 1, d: d.getUTCDate() };
+  };
+  const few = (base) => (base > 0 && base < 10 ? " · 표본 적음" : "");
+  function tableRows(id, rows) {
+    const tb = $(id);
+    clear(tb);
+    for (const cells of rows) {
+      const tr = document.createElement("tr");
+      for (const v of cells) { const td = document.createElement("td"); td.textContent = v; tr.appendChild(td); }
+      tb.appendChild(tr);
+    }
+  }
+  function renderBiz(b) {
+    if (!b) {
+      for (const id of ["revHero", "revPaid", "revExp", "revGross", "mrr", "mrrGross", "paying", "payM", "payY", "conv", "cancel", "d1", "trialNow", "trialOn", "refunds"]) setText(id, "–");
+      for (const id of ["convSub", "cancelSub", "d1Sub"]) setText(id, " ");
+      return;
+    }
+    const tm = b.revenue.this_month, mrr = b.revenue.mrr;
+    setText("revHero", fmt(tm.net + tm.expected_net));
+    setText("revPaid", won(tm.net));
+    setText("revExp", won(tm.expected_net));
+    setText("revGross", won(tm.gross + tm.expected_gross));
+    setText("mrr", fmt(mrr.net));
+    setText("mrrGross", won(mrr.gross));
+    setText("paying", fmt(mrr.monthly_subs + mrr.yearly_subs));
+    setText("payM", fmt(mrr.monthly_subs));
+    setText("payY", fmt(mrr.yearly_subs));
+    let ms = b.revenue.months.slice();
+    if (ms.length && ms[ms.length - 1].future && !(ms[ms.length - 1].expected.net > 0)) ms = ms.slice(0, -1);
+    const curIdx = ms.findIndex((m) => m.current);
+    colChart("chRev", ms.map((m) => ({ segs: [m.net, m.expected.net], label: Number(m.m.slice(5)) + "월" })), {
+      classes: ["s1", "exp"],
+      peak: man,
+      start: curIdx,
+      caption: (i) => {
+        const m = ms[i];
+        return Number(m.m.slice(5)) + "월 · " + (m.future ? "" : "결제 " + man(m.net) + "원") +
+          (m.expected.net > 0 ? (m.future ? "" : " · ") + "예상 " + man(m.expected.net) + "원" : "");
+      },
+    });
+    tableRows("tRev", ms.map((m) => [
+      m.m.slice(0, 4) + "." + m.m.slice(5),
+      fmt(m.charges.monthly + m.charges.yearly),
+      fmt(m.new_paid.monthly + m.new_paid.yearly),
+      fmt(m.net),
+      fmt(m.expected.net),
+    ]));
+
+    const t = b.trials, r = b.retention;
+    setText("conv", pct(t.conversion_rate));
+    setText("convSub", fmt(t.converted_30d) + "/" + fmt(t.ended_30d) + "명" + few(t.ended_30d));
+    setText("cancel", pct(t.cancel_rate));
+    setText("cancelSub", fmt(t.cancelled_30d) + "/" + fmt(t.started_30d) + "명" + few(t.started_30d));
+    setText("d1", pct(r.d1.rate));
+    setText("d1Sub", "7일째 " + pct(r.d7.rate) + few(r.d1.base));
+    setText("trialNow", fmt(t.now));
+    setText("trialOn", fmt(t.now_renew_on));
+    setText("refunds", fmt(t.refunds_30d));
+    const wk = r.weeks || [];
+    const wl = (w) => { const p = w.split("-").map(Number); return p[1] + "/" + p[2]; };
+    const rr = (x) => (x && typeof x.rate === "number" ? x.rate : null);
+    lineChart("chRet", wk.map((w) => ({ label: wl(w.w), d1: rr(w.d1), d7: rr(w.d7), d30: rr(w.d30) })),
+      [{ key: "d1", cls: "k1" }, { key: "d7", cls: "k2" }, { key: "d30", cls: "k3" }], {
+        start: (() => { for (let i = wk.length - 1; i >= 0; i--) if (rr(wk[i].d1) !== null) return i; return wk.length - 1; })(),
+        caption: (i) => { const w = wk[i]; return wl(w.w) + " 주 · 가입 " + fmt(w.n) + " · " + pct(rr(w.d1)) + " / " + pct(rr(w.d7)) + " / " + pct(rr(w.d30)); },
+      });
+    setText("d30note", wk.some((w) => rr(w.d30) !== null) ? "" : " · 아직");
+    tableRows("tRet", wk.slice().reverse().map((w) => [wl(w.w), fmt(w.n),
+      w.d1.base ? pct(w.d1.rate) + " (" + fmt(w.d1.back) + "/" + fmt(w.d1.base) + ")" : "–",
+      w.d7.base ? pct(w.d7.rate) + " (" + fmt(w.d7.back) + "/" + fmt(w.d7.base) + ")" : "–",
+      w.d30.base ? pct(w.d30.rate) + " (" + fmt(w.d30.back) + "/" + fmt(w.d30.base) + ")" : "–"]));
+    paidTable(b.paid_retention);
+    const n = t.daily.length;
+    const dl = (i) => { const d = dayAt(t.days_from, i); return d.m + "/" + d.d; };
+    colChart("chTr", t.daily.map((v, i) => ({ segs: [v], label: i === n - 1 ? "오늘" : dl(i) })), {
+      classes: ["s1"], peak: fmt, start: n - 1, ticks: [0, Math.floor(n / 2), n - 1],
+      caption: (i) => (i === n - 1 ? "오늘" : dl(i)) + " · " + fmt(t.daily[i]) + "명",
+    });
+
+    const sd = b.signups_daily, sn = sd.apple.length;
+    const sl = (i) => { const d = dayAt(sd.days_from, i); return d.m + "/" + d.d; };
+    colChart("chSu", sd.apple.map((v, i) => ({ segs: [v, sd.guest[i]], label: i === sn - 1 ? "오늘" : sl(i) })), {
+      classes: ["s1", "s2"], peak: fmt, start: sn - 1, ticks: [0, Math.floor(sn / 2), sn - 1],
+      caption: (i) => (i === sn - 1 ? "오늘" : sl(i)) + " · 애플 " + fmt(sd.apple[i]) + " · 게스트 " + fmt(sd.guest[i]),
+    });
+    funnel(b.funnel_7d);
+    const rows = [];
+    for (let i = sn - 1; i >= 0; i--) rows.push([sl(i), fmt(sd.apple[i]), fmt(sd.guest[i]), fmt(t.daily[i] || 0)]);
+    tableRows("tDay", rows);
+  }
+  function render(s) {
+    last = s;
+    setText("day", kstDayLabel(s.kst_day));
+    setText("su", fmt(s.signups.total));
+    setText("suA", fmt(s.signups.apple));
+    setText("suG", fmt(s.signups.guest));
+    setText("a5", fmt(s.active.m5));
+    setText("a60", fmt(s.active.h1));
+    setText("q", fmt(s.chat.questions));
+    renderBiz(s.biz || null);
+  }
+  async function load() {
+    if (busy) return;
+    if (!session || session.e <= Date.now() + 5000) {
+      const expired = !!session;
+      dropSession();
+      clearTimeout(timer);
+      lockUI(expired ? "12시간이 지나 다시 열어야 해요." : "");
+      return;
+    }
+    busy = true;
+    clearTimeout(timer);
+    try {
+      const r = await fetch(API, {
+        headers: { authorization: "Bearer " + session.t },
+        cache: "no-store",
+        credentials: "omit",
+        referrerPolicy: "no-referrer",
+      });
+      if (r.status === 404) { dropSession(); lockUI("다시 열어 주세요."); return; }
+      if (!r.ok) throw new Error("http " + r.status);
+      const s = await r.json();
+      render(s);
+      lastOkAt = Date.now();
+      setState("live", "업데이트 " + kstClock(s.at));
+    } catch (e) {
+      setState("stale", last ? "연결 끊김 · " + kstClock(last.at) : "연결 안 됨");
+    } finally {
+      busy = false;
+      if (document.body.dataset.view === "stats") timer = setTimeout(load, REFRESH_MS);
+    }
+  }
+
+  $("unlock").addEventListener("click", unlock);
+  $("status").addEventListener("click", load);
+  $("logout").addEventListener("click", () => { dropSession(); clearTimeout(timer); last = null; lockUI(""); });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && document.body.dataset.view === "stats" && Date.now() - lastOkAt > 20000) load();
+  });
+  session = regToken ? null : readSession();
+  if (session) { document.body.dataset.view = "stats"; setState("idle", "불러오는 중"); load(); } else lockUI("");
+})();
+</script>
+</body>
+</html>
