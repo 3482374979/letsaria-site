@@ -1,9 +1,9 @@
 # Aria
 
-> Aria는 주식회사 립슨(LIPSON Inc.)이 만든 iPhone·iPad·Mac용 할일·일정 관리 AI 비서 앱이에요. 말하거나 쓴 한 문장을 할일·일정·메모로 나눠 담고, 아침 브리핑과 저녁 정리, 할일과 캘린더를 한 화면에서 보여 줘요. App Store에서 무료로 받을 수 있어요(AI가 아닌 기능은 모두 무료 · AI 질문 하루 20개 무료 · 선택형 Aria Pro 구독).
+> Aria는 주식회사 립슨(Lipson Inc.)이 만든 iPhone·iPad·Mac·Apple Watch용 할 일·일정 관리 AI 비서 앱이에요. 말하거나 쓴 한 문장을 할 일·일정·메모로 나눠 담고, 아침 브리핑과 저녁 정리, 할 일과 캘린더를 한 화면에서 보여 줘요. App Store에서 무료로 받을 수 있어요(AI가 아닌 기능은 모두 무료 · AI 질문 하루 20개 무료 · 선택형 Aria Pro 구독).
 
 - App Store: https://apps.apple.com/kr/app/id6776524212
-- 마지막 확인: 2026-10-17 · 앱 버전 1.1.2 기준
+- 마지막 확인: 2026-10-22 · 앱 버전 1.1.6 기준
 
 ## 소개
 - [Aria 홈(한국어)](https://letsaria.com/ko/): 앱 소개와 안내 문서
@@ -11,51 +11,51 @@
 
 ## 가이드
 - [아이폰 일정 관리 앱 추천 7가지 비교 (2026년 10월)](https://letsaria.com/ko/guide/iphone-calendar-app/): 아이폰 기본 캘린더·미리 알림부터 Fantastical, TickTick, Todoist, Things 3, Aria까지 한국 App Store 정보로 비교했어요. 상황별로 고르는 법도 정리했어요.
-- [AI 일정 관리 앱, Aria는 이렇게 정리해요](https://letsaria.com/ko/guide/ai-schedule-assistant/): “금요일까지 보고서, 내일 오후 3시 회의”처럼 말하면 할일과 일정으로 나눠 담는 AI 비서 앱 Aria. 아침 브리핑, 저녁 정리, 웹 찾기, 무료 범위까지 정리했어요.
-- [아이폰 할일 앱으로 Aria 쓰기 — 투두리스트 기능 정리](https://letsaria.com/ko/guide/todo-list-app/): 오늘·예정·언젠가·수신함 목록, 반복과 하위 할일, 카테고리, 장보기 목록까지. 아이폰 투두리스트 앱으로 Aria를 쓰는 법을 기능별로 정리했어요.
-- [할일 캘린더 앱 — Aria에서 할일과 일정을 한 화면에](https://letsaria.com/ko/guide/calendar-planner-app/): 일·3일·주·월 캘린더에서 할일과 일정을 함께 보고, 할일을 시간표로 끌어 놓아 시간을 잡는 아이폰 플래너 앱 Aria의 캘린더 기능을 정리했어요.
+- [AI 일정 관리 앱, Aria는 이렇게 정리해요](https://letsaria.com/ko/guide/ai-schedule-assistant/): “금요일까지 보고서, 내일 오후 3시 회의”처럼 말하면 할 일과 일정으로 나눠 담는 AI 비서 앱 Aria. 아침 브리핑, 저녁 정리, 웹 찾기, 무료 범위까지 정리했어요.
+- [아이폰 할 일 앱으로 Aria 쓰기 — 투두리스트 기능 정리](https://letsaria.com/ko/guide/todo-list-app/): 오늘·예정·언젠가·수신함 목록, 반복과 하위 할 일, 카테고리, 장보기 목록까지. 아이폰 투두리스트 앱으로 Aria를 쓰는 법을 기능별로 정리했어요.
+- [할 일 캘린더 앱 — Aria에서 할 일과 일정을 한 화면에](https://letsaria.com/ko/guide/calendar-planner-app/): 일·3일·주·월 캘린더에서 할 일과 일정을 함께 보고, 할 일을 시간표로 끌어 놓아 시간을 잡는 아이폰 플래너 앱 Aria의 캘린더 기능을 정리했어요.
 - [루틴·습관 앱으로 Aria 쓰기 — 연속 기록과 따라 하기](https://letsaria.com/ko/guide/routine-habit-app/): 매일 하는 일을 루틴으로 만들고 연속 기록으로 이어 가세요. 단계별 따라 하기 타이머, 위젯 체크, 주간 브리핑까지 아이폰 습관 앱으로 쓰는 법이에요.
-- [아이폰 할일 알림, Aria로 놓치지 않게 맞추기](https://letsaria.com/ko/guide/iphone-todo-alarm/): 마감 단계별 알림, 무음·집중 모드에서도 울리는 「꼭 알람」, 장소 도착·출발 알림까지 아이폰에서 할일 알림을 놓치지 않는 법을 정리했어요.
+- [아이폰 할 일 알림, Aria로 놓치지 않게 맞추기](https://letsaria.com/ko/guide/iphone-todo-alarm/): 마감 단계별 알림, 무음·집중 모드에서도 울리는 ‘꼭 알람’, 장소 도착·출발 알림까지 아이폰에서 할 일 알림을 놓치지 않는 법을 정리했어요.
 - [사진·캡처·PDF로 일정 등록하기](https://letsaria.com/ko/guide/photo-to-schedule/): 안내문 사진, 공지 캡처, PDF 일정표를 Aria에 공유하면 날짜를 찾아 일정과 알림을 제안해요. 아이폰에서 사진으로 일정을 추가하는 법이에요.
-- [회의·강의 녹음 요약, Aria로 받아쓰고 할 일까지](https://letsaria.com/ko/guide/meeting-recording-summary/): [녹음 시작] 한 번으로 회의·강의를 받아쓰고 요약과 할 일로 정리해요. 제어 센터에서 바로 녹음하는 법과 녹음 전에 알아 둘 점을 정리했어요.
-- [말로 할일·일정 추가하는 법](https://letsaria.com/ko/guide/add-tasks-by-voice/): Aria에 한 문장으로 말하면 할일과 일정이 나뉘어 담겨요. 음성·글 입력, [모두 담기], 결과 되돌리기, Siri·단축어까지 단계별로 알려 드려요.
-- [아이폰 홈 화면·잠금 화면에 할일 위젯 추가하는 법](https://letsaria.com/ko/guide/iphone-todo-widget/): 아이폰 홈 화면과 잠금 화면에 Aria 할일·루틴·디데이·월간 달력 위젯을 놓는 법을 단계별로 정리했어요. 위젯에서 바로 할일을 끝낼 수 있어요.
-- [Apple 미리 알림에서 Aria로 할일 옮겨 오는 법](https://letsaria.com/ko/guide/import-apple-reminders/): 아이폰 미리 알림에 있던 목록을 Aria로 가져오는 법이에요. 미리 알림은 읽기만 하고 지우거나 바꾸지 않아요. 순서와 안 될 때 확인할 것을 정리했어요.
-- [Aria 알림이 안 올 때 해결 방법](https://letsaria.com/ko/guide/notifications-not-working/): 할일 알림이 안 오거나 무음 모드에서 안 울릴 때 확인할 것을 순서대로 정리했어요. 알림 허용, 집중 모드, 예약 요약, 꼭 알람, 위치 알림까지 점검해요.
+- [회의·강의 녹음 요약, Aria로 받아쓰고 할 일까지](https://letsaria.com/ko/guide/meeting-recording-summary/): ‘녹음 시작’ 한 번으로 회의·강의를 받아쓰고 요약과 할 일로 정리해요. 제어 센터에서 바로 녹음하는 법과 녹음 전에 알아 둘 점을 정리했어요.
+- [말로 할 일·일정 추가하는 법](https://letsaria.com/ko/guide/add-tasks-by-voice/): Aria에 한 문장으로 말하면 할 일과 일정이 나뉘어 담겨요. 음성·글 입력, ‘모두 담기’, 결과 되돌리기, Siri·단축어까지 단계별로 알려 드려요.
+- [아이폰 홈 화면·잠금 화면에 할 일 위젯 추가하는 법](https://letsaria.com/ko/guide/iphone-todo-widget/): 아이폰 홈 화면과 잠금 화면에 Aria 할 일·루틴·디데이·월간 달력 위젯을 놓는 법을 단계별로 정리했어요. 위젯에서 바로 할 일을 끝낼 수 있어요.
+- [Apple 미리 알림에서 Aria로 할 일 옮겨 오는 법](https://letsaria.com/ko/guide/import-apple-reminders/): 아이폰 미리 알림에 있던 목록을 Aria로 가져오는 법이에요. 미리 알림은 읽기만 하고 지우거나 바꾸지 않아요. 순서와 안 될 때 확인할 것을 정리했어요.
+- [Aria 알림이 안 올 때 해결 방법](https://letsaria.com/ko/guide/notifications-not-working/): 할 일 알림이 안 오거나 무음 모드에서 안 울릴 때 확인할 것을 순서대로 정리했어요. 알림 허용, 집중 모드, 예약 요약, 꼭 알람, 위치 알림까지 점검해요.
 - [아이폰 캘린더 일정이 Aria에 안 보일 때](https://letsaria.com/ko/guide/calendar-not-showing/): 구글 캘린더나 iCloud 일정이 Aria에 안 보일 때 캘린더 접근 허용, 아이폰 캘린더 계정, 구독 캘린더, 기본 캘린더를 순서대로 확인하는 법이에요.
 - [아이폰·아이패드·맥에서 Aria 동기화가 안 될 때](https://letsaria.com/ko/guide/sync-not-working/): 다른 기기에서 Aria 기록이 안 보일 때 확인할 것: 같은 Apple 계정 로그인, 게스트 기록, 동기화 상태, 구매 복원까지 순서대로 정리했어요.
 - [Aria 자주 묻는 질문](https://letsaria.com/ko/guide/faq/): Aria는 무료인가요? 로그인 없이 쓸 수 있나요? 내 기록이 AI 학습에 쓰이나요? 요금, 기기, 개인정보, 알림, 캘린더 연동에 관한 질문을 모았어요.
-- [할일 앱 추천 — 무료 투두리스트 앱 7가지, 기기·목적별로 고르기](https://letsaria.com/ko/guide/todo-app-recommend/): 미리 알림·Microsoft To Do·Google Tasks·Todoist·TickTick·투두메이트·Aria를 한국 App Store 정보로 비교했어요. 쓰는 기기, 무료 범위, 애플워치·안드로이드·윈도우 지원으로 고르는 법을 정리했어요.
-- [아이폰 미리 알림 vs 할일 앱 — 기본 앱으로 충분할 때, 바꿔야 할 때](https://letsaria.com/ko/guide/reminders-vs-todo-app/): 아이폰 미리 알림만으로 충분한 경우와 전용 할일 앱이 편해지는 순간을 상황별로 나눴어요. 미리 알림 대체 앱을 고르기 전에 볼 신호 4가지, 둘을 같이 쓰는 법, 원본을 지키며 옮기는 법을 정리했어요.
-- [틱틱(TickTick) 대안 — 떠나는 이유별로 고르는 할일 앱](https://letsaria.com/ko/guide/ticktick-alternative/): TickTick을 그만 쓰려는 이유가 기능이 많아서인지, 입력이 번거로워서인지에 따라 맞는 대안이 달라요. 떠나는 이유별 대안표와 틱틱에 있고 Aria에는 없는 기능까지 그대로 정리했어요.
-- [투두이스트(Todoist) 대안 — 내 쓰는 방식에 맞는 할일 앱 찾기](https://letsaria.com/ko/guide/todoist-alternative/): Todoist가 무겁게 느껴진다면 프로젝트형인지 하루형인지부터 따져 보세요. 5문항 진단으로 미리 알림·Things 3·Microsoft To Do·Aria 가운데 맞는 대안을 고르고, 무료 알림 범위도 공식 정보로 비교했어요.
-- [노션 캘린더 대안 — 노션 없이 할일과 일정을 한 화면에](https://letsaria.com/ko/guide/notion-calendar-alternative/): Notion 캘린더는 구글·iCloud 캘린더와 노션 데이터베이스를 잇는 데 맞춰져 있어요. 노션을 계속 쓸지에 따라 두 갈래로 나눠 Google 캘린더·Fantastical·Aria 같은 대안을 비교하고 옮기는 법을 정리했어요.
-- [맥 할일 앱 추천 — 맥북 메뉴 막대·위젯으로 쓰는 투두리스트](https://letsaria.com/ko/guide/mac-todo-app/): 맥북에서 일하다 바로 할일을 넣을 수 있는지를 기준으로 미리 알림·Things 3·Todoist·TickTick·Aria의 맥 앱을 비교했어요. 빠르게 넣는 길, 바탕화면 위젯, 아이폰과 이어지는 방식, 맥 앱 가격을 정리했어요.
-- [아이패드 플래너 앱 추천 — 손글씨형 vs 할일·캘린더형](https://letsaria.com/ko/guide/ipad-planner-app/): 아이패드 플래너는 펜으로 쓰는 노트형과 알림·반복이 되는 앱형으로 나뉘어요. 두 방식의 차이를 표로 비교하고, 아이패드에서 계획하고 아이폰으로 알림 받는 섞어 쓰기 한 주 예시를 정리했어요.
-- [AI 비서 앱 비교 — 범용 챗봇·기기 비서·일정 비서, 무엇이 다른가](https://letsaria.com/ko/guide/ai-assistant-app/): AI 비서 앱은 무엇이든 답하는 범용 챗봇, 전화·기기와 붙은 비서, 할일과 일정에 바로 담는 일정 비서로 나뉘어요. 유형별로 잘하는 일과 기록이 남는 곳, 쓰기 전에 확인할 개인정보 5문항을 정리했어요.
-- [애플워치로 할일 관리하는 법 — 미리 알림·Siri·컴플리케이션](https://letsaria.com/ko/guide/apple-watch-reminders/): 애플워치에서 할일을 넣고, 시계 화면에 띄우고, 끝내고, 알림 받는 네 가지 방법을 단계별로 정리했어요. 미리 알림 앱과 Siri, 컴플리케이션 놓는 법, 아이폰 앱 알림 설정과 알림이 안 올 때 점검표까지 담았어요.
+- [할 일 앱 추천 — 무료 투두리스트 앱 7가지, 기기·목적별로 고르기](https://letsaria.com/ko/guide/todo-app-recommend/): 미리 알림·Microsoft To Do·Google Tasks·Todoist·TickTick·투두메이트·Aria를 한국 App Store 정보로 비교했어요. 쓰는 기기, 무료 범위, 애플워치·안드로이드·윈도우 지원으로 고르는 법을 정리했어요.
+- [아이폰 미리 알림 vs 할 일 앱 — 기본 앱으로 충분할 때, 바꿔야 할 때](https://letsaria.com/ko/guide/reminders-vs-todo-app/): 아이폰 미리 알림만으로 충분한 경우와 전용 할 일 앱이 편해지는 순간을 상황별로 나눴어요. 미리 알림 대체 앱을 고르기 전에 볼 신호 4가지, 둘을 같이 쓰는 법, 원본을 지키며 옮기는 법을 정리했어요.
+- [틱틱(TickTick) 대안 — 떠나는 이유별로 고르는 할 일 앱](https://letsaria.com/ko/guide/ticktick-alternative/): TickTick을 그만 쓰려는 이유가 기능이 많아서인지, 입력이 번거로워서인지에 따라 맞는 대안이 달라요. 떠나는 이유별 대안표와 틱틱에 있고 Aria에는 없는 기능까지 그대로 정리했어요.
+- [투두이스트(Todoist) 대안 — 내 쓰는 방식에 맞는 할 일 앱 찾기](https://letsaria.com/ko/guide/todoist-alternative/): Todoist가 무겁게 느껴진다면 프로젝트형인지 하루형인지부터 따져 보세요. 5문항 진단으로 미리 알림·Things 3·Microsoft To Do·Aria 가운데 맞는 대안을 고르고, 무료 알림 범위도 공식 정보로 비교했어요.
+- [노션 캘린더 대안 — 노션 없이 할 일과 일정을 한 화면에](https://letsaria.com/ko/guide/notion-calendar-alternative/): Notion 캘린더는 구글·iCloud 캘린더와 노션 데이터베이스를 잇는 데 맞춰져 있어요. 노션을 계속 쓸지에 따라 두 갈래로 나눠 Google 캘린더·Fantastical·Aria 같은 대안을 비교하고 옮기는 법을 정리했어요.
+- [맥 할 일 앱 추천 — 맥북 메뉴 막대·위젯으로 쓰는 투두리스트](https://letsaria.com/ko/guide/mac-todo-app/): 맥북에서 일하다 바로 할 일을 넣을 수 있는지를 기준으로 미리 알림·Things 3·Todoist·TickTick·Aria의 맥 앱을 비교했어요. 빠르게 넣는 길, 바탕화면 위젯, 아이폰과 이어지는 방식, 맥 앱 가격을 정리했어요.
+- [아이패드 플래너 앱 추천 — 손글씨형 vs 할 일·캘린더형](https://letsaria.com/ko/guide/ipad-planner-app/): 아이패드 플래너는 펜으로 쓰는 노트형과 알림·반복이 되는 앱형으로 나뉘어요. 두 방식의 차이를 표로 비교하고, 아이패드에서 계획하고 아이폰으로 알림 받는 섞어 쓰기 한 주 예시를 정리했어요.
+- [AI 비서 앱 비교 — 범용 챗봇·기기 비서·일정 비서, 무엇이 다른가](https://letsaria.com/ko/guide/ai-assistant-app/): AI 비서 앱은 무엇이든 답하는 범용 챗봇, 전화·기기와 붙은 비서, 할 일과 일정에 바로 담는 일정 비서로 나뉘어요. 유형별로 잘하는 일과 기록이 남는 곳, 쓰기 전에 확인할 개인정보 5문항을 정리했어요.
+- [애플워치로 할 일 관리하는 법 — 미리 알림·Siri·컴플리케이션](https://letsaria.com/ko/guide/apple-watch-reminders/): 애플워치에서 할 일을 넣고, 시계 화면에 띄우고, 끝내고, 알림 받는 네 가지 방법을 단계별로 정리했어요. 미리 알림 앱과 Siri, 컴플리케이션 놓는 법, 아이폰 앱 알림 설정과 알림이 안 올 때 점검표까지 담았어요.
 - [구글 캘린더 아이폰 연동하는 법 — 기본 캘린더에 추가하고 안 될 때 점검](https://letsaria.com/ko/guide/google-calendar-iphone/): 아이폰 설정에서 구글 계정을 추가해 기본 캘린더에 구글 일정을 띄우는 다섯 단계와, 일부 캘린더가 안 보일 때 어느 쪽 문제인지 가르는 점검표를 정리했어요. 위젯과 다른 일정 앱에서 보는 법도 담았어요.
-- [아이폰 미리 알림 사용법 — 깃발·태그·스마트 목록·위치 알림까지](https://letsaria.com/ko/guide/iphone-reminders-guide/): 아이폰 미리 알림 앱을 목록 → 할일 → 세부사항 순서로 쓰는 법을 정리했어요. 깃발·태그·우선순위의 차이, 반복·위치 알림, 사용자 설정 스마트 목록과 템플릿, 가족과 목록 공유, 직장인 목록 구조 예시까지 담았어요.
-- [투두리스트 작성법 — 끝까지 지우게 되는 할일 목록 쓰는 규칙](https://letsaria.com/ko/guide/todo-list-writing/): 할일을 적어도 못 지우는 이유와, 동사로 끝나고 한 번에 끝나는 한 줄로 고쳐 쓰는 법을 예시 10개로 정리했어요. 오늘 목록 개수, 큰 일 쪼개기, 못 끝낸 일 처리법, 하루 목록 예시까지 담았어요.
-- [할일 미루는 습관 고치는 법 — 시작이 안 될 때 쓰는 5가지 장치](https://letsaria.com/ko/guide/stop-procrastinating/): 할일을 자꾸 미루게 되는 이유별로 바로 써 볼 수 있는 장치 5가지를 정리했어요. 첫 행동 2분으로 쪼개기, 시작 시각 정하기, 밀린 일 15분 정리법과 Aria에서 하는 법, 전문가 상담이 필요한 때까지 담았어요.
+- [아이폰 미리 알림 사용법 — 깃발·태그·스마트 목록·위치 알림까지](https://letsaria.com/ko/guide/iphone-reminders-guide/): 아이폰 미리 알림 앱을 목록 › 할 일 › 세부사항 순서로 쓰는 법을 정리했어요. 깃발·태그·우선순위의 차이, 반복·위치 알림, 사용자 설정 스마트 목록과 템플릿, 가족과 목록 공유, 직장인 목록 구조 예시까지 담았어요.
+- [투두리스트 작성법 — 끝까지 지우게 되는 할 일 목록 쓰는 규칙](https://letsaria.com/ko/guide/todo-list-writing/): 할 일을 적어도 못 지우는 이유와, 동사로 끝나고 한 번에 끝나는 한 줄로 고쳐 쓰는 법을 예시 10개로 정리했어요. 오늘 목록 개수, 큰 일 쪼개기, 못 끝낸 일 처리법, 하루 목록 예시까지 담았어요.
+- [할 일 미루는 습관 고치는 법 — 시작이 안 될 때 쓰는 5가지 장치](https://letsaria.com/ko/guide/stop-procrastinating/): 할 일을 자꾸 미루게 되는 이유별로 바로 써 볼 수 있는 장치 5가지를 정리했어요. 첫 행동 2분으로 쪼개기, 시작 시각 정하기, 밀린 일 15분 정리법과 Aria에서 하는 법, 전문가 상담이 필요한 때까지 담았어요.
 - [아이폰 디데이 위젯 만드는 법 — 시험·기념일·마감 D-day](https://letsaria.com/ko/guide/iphone-dday-widget/): 아이폰 홈 화면·잠금 화면에 디데이를 띄우는 순서를 Aria 기준으로 정리했어요. 한 번·매년·함께한 날 세는 법의 차이, D-day·D+1·n일째·100일 계산 규칙과 실제 날짜 예시, 위젯 숫자가 안 바뀔 때 확인할 것까지 담았어요.
 - [아이폰 캘린더 공유하는 법 — 가족·연인·갤럭시 사용자와 일정 같이 보기](https://letsaria.com/ko/guide/iphone-calendar-share/): 아이폰 캘린더를 iCloud 구성원 추가, 가족 공유, 구글 캘린더, 공개 링크로 공유하는 법을 상대 기기별로 정리했어요. 공유 캘린더가 안 보일 때 점검할 것도 담았어요.
-- [시간 블로킹(타임 블로킹) 방법 — 하루를 블록으로 나누는 5단계와 예시](https://letsaria.com/ko/guide/time-blocking/): 할일 목록을 캘린더 위 시간 덩어리로 옮기는 시간 블로킹을 5단계로 정리했어요. 직장인·학생 하루 블록 예시, 타임박싱·뽀모도로와의 차이, 블록이 무너질 때 고치는 법까지 담았어요.
-- [아이젠하워 매트릭스 사용법 — 긴급·중요 4칸 예시와 할일 앱에 옮기기](https://letsaria.com/ko/guide/eisenhower-matrix/): 급한가·중요한가 두 질문으로 할일을 4칸에 나누는 아이젠하워 매트릭스의 뜻과 칸별 행동, 직장인·학생 예시 16개, 할일 앱의 목록·알림·캘린더로 옮기는 법을 정리했어요.
+- [시간 블로킹(타임 블로킹) 방법 — 하루를 블록으로 나누는 5단계와 예시](https://letsaria.com/ko/guide/time-blocking/): 할 일 목록을 캘린더 위 시간 덩어리로 옮기는 시간 블로킹을 5단계로 정리했어요. 직장인·학생 하루 블록 예시, 타임박싱·뽀모도로와의 차이, 블록이 무너질 때 고치는 법까지 담았어요.
+- [아이젠하워 매트릭스 사용법 — 긴급·중요 4칸 예시와 할 일 앱에 옮기기](https://letsaria.com/ko/guide/eisenhower-matrix/): 급한가·중요한가 두 질문으로 할 일을 4칸에 나누는 아이젠하워 매트릭스의 뜻과 칸별 행동, 직장인·학생 예시 16개, 할 일 앱의 목록·알림·캘린더로 옮기는 법을 정리했어요.
 - [뽀모도로 기법 하는 법 — 25분 집중·5분 휴식을 아이폰으로](https://letsaria.com/ko/guide/pomodoro-technique/): 뽀모도로 기법의 기본 순서와 25/5·50/10·90/20 변형, 아이폰 시계 앱 타이머로 하는 법, 루틴 타이머로 집중·휴식 단계를 이어 가는 설정까지 정리했어요.
-- [GTD 방법 — 수집·명확화·정리·검토·실행 5단계를 할일 앱으로](https://letsaria.com/ko/guide/gtd-method/): 머릿속 할일을 한곳에 모으고 다음 행동으로 바꾸는 GTD(Getting Things Done) 5단계와 2분 규칙, 주간 검토 체크리스트, 할일 앱 화면에 대응시킨 표를 정리했어요.
-- [할일 우선순위 정하는 법 — 다 중요해 보일 때 쓰는 기준 4가지](https://letsaria.com/ko/guide/prioritize-tasks/): 할일이 다 중요해 보일 때 마감·영향·노력·기운으로 순서를 정하는 법, 1-3-5 규칙·ABCDE·개구리 먼저 먹기 등 방법 5가지의 상황별 비교, 점수 매기기 예시표를 정리했어요.
+- [GTD 방법 — 수집·명확화·정리·검토·실행 5단계를 할 일 앱으로](https://letsaria.com/ko/guide/gtd-method/): 머릿속 할 일을 한곳에 모으고 다음 행동으로 바꾸는 GTD(Getting Things Done) 5단계와 2분 규칙, 주간 검토 체크리스트, 할 일 앱 화면에 대응시킨 표를 정리했어요.
+- [할 일 우선순위 정하는 법 — 다 중요해 보일 때 쓰는 기준 4가지](https://letsaria.com/ko/guide/prioritize-tasks/): 할 일이 다 중요해 보일 때 마감·영향·노력·기운으로 순서를 정하는 법, 1-3-5 규칙·ABCDE·개구리 먼저 먹기 등 방법 5가지의 상황별 비교, 점수 매기기 예시표를 정리했어요.
 - [주간 계획 세우는 법 — 일요일 30분 돌아보기와 주간 계획표 예시](https://letsaria.com/ko/guide/weekly-planning/): 지난주 돌아보기, 이번 주 꼭 할 3가지, 캘린더에 시간 잡기, 요일별 나누기 4단계로 주간 계획을 30분 안에 세우는 법과 돌아보기 질문 5개, 주간 계획표 예시를 담았어요.
 - [아침 루틴 만들기 — 작게 시작해 끊기지 않게 이어 가는 법](https://letsaria.com/ko/guide/morning-routine/): 아침 루틴을 2~3가지 작은 행동으로 시작해 같은 순서로 이어 가는 법, 10·20·40분 길이별 루틴 예시, 하루 빠졌을 때 다시 잇는 법, 오늘 할 일까지 이어지는 아침 흐름을 정리했어요.
-- [ADHD 할일 관리 — 잊지 않고 시작하게 돕는 앱 설정법](https://letsaria.com/ko/guide/adhd-todo/): 할일을 자주 잊거나 시작이 어려울 때 도움이 될 수 있는 장치 네 가지와 어려움별 앱 설정 경로, 앱 고를 때 볼 것을 정리했어요. 진단과 치료는 전문가와 상의하세요.
+- [ADHD 할 일 관리 — 잊지 않고 시작하게 돕는 앱 설정법](https://letsaria.com/ko/guide/adhd-todo/): 할 일을 자주 잊거나 시작이 어려울 때 도움이 될 수 있는 장치 네 가지와 어려움별 앱 설정 경로, 앱 고를 때 볼 것을 정리했어요. 진단과 치료는 전문가와 상의하세요.
 - [대학생 플래너 앱 활용법 — 과제 마감·강의·시험을 한 곳에](https://letsaria.com/ko/guide/college-student-planner/): 개강 주에 강의계획서 PDF로 한 학기 과제·시험 날짜를 넣어 두는 법, 과제 마감 알림, 강의 녹음 정리, 학기 타임라인 체크리스트까지 대학생 플래너 앱 쓰는 법을 정리했어요.
-- [직장인 일정 관리법 — 회의·업무·개인 일을 한 화면에서](https://letsaria.com/ko/guide/office-worker-schedule/): 회사 캘린더는 그대로 두고 그 위에 내 할일을 얹는 직장인 일정 관리법. 출근·점심·퇴근 하루 3번 점검표, 회의 전후 체크리스트, 업무용·개인용 기록 나누는 법을 정리했어요.
+- [직장인 일정 관리법 — 회의·업무·개인 일을 한 화면에서](https://letsaria.com/ko/guide/office-worker-schedule/): 회사 캘린더는 그대로 두고 그 위에 내 할 일을 얹는 직장인 일정 관리법. 출근·점심·퇴근 하루 3번 점검표, 회의 전후 체크리스트, 업무용·개인용 기록 나누는 법을 정리했어요.
 - [육아 일정 관리 — 알림장·가정통신문·예방접종을 놓치지 않는 법](https://letsaria.com/ko/guide/parenting-schedule/): 가정통신문 사진·알림장 캡처·단톡 공지·병원 문자로 흩어져 들어오는 아이 일정을 받자마자 옮기는 법, 준비물 알림 시점, 예방접종 공식 안내 확인, 배우자와 같이 보는 법을 정리했어요.
 - [시험 공부 계획 세우기 — 스터디 플래너 앱으로 D-day까지](https://letsaria.com/ko/guide/study-planner/): 시험일에서 거꾸로 범위를 나누는 8주 역산 계획표, 하루 공부 목록 쓰는 법, 1·3·7일 복습 알림 예시, 밀린 범위 다시 나누기, 순공 시간 측정 앱과 나눠 쓰는 법을 정리했어요.
 - [여행 준비물 체크리스트 — 예약 확인서부터 출발 알림까지 앱으로](https://letsaria.com/ko/guide/travel-checklist/): 출발 2주 전·1주 전·3일 전·전날·당일로 나눈 여행 준비 체크리스트와 해외여행 준비물 표, 항공권·숙소 확인서 날짜를 일정으로 옮기는 법, 집을 나설 때 여권 알림 설정을 정리했어요.
 - [장보기 리스트 앱으로 쓰는 법 — 카테고리 자동 묶기와 마트 도착 알림](https://letsaria.com/ko/guide/grocery-list-app/): 장보기 목록 앱 고르는 기준, 아이폰 미리 알림 식료품 목록과 Aria 장보기 목록·전용 앱 비교, 한 문장으로 여러 품목 넣기, 마트 도착 알림, 가족과 같이 쓰는 법을 정리했어요.
-- [애플워치 할일 앱 추천·비교 (2026년 10월)](https://letsaria.com/ko/guide/apple-watch-todo-app/): 미리 알림·캘린더·TickTick·Todoist·Things 3·Fantastical·Aria의 Apple Watch 지원을 한국 App Store 정보로 비교했어요.
-- [애플워치에서 Aria 쓰는 법 — 할일 체크·말하기·루틴·컴플리케이션](https://letsaria.com/ko/guide/apple-watch-aria/): Aria 워치 앱 설치, 오늘 할일 체크, 말하기, 루틴·집중 타이머, 녹음, 시계 화면 컴플리케이션을 표로 정리했어요.
+- [애플워치 할 일 앱 추천·비교 (2026년 10월)](https://letsaria.com/ko/guide/apple-watch-todo-app/): 미리 알림·캘린더·TickTick·Todoist·Things 3·Fantastical·Aria의 Apple Watch 지원을 한국 App Store 정보로 비교했어요.
+- [애플워치에서 Aria 쓰는 법 — 할 일 체크·말하기·루틴·컴플리케이션](https://letsaria.com/ko/guide/apple-watch-aria/): Aria 워치 앱 설치, 오늘 할 일 체크, 말하기, 루틴·집중 타이머, 녹음, 시계 화면 컴플리케이션을 표로 정리했어요.
 - [가이드 전체](https://letsaria.com/ko/guide/): 모든 가이드 글 목록
 
 ## Guide (English)
