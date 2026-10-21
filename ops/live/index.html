@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-lQaVZtSv2z0xuWgSAIM3llc/SRF/7nEUbIzTjIVLvAY='; style-src 'sha256-/8y9h76Wb/GsvD1fZo7L7zeevc7jyReJHn0vLv2Ain0='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-CXy13gyIsP4omhpqoHXAQVXXUXco0YxfVmL6LBrmLBw='; style-src 'sha256-FPV7sC6w2ymsKtymk1f+BXfTjhARp3ExguAVoa9ecpk='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -129,6 +129,7 @@ body[data-view="stats"] #lock { display: none; }
 .line b { color: var(--ink); font-weight: 600; }
 .chart { margin-top: 14px; }
 .chart.chart-top { margin-top: 0; }
+.chart > .tiles { margin-top: 8px; }
 .chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .chart-head .sub { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
 .legend { display: flex; gap: 12px; margin-top: 6px; font-size: 12px; color: var(--ink-2); }
@@ -300,6 +301,132 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     </div>
   </section>
 
+  <section class="card block" aria-labelledby="hUse">
+    <h2 id="hUse">앱 사용</h2>
+    <div class="tiles">
+      <div class="tile">
+        <div class="label">대시보드 칩 누름률</div>
+        <div class="mid"><span class="num" id="uDash">–</span></div>
+        <div class="sub" id="uDashSub">&nbsp;</div>
+      </div>
+      <div class="tile">
+        <div class="label">입력칸 칩</div>
+        <div class="mid"><span class="num" id="uComp">–</span></div>
+        <div class="sub" id="uCompSub">&nbsp;</div>
+      </div>
+      <div class="tile">
+        <div class="label">이어서 칩</div>
+        <div class="mid"><span class="num" id="uFu">–</span></div>
+        <div class="sub" id="uFuSub">&nbsp;</div>
+      </div>
+    </div>
+    <p class="empty" id="useEmpty"></p>
+    <div id="useBody">
+      <div class="line">칩 누른 세션 <b id="uReco">–</b> · 새 기능 카드 누름 <b id="uDisc">–</b> · 쓴 사람 <b id="uUsers">–</b>명</div>
+      <div class="line">세션 평균 <b id="uAvg">–</b> · 칩 누른 세션 <b id="uRecoAvg">–</b> · 안 누른 세션 <b id="uOtherAvg">–</b><br>길이 <span id="uBins">–</span></div>
+      <div class="line">100세션당 AI 되돌림 <b id="uUndo">–</b> · 다시 물음 <b id="uReask">–</b> · 도구 다시 부름 <b id="uRecall">–</b></div>
+      <div class="chart">
+        <div class="chart-head"><div class="label">날마다 세션 · 28일</div><div class="sub" id="chUsecap">&nbsp;</div></div>
+        <div class="legend"><span class="key"><i class="sw"></i>칩 누른 세션</span><span class="key"><i class="sw exp"></i>나머지</span></div>
+        <svg id="chUse" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="어제까지 28일 날마다 세션 수 막대 그래프 — 칩 누른 세션과 나머지"></svg>
+      </div>
+      <div class="chart">
+        <div class="chart-head"><div class="label">칩 누름률 · 28일</div><div class="sub" id="chTapcap">&nbsp;</div></div>
+        <div class="legend"><span class="key"><i class="ln"></i>대시보드</span><span class="key"><i class="ln s2"></i>입력칸</span><span class="key"><i class="ln s3"></i>이어서</span></div>
+        <svg id="chTap" viewBox="0 0 336 130" role="img" tabindex="0" aria-label="어제까지 28일 날마다 대시보드 · 입력칸 · 이어서 칩 누름률 선 그래프"></svg>
+        <details>
+          <summary>표로 보기</summary>
+          <table><thead><tr><th>날</th><th>세션</th><th>칩 누른</th><th>대시보드</th><th>입력칸</th><th>이어서</th></tr></thead><tbody id="tUse"></tbody></table>
+        </details>
+      </div>
+    </div>
+
+    <div class="chart">
+      <div class="chart-head"><div class="label">화면 답 · 7일</div><div class="sub" id="scrCap">&nbsp;</div></div>
+      <p class="empty" id="scrEmpty"></p>
+      <div id="scrBody">
+        <table><thead><tr><th>한 탭 실행</th><th>수</th><th>몫</th></tr></thead><tbody id="tAct"></tbody></table>
+        <div class="line">화면 답 <b id="sAns">–</b>개 · 글만 답 <b id="sGen">–</b> · 기본 화면(L0) <b id="sL0">–</b> · 버린 참조 <b id="sDrop">–</b></div>
+        <div class="line">브리핑 본 사람 <b id="sBrief">–</b>명 · 그중 주 3일+ <b id="sBrief3">–</b> · 알림 끈 기기·날 <b id="sAlert">–</b> · 목록만 스크롤 <b id="sScroll">–</b></div>
+        <div class="chart">
+          <div class="chart-head"><div class="label">첫 행동까지 · 브리핑 화면</div><div class="sub" id="faCap">&nbsp;</div></div>
+          <svg id="chFa" viewBox="0 0 336 170" role="img" aria-label="최근 7일 브리핑 화면이 보인 뒤 첫 행동까지 걸린 시간 구간별 화면 수"></svg>
+        </div>
+        <div class="line">첫 픽셀 <span id="sPaint">–</span><br>완성 <span id="sFinal">–</span></div>
+      </div>
+      <p class="empty">제안 수락률 — 1.1.7 부터(표면별 보임·수락·시간 바꿈·기타)</p>
+    </div>
+
+    <div class="chart">
+      <div class="chart-head"><div class="label">답 평가 · 7일</div><div class="sub" id="fbCap">&nbsp;</div></div>
+      <div class="pair pair-top">
+        <div>
+          <div class="label">추천 비율</div>
+          <div class="mid"><span class="num" id="fbUp">–</span></div>
+          <div class="sub">추천 <b id="fbUpN">–</b> · 비추천 <b id="fbDownN">–</b></div>
+        </div>
+        <div>
+          <div class="label">웹 찾기 답</div>
+          <div class="mid"><span class="num" id="fbWeb">–</span></div>
+          <div class="sub" id="fbWebSub">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line">비추천 이유 <span id="fbWhy">–</span></div>
+    </div>
+
+    <div class="chart">
+      <div class="chart-head"><div class="label">결제 화면 · 계기별 · 7일</div><div class="sub" id="pwCap">&nbsp;</div></div>
+      <table id="pwTable"><thead><tr><th>계기</th><th>봄</th><th>버튼</th><th>구매</th><th>구매율</th></tr></thead><tbody id="tPw"></tbody></table>
+      <p class="empty" id="pwEmpty"></p>
+      <div class="line">권유 토스트 <b id="pwOffer">–</b>번 → 결제 화면 <b id="pwOfferShown">–</b>번</div>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hFeat">
+    <h2 id="hFeat">기능 · AI 행동</h2>
+    <p class="empty" id="uxEmpty"></p>
+    <div class="chart chart-top">
+      <div class="chart-head"><div class="label">기능 쓰임 · 7일</div><div class="sub" id="ftCap">&nbsp;</div></div>
+      <svg id="chFt" viewBox="0 0 336 384" role="img" aria-label="최근 7일 기능마다 쓴 사람 수 · 7일 활동 사람 중 몫 · 횟수"></svg>
+      <div class="line">미리 알림 · 캘린더에서 가져온 할일 <b id="ftImp">–</b>개 · <b id="ftImpU">–</b>명(위 「할일 만듦」에서 뺌)</div>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">AI 답 → 행동 · 7일</div><div class="sub" id="aiCap">&nbsp;</div></div>
+      <div class="tiles">
+        <div class="tile">
+          <div class="label">행동으로 이어진 답</div>
+          <div class="mid"><span class="num" id="aiActed">–</span></div>
+          <div class="sub" id="aiActedSub">&nbsp;</div>
+        </div>
+        <div class="tile">
+          <div class="label">카드 붙은 답</div>
+          <div class="mid"><span class="num" id="aiCard">–</span></div>
+          <div class="sub" id="aiCardSub">&nbsp;</div>
+        </div>
+        <div class="tile">
+          <div class="label">이어 물음</div>
+          <div class="mid"><span class="num" id="aiFu">–</span></div>
+          <div class="sub" id="aiFuSub">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line">할일 만든 답 <b id="aiMk">–</b> · 할일 완료한 답 <b id="aiDone">–</b> · 기록 만든 답 <b id="aiJr">–</b> · 답당 결과 카드 <b id="aiChips">–</b>개</div>
+      <div class="chart">
+        <div class="chart-head"><div class="label">행동으로 이어진 답 · 14일</div><div class="sub" id="chActcap">&nbsp;</div></div>
+        <svg id="chAct" viewBox="0 0 336 130" role="img" tabindex="0" aria-label="오늘까지 14일 날마다 행동으로 이어진 Aria 답 비율 선 그래프"></svg>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">하루 질문 수 · 사람마다</div><div class="sub" id="qdCap">&nbsp;</div></div>
+      <svg id="chQd" viewBox="0 0 336 136" role="img" aria-label="어제까지 7일 사람 · 날마다 AI 질문 수 구간별 분포"></svg>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">온보딩 단계</div><div class="sub" id="obCap">&nbsp;</div></div>
+      <p class="empty" id="obEmpty"></p>
+      <table id="obTable"><thead><tr><th>단계</th><th>7일</th><th>28일</th></tr></thead><tbody id="tOb"></tbody></table>
+      <div class="line" id="obPick">&nbsp;</div>
+    </div>
+  </section>
+
   <div class="note">
     <p>숫자만 보여요. 이름·이메일·대화 내용은 없어요. 1분마다 새로 고침.</p>
     <p>수익 = 애플 가격(월 9,800원 · 연 98,000원) × 결제 건 · 순수익 = 애플 수수료 15%(소규모 사업자) 뺀 값 · 환불은 빼지 않고 따로 셈. 예상 = 체험 중이고 자동 갱신이 켜진 구독이 체험 끝에 모두 결제될 때.</p>
@@ -307,6 +434,13 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     <p>재방문 = 가입 다음 날(D1) · 7일째(D7) · 30일째(D30)에 AI를 쓴 사람(UTC 날짜 · 주는 월요일 시작 · 앱만 열고 AI를 안 쓴 날은 빠짐). 그날이 아직 안 온 사람은 빼고 계산 · 비어 있으면 아직 그날이 안 온 것.</p>
     <p>결제 유지 = 첫 결제 달별로 1·2·3달 뒤에도 결제가 이어진 비율(환불 제외 · 연간은 낸 1년 동안 이어진 것으로 셈) · 「–」 = 아직 그 차례가 안 옴.</p>
     <p>흐름 = 최근 7일 가입한 사람 중 한 번이라도 그 단계를 한 사람. 첫 질문 · 첫 할 일은 서버에 남은 기록 기준이라 조금 덜 셀 수 있어요. 오늘 = 한국 시간 0시부터.</p>
+    <p>앱 사용 = 앱(1.1.5+)이 하루가 끝나면 다음 실행 때 올리는 날 요약(기기 · 날 한 줄 · 수만). 10월 26일부터 쌓이고 화면 답 · 알림 끔은 10월 27일부터(1.1.6+). 오늘은 비어 있고 어제도 앱을 다시 연 사람만큼 늦게 채워져요. 7일 · 28일 = 어제까지 · 날 = 기기 날짜.</p>
+    <p>칩 누름률 = 누른 수 ÷ 그 자리에 칩이 선 세션 수(한 세션에 여러 번 누르면 100%를 넘을 수 있어요). 대시보드 칩 = 대시보드 칩 덱(「하면 좋을 일」 카드 아님) · 입력칸 칩 = 입력칸 위 · 이어서 칩 = 답 아래 · 새 기능 카드 = 안 써 본 기능 카드. 칩 누른 세션 = 이 넷 중 하나라도 누른 세션. AI 되돌림 · 다시 물음 · 도구 다시 부름 = 100세션당 횟수.</p>
+    <p>화면 답 한 탭: 지금 시작 = ▶ 지금 시작 · 미루기·내일로(섞임) = ⋯ 미루기/날짜 시트가 열린 수(취소해도 셈) + 저녁 「내일 하면 좋을 일」 [수락] · 시간 직접. 대시보드 「하면 좋을 일」 [수락] · 시간 직접 [적용] · 2·3순위 [수락] · 캘린더 제안 · 채팅 답 카드 버튼은 아직 세지 않아요 → 제안 수락률은 1.1.7 부터. 첫 행동까지 = 브리핑 화면이 보인 뒤 첫 탭까지. 글만 답 = 화면 대신 글로만 답한 몫 · 기본 화면(L0) = 서버 문구 없이 기기 기본 화면으로 끝난 몫. 브리핑 본 날 · 알림 끔은 기기 하루 0/1이라 보임 수가 아니에요.</p>
+    <p>답 평가 = 최근 7일(오늘 포함) 답마다 마지막 [추천]/[비추천](취소는 뺌) · 이유 = 비추천 칩. 결제 화면 계기별 = 최근 7일 화면 수(같은 화면은 한 번) · 버튼 = 체험/구독 버튼 누름 · 구매 = 체험 시작 포함 · 구매율 = 구매 ÷ 봄.</p>
+    <p>기능 쓰임 = 최근 7일(오늘 포함) 서버에 남은 기록으로 기능마다 쓴 사람 · 7일 활동 사람(앱을 열었거나 AI를 쓴 사람) 중 몫 · 횟수. 지운 것은 빼요(채팅 질문만 지운 대화도 셈). 할일 AI = 채팅에서 Aria가 만든 것 · 기록 · 사진·파일 = 스크랩 · 시냅스 새 낱말 = AI가 뽑은 것. 대화 동기화를 끈 사람의 채팅은 빠져요.</p>
+    <p>AI 답 → 행동 = 최근 7일 Aria 답 중 할일 만듦 · 완료 · 기록 만듦 · 결과 카드(정렬 · 수정 · 기억 등) 중 하나라도 한 답의 몫. 카드 붙은 답 = 화면 카드가 붙은 답 · 이어 물음 = 질문이 있던 대화 중 2번 이상 물은 대화의 몫. 14일 선 = 날마다 그 몫.</p>
+    <p>하루 질문 수 = 어제까지 7일(UTC 날) 질문한 사람·날마다 질문 수 구간(구독자는 요청 단위라 조금 더 셈). 온보딩 단계 = 앱 1.1.5+ 초기 설정 기록이 있는 사람(10월 25일부터 · 단계별 그 단계에 온 사람 · 몫은 시작 화면 대비).</p>
   </div>
   <div class="foot"><button id="logout" class="link" type="button">이 기기에서 잠그기</button></div>
 </main>
@@ -608,7 +742,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     c.sel = i >= 0 && i < c.n ? i : null;
     caption(c);
   }
-  for (const id of ["chHr", "chRev", "chRet", "chTr", "chSu"]) {
+  for (const id of ["chHr", "chRev", "chRet", "chTr", "chSu", "chUse", "chTap", "chAct"]) {
     const s = $(id);
     s.addEventListener("pointerdown", pick);
     s.addEventListener("pointermove", pick);
@@ -624,6 +758,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     s.addEventListener("blur", () => { const c = charts[id]; if (c) { c.sel = null; caption(c); } });
   }
   // 선 그래프 — 주 8칸 · 0% 바닥 · 위 눈금 하나 · 빈 값(아직)은 끊는다.
+  // o.cap = 위 끝 상한(기본 100% · 누름률처럼 넘을 수 있는 값은 더 크게) · o.ticks = 이름 붙일 칸(기본 전부) · 칸이 많으면(>12) 점은 홀로 선 값만.
   const LH = 130, LTOP = 14, LBOT = 18;
   function lineChart(id, pts, series, o) {
     const svg = $(id);
@@ -632,8 +767,8 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     const n = Math.max(1, pts.length), band = CW / n;
     let mx = 0;
     pts.forEach((p) => series.forEach((s) => { const v = p[s.key]; if (typeof v === "number" && v > mx) mx = v; }));
-    const top = Math.min(1, Math.max(0.1, Math.ceil(mx * 10) / 10));
-    const yOf = (v) => base - (v / top) * plotH;
+    const top = Math.min(o.cap || 1, Math.max(0.1, Math.ceil(mx * 10) / 10));
+    const yOf = (v) => base - (Math.min(v, top) / top) * plotH;
     const hl = el("rect", { x: 0, y: 2, width: band, height: base - 2, rx: 6, class: "hl", visibility: "hidden" }, svg);
     el("line", { x1: 0, x2: CW, y1: LTOP + 0.5, y2: LTOP + 0.5, class: "grid-line" }, svg);
     el("line", { x1: 0, x2: CW, y1: base + 0.5, y2: base + 0.5, class: "axis" }, svg);
@@ -648,11 +783,18 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
       });
       if (d) el("path", { d: d, class: "lp " + s.cls }, svg);
     });
+    const num = (p, s) => !!p && typeof p[s.key] === "number";
     series.forEach((s) => pts.forEach((p, i) => {
       const v = p[s.key];
-      if (typeof v === "number") el("circle", { cx: i * band + band / 2, cy: yOf(v), r: 4, class: "pt " + s.cls }, svg);
+      if (typeof v !== "number") return;
+      if (pts.length > 12 && (num(pts[i - 1], s) || num(pts[i + 1], s))) return;
+      el("circle", { cx: i * band + band / 2, cy: yOf(v), r: 4, class: "pt " + s.cls }, svg);
     }));
-    pts.forEach((p, i) => txt(svg, i * band + band / 2, LH - 3, p.label, "tick", "middle"));
+    (o.ticks || pts.map((_, i) => i)).forEach((i) => {
+      if (!pts[i]) return;
+      const anchor = n > 8 && i === 0 ? "start" : n > 8 && i === n - 1 ? "end" : "middle";
+      txt(svg, anchor === "start" ? 0 : anchor === "end" ? CW : i * band + band / 2, LH - 3, pts[i].label, "tick", anchor);
+    });
     const prev = charts[id];
     const c = { id: id, svg: svg, hl: hl, band: band, n: pts.length, o: o, start: o.start, sel: prev && prev.sel != null && prev.sel < pts.length ? prev.sel : null };
     charts[id] = c;
@@ -798,6 +940,199 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
       caption: (i) => i > now ? i + "시 · 아직" : (i === now ? "지금 " : "") + i + "시 · 질문 " + fmt(hq[i] || 0) + " · 가입 " + fmt(hs[i] || 0),
     });
   }
+  // ── 앱 사용(usage) — 칸이 아직 안 쌓였으면 0 대신 「…부터 쌓여요」 ─────────────
+  const ENTRY_KO = {
+    onboarding: "온보딩", alarm: "알람", credit: "AI 동전", settings: "설정", chat_quota: "채팅 한도", dday: "디데이",
+    nudge_dday: "권유 · 디데이", nudge_tasks5: "권유 · 할 일 5개", nudge_day3: "권유 · 3일째",
+  };
+  const REASON_KO = [["wrong", "틀린 정보"], ["unhelpful", "도움 안 됨"], ["too_long", "너무 길어요"], ["other", "기타"], ["none", "이유 없음"]];
+  const ACTION_KO = [["start", "지금 시작"], ["complete", "완료"], ["postpone", "미루기·내일로(섞임)"], ["insert", "넣기"], ["open", "열기"]];
+  const md = (key) => { const p = String(key).split("-").map(Number); return p[1] + "월 " + p[2] + "일"; };
+  const share = (v, tot) => (tot > 0 ? Math.round((v / tot) * 100) + "%" : "–");
+  const per100 = (x) => (typeof x === "number" && isFinite(x) ? nf.format(Math.round(x * 1000) / 10) + "번" : "–");
+  const rateOf = (t, s) => (s > 0 ? t / s : null);
+  const dur = (s) => {
+    if (typeof s !== "number" || !isFinite(s)) return "–";
+    if (s < 60) return Math.round(s) + "초";
+    const m = Math.floor(s / 60), r = Math.round(s % 60);
+    if (m < 60) return m + "분" + (m < 10 && r ? " " + r + "초" : "");
+    return Math.floor(m / 60) + "시간 " + (m % 60) + "분";
+  };
+  const binsText = (arr, names) => {
+    const tot = arr.reduce((a, v) => a + (Number(v) || 0), 0);
+    return tot > 0 ? names.map((nm, i) => nm + " " + share(arr[i] || 0, tot)).join(" · ") : "–";
+  };
+  // 가로 막대 — rows = [{ l: 이름, f: 0..1 막대 길이, t: 오른쪽 글 }].
+  function hbars(id, rows) {
+    const svg = $(id);
+    clear(svg);
+    const RH = 32;
+    svg.setAttribute("viewBox", "0 0 " + CW + " " + Math.max(1, rows.length) * RH);
+    rows.forEach((row, i) => {
+      const y = i * RH, f = typeof row.f === "number" && isFinite(row.f) ? Math.max(0, Math.min(1, row.f)) : 0;
+      txt(svg, 0, y + 14, row.l, "flabel");
+      txt(svg, CW, y + 14, row.t, "fval", "end");
+      el("rect", { x: 0, y: y + 20, width: CW, height: 8, rx: 4, class: "track" }, svg);
+      if (f > 0) el("rect", { x: 0, y: y + 20, width: Math.max(8, f * CW), height: 8, rx: 4, class: "s1" }, svg);
+    });
+  }
+  // 구간 분포 — 막대 길이 = 전체 중 몫.
+  function bars(id, rows) {
+    const tot = rows.reduce((a, r) => a + (Number(r[1]) || 0), 0);
+    hbars(id, rows.map((r) => { const v = Number(r[1]) || 0; return { l: r[0], f: tot > 0 ? v / tot : 0, t: fmt(v) + " · " + share(v, tot) }; }));
+  }
+  function renderUsage(u, today) {
+    const L = u ? u.last7 : null, sc = u ? u.screen7 : null;
+    const hasEng = !!(L && L.rows > 0);
+    const since = (from, what) => (!u ? "앱 사용 숫자를 못 불러왔어요." : !from ? what + " 아직 수집 전이에요." :
+      what + " " + md(from) + "부터 쌓여요" + (today && today > from ? " · 아직 들어온 기록이 없어요." : " · 하루가 끝나면 다음 날 올라와요."));
+    const tiles = [["uDash", L && L.dashboard], ["uComp", L && L.composer], ["uFu", L && L.follow_up]];
+    for (const [id, sf] of tiles) {
+      setText(id, hasEng && sf && sf.shown > 0 ? pct(sf.per_shown) : "–");
+      setText(id + "Sub", !hasEng ? (u && u.engage_from ? md(u.engage_from) + "부터" : " ") :
+        sf && sf.shown > 0 ? fmt(sf.taps) + "/" + fmt(sf.shown) + "세션" + few(sf.shown) : "아직 안 보임");
+    }
+    setText("useEmpty", hasEng ? "" : since(u && u.engage_from, "앱 이용 통계는"));
+    $("useBody").hidden = !hasEng;
+    if (hasEng) {
+      setText("uReco", pct(L.reco_session_rate));
+      setText("uDisc", L.discover.shown > 0 ? pct(L.discover.per_shown) : "–");
+      setText("uUsers", fmt(L.users));
+      setText("uAvg", dur(L.avg_s));
+      setText("uRecoAvg", dur(L.reco_avg_s));
+      setText("uOtherAvg", dur(L.other_avg_s));
+      setText("uBins", binsText(L.session_bins, ["1분 밑", "1~5분", "5~15분", "15분+"]));
+      setText("uUndo", per100(L.ai.undo_per_session));
+      setText("uReask", per100(L.ai.reask_per_session));
+      setText("uRecall", per100(L.ai.recall_per_session));
+      const d = u.daily, n = d.sessions.length;
+      const dl = (i) => (i === n - 1 ? "어제" : (() => { const x = dayAt(d.days_from, i); return x.m + "/" + x.d; })());
+      colChart("chUse", d.sessions.map((v, i) => ({ segs: [d.reco_sessions[i], Math.max(0, v - d.reco_sessions[i])], label: dl(i) })), {
+        classes: ["s1", "exp"], peak: fmt, start: n - 1, ticks: [0, Math.floor(n / 2), n - 1],
+        caption: (i) => dl(i) + " · 세션 " + fmt(d.sessions[i]) + " · 칩 누른 " + share(d.reco_sessions[i], d.sessions[i]) + " · " + fmt(d.users[i]) + "명",
+      });
+      const pts = d.sessions.map((_, i) => ({
+        label: dl(i), a: rateOf(d.dash_taps[i], d.dash_shown[i]), b: rateOf(d.comp_taps[i], d.comp_shown[i]), c: rateOf(d.fu_taps[i], d.fu_shown[i]),
+      }));
+      const lastPt = (() => { for (let i = n - 1; i >= 0; i--) if (pts[i].a !== null || pts[i].b !== null || pts[i].c !== null) return i; return n - 1; })();
+      lineChart("chTap", pts, [{ key: "a", cls: "k1" }, { key: "b", cls: "k2" }, { key: "c", cls: "k3" }], {
+        cap: 5, ticks: [0, Math.floor(n / 2), n - 1], start: lastPt,
+        caption: (i) => dl(i) + " · " + pct(pts[i].a) + " / " + pct(pts[i].b) + " / " + pct(pts[i].c),
+      });
+      const rows = [];
+      const cell = (t, s) => (s > 0 ? pct(t / s) : "–");
+      for (let i = n - 1; i >= 0; i--) {
+        if (!d.rows[i]) continue;
+        rows.push([dl(i), fmt(d.sessions[i]), share(d.reco_sessions[i], d.sessions[i]), cell(d.dash_taps[i], d.dash_shown[i]),
+          cell(d.comp_taps[i], d.comp_shown[i]), cell(d.fu_taps[i], d.fu_shown[i])]);
+      }
+      tableRows("tUse", rows);
+    }
+
+    // 화면 답(1.1.6+ · 10월 27일부터)
+    const scrHas = !!(sc && (sc.answers + sc.first_action_total + sc.actions_total + sc.finals + sc.briefing_days +
+      sc.paint.reduce((a, v) => a + v, 0) + sc.scroll_only) > 0);
+    $("scrBody").hidden = !scrHas;
+    setText("scrEmpty", scrHas || !u ? "" : since(u.screen_from, "화면 답 숫자는"));
+    setText("scrCap", scrHas ? "한 탭 " + fmt(sc.actions_total) + "번" : " ");
+    if (scrHas) {
+      tableRows("tAct", ACTION_KO.map(([k, nm]) => [nm, fmt(sc.actions[k]), share(sc.actions[k], sc.actions_total)]));
+      setText("sAns", fmt(sc.answers));
+      setText("sGen", pct(sc.fallback_rate));
+      setText("sL0", pct(sc.l0_rate));
+      setText("sDrop", fmt(sc.ref_drop));
+      setText("sBrief", fmt(sc.brief_users));
+      setText("sBrief3", pct(sc.brief3_rate));
+      setText("sAlert", pct(sc.alert_off_rate));
+      setText("sScroll", fmt(sc.scroll_only));
+      setText("faCap", sc.first_action_total > 0 ? "화면 " + fmt(sc.first_action_total) + "개" : " ");
+      bars("chFa", [["5초 밑", sc.first_action[0]], ["5~15초", sc.first_action[1]], ["15~60초", sc.first_action[2]], ["60초 넘게", sc.first_action[3]], ["행동 없음", sc.first_action[4]]]);
+      setText("sPaint", binsText(sc.paint, ["0.3초 밑", "0.3~1초", "1초+"]));
+      setText("sFinal", binsText(sc.final, ["1초 밑", "1~2초", "2~4초", "4초+"]));
+    }
+
+    // 답 평가(지금도 쌓임)
+    const f = u ? u.feedback7 : null, rated = f ? f.up + f.down : 0;
+    setText("fbCap", f ? md(f.from) + "부터" + (rated ? " · " + fmt(rated) + "개" + few(rated) : "") : " ");
+    setText("fbUp", rated ? pct(f.up_rate) : "–");
+    setText("fbUpN", f ? fmt(f.up) : "–");
+    setText("fbDownN", f ? fmt(f.down) : "–");
+    const wr = f ? f.web.up + f.web.down : 0, nr = f ? f.no_web.up + f.no_web.down : 0;
+    setText("fbWeb", wr ? pct(f.web.up_rate) : "–");
+    setText("fbWebSub", f ? "웹 " + fmt(wr) + "개 · 그 외 " + (nr ? pct(f.no_web.up_rate) + " (" + fmt(nr) + "개)" : "–") : " ");
+    setText("fbWhy", f && f.down > 0 ? REASON_KO.filter(([k]) => f.reasons[k] > 0).map(([k, nm]) => nm + " " + fmt(f.reasons[k])).join(" · ") :
+      f ? "없음" + (f.cancelled ? " · 취소 " + fmt(f.cancelled) : "") : "–");
+
+    // 결제 화면 계기별
+    const pw = u ? u.paywall7 : null, ents = pw ? pw.entries : [];
+    tableRows("tPw", ents.map((x) => [ENTRY_KO[x.entry] || x.entry, fmt(x.shown), fmt(x.cta), fmt(x.purchased), pct(x.purchase_rate)]));
+    $("pwTable").hidden = ents.length === 0;
+    setText("pwEmpty", !pw || ents.length ? "" : "최근 7일 결제 화면 기록이 없어요.");
+    setText("pwCap", pw && pw.shown ? "구매율 " + pct(pw.purchase_rate) + " · " + fmt(pw.purchased) + "/" + fmt(pw.shown) : " ");
+    setText("pwOffer", pw ? fmt(pw.offers) : "–");
+    setText("pwOfferShown", pw ? fmt(pw.offer_shown) : "–");
+  }
+  // ── 기능 · AI 행동(ux · 서버 기록) ─────────────────────────────────────
+  const FEAT_KO = {
+    chat: "채팅 질문", task_new: "할일 만듦", task_ai: "할일 만듦 · AI", task_direct: "할일 만듦 · 직접", task_done: "할일 완료",
+    routine_done: "루틴 완료", journal: "기록", files: "사진 · 파일", voice: "음성 메모", people: "사람 추가", synapse: "시냅스 새 낱말", briefing: "브리핑",
+  };
+  const STEP_KO = {
+    welcome: "시작 화면", name: "호칭", persona: "말투", interests: "관심사", checkin: "체크인", calendar: "캘린더", location: "위치",
+    ai_consent: "AI 동의", apple: "애플 로그인", pro: "Pro 안내", done: "끝",
+  };
+  const PICK_KO = [["ai_consent", "agree", "AI 동의"], ["ai_consent", "decline", "거절"], ["apple", "apple", "애플 로그인"], ["apple", "later", "나중에"],
+    ["persona", "tone_friend", "말투 친구"], ["persona", "tone_warm", "따뜻"], ["persona", "tone_crisp", "간결"], ["persona", "tone_coach", "코치"]];
+  function renderUx(x, today) {
+    setText("uxEmpty", x ? "" : "기능 숫자를 못 불러왔어요.");
+    const ft = x ? x.features : [];
+    setText("ftCap", x ? md(x.from) + "부터 · 활동 " + fmt(x.active7) + "명" : " ");
+    hbars("chFt", ft.map((f) => ({ l: FEAT_KO[f.key] || f.key, f: f.share, t: fmt(f.users) + "명 · " + pct(f.share) + " · " + fmt(f.count) + "번" })));
+    setText("ftImp", x ? fmt(x.tasks_imported.count) : "–");
+    setText("ftImpU", x ? fmt(x.tasks_imported.users) : "–");
+
+    const a = x ? x.ai7 : null;
+    const of = (k, n) => (a && a.answers > 0 ? fmt(k) + "/" + fmt(n) + few(n) : " ");
+    setText("aiCap", a ? "Aria 답 " + fmt(a.answers) + "개" : " ");
+    setText("aiActed", a ? pct(a.acted_rate) : "–");
+    setText("aiActedSub", a ? of(a.acted, a.answers) : " ");
+    setText("aiCard", a ? pct(a.card_rate) : "–");
+    setText("aiCardSub", a ? of(a.card, a.answers) : " ");
+    setText("aiFu", a ? pct(a.followup_rate) : "–");
+    setText("aiFuSub", a && a.sessions > 0 ? "대화 " + fmt(a.followup_sessions) + "/" + fmt(a.sessions) : " ");
+    setText("aiMk", a ? pct(a.made_task_rate) : "–");
+    setText("aiDone", a ? pct(a.done_task_rate) : "–");
+    setText("aiJr", a ? pct(a.made_journal_rate) : "–");
+    setText("aiChips", a && typeof a.chips_per_answer === "number" ? nf.format(Math.round(a.chips_per_answer * 100) / 100) : "–");
+    if (x) {
+      const d = x.ai_daily, n = d.answers.length;
+      const dl = (i) => (i === n - 1 ? "오늘" : (() => { const q = dayAt(d.days_from, i); return q.m + "/" + q.d; })());
+      const pts = d.answers.map((v, i) => ({ label: dl(i), a: rateOf(d.acted[i], v) }));
+      const lastPt = (() => { for (let i = n - 1; i >= 0; i--) if (pts[i].a !== null) return i; return n - 1; })();
+      lineChart("chAct", pts, [{ key: "a", cls: "k1" }], {
+        ticks: [0, Math.floor(n / 2), n - 1], start: lastPt,
+        caption: (i) => dl(i) + " · " + (d.answers[i] ? pct(pts[i].a) + " · " + fmt(d.acted[i]) + "/" + fmt(d.answers[i]) : "답 없음"),
+      });
+    } else clear($("chAct"));
+
+    const q = x ? x.questions : null;
+    setText("qdCap", q && q.user_days ? "사람·날 " + fmt(q.user_days) + " · " + fmt(q.users) + "명" : q ? "아직 없음" : " ");
+    if (q) bars("chQd", [["1번", q.buckets[0]], ["2~3번", q.buckets[1]], ["4~9번", q.buckets[2]], ["10번 넘게", q.buckets[3]]]);
+    else clear($("chQd"));
+
+    const ob = x ? x.onboarding : null;
+    const has = !!(ob && ob.steps.some((s) => s.u28 > 0));
+    $("obTable").hidden = !has;
+    setText("obEmpty", has || !ob ? "" : ob.from ? "온보딩 기록은 " + md(ob.from) + "부터 쌓여요" + (today && today > ob.from ? " · 아직 들어온 기록이 없어요." : ".") : "온보딩 기록은 아직 수집 전이에요.");
+    setText("obCap", has ? "28일 " + fmt(ob.steps[0].u28) + "명 시작" : " ");
+    if (has) {
+      const w7 = ob.steps[0].u7, w28 = ob.steps[0].u28;
+      tableRows("tOb", ob.steps.map((s) => [STEP_KO[s.step] || s.step, fmt(s.u7) + (w7 ? " · " + share(s.u7, w7) : ""), fmt(s.u28) + (w28 ? " · " + share(s.u28, w28) : "")]));
+      const pick = PICK_KO.map(([st, ac, nm]) => { const r = ob.actions.find((y) => y.step === st && y.action === ac); return nm + " " + fmt(r ? r.u28 : 0); });
+      setText("obPick", "28일 고른 것 — " + pick.join(" · "));
+    } else setText("obPick", " ");
+    $("obPick").hidden = !has;
+  }
   function render(s) {
     last = s;
     setText("day", kstDayLabel(s.kst_day));
@@ -815,6 +1150,8 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     setText("subY", fmt(s.subs.yearly));
     hourChart(s.hourly);
     renderBiz(s.biz || null);
+    renderUsage(s.usage || null, s.kst_day);
+    renderUx(s.ux || null, s.kst_day);
   }
   async function load() {
     if (busy) return;
