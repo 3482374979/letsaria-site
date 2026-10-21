@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-E0OMIDp4zXAFfQLligThZLaODKs6QFpJWDYWaKycTlQ='; style-src 'sha256-kKXy4V+6gf+/A+f9eQtvMm0K5GpvHLikQTKR6HsGaA8='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-L/7eikkjkldZiFfXYnwpK07yh1t2b1pXuhM11kIOxTc='; style-src 'sha256-kKXy4V+6gf+/A+f9eQtvMm0K5GpvHLikQTKR6HsGaA8='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -284,8 +284,9 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <div class="hrow"><h2 id="hNow">지금 · 오늘</h2><button class="info" type="button" aria-expanded="false" aria-controls="dNow" aria-label="지금 · 오늘 도움말">ⓘ</button></div>
     <div class="defs" id="dNow" hidden>
       <p>숫자만 보여요. 이름·이메일·대화 내용은 없어요. 1분마다 새로 고침 — 열면 이 기기에 저장된 마지막 숫자를 먼저(시각 표시) 보여 주고 새 숫자로 바꿔요.</p>
-      <p>추세 줄 = 최근 14일 날마다(오른쪽 끝 = 오늘 · 점선 = 아직 도는 중). 전일 = 오늘 지금까지 ÷ 어제 같은 시각까지 · 전주 = 지난주 같은 요일 같은 시각까지 · 7일 = 최근 7일 합 ÷ 그 앞 7일(사람 수는 그 7일 안 서로 다른 사람). 비교 바탕이 10 밑이면 % 대신 차이(▲2). 답 → 행동은 %p 차이 · 답 끝은 초 차이(7일 = 날마다 값을 답 수로 묶은 것). 초록 = 좋아짐 · 주황 = 나빠짐.</p>
-      <p>쓴 사람 = 그날 앱을 열어 로그인 토큰이 갱신됐거나 AI를 썼거나 질문한 사람(유지 · 가치 「쓴 사람」과 같은 뜻 · 지난 창의 AI 요청은 그날 마지막 시각만 남아 조금 덜 셀 수 있어요). 질문 = 동기화된 채팅 질문(구독자 포함 · 지운 대화도 셈 · 대화 동기화를 끈 사람은 빠져요). 체험 시작 = 수익 · 유지와 같은 뜻. 답 → 행동 · 답 끝 = 아래 「기능 · AI 행동」 · 「AI 답 속도」와 같은 뜻.</p>
+      <p>추세 줄 = 최근 14일 날마다(오른쪽 끝 = 오늘 · 점선 = 아직 도는 중). 전일 = 오늘 지금까지 ÷ 어제 같은 시각까지 · 전주 = 지난주 같은 요일 같은 시각까지 · 7일 = 최근 7일 합 ÷ 그 앞 7일(DAU · WAU · MAU · 고착도는 꽉 찬 최근 7일(어제까지) 평균 ÷ 그 앞 7일 평균). 비교 바탕이 10 밑이면 % 대신 차이(▲2). 답 → 행동은 %p 차이 · 답 끝은 초 차이(7일 = 날마다 값을 답 수로 묶은 것). 초록 = 좋아짐 · 주황 = 나빠짐.</p>
+      <p>DAU · WAU · MAU = 그날 · 그날까지 7일 · 30일(한국 날짜) 동안 한 번이라도 앱을 열어 로그인 토큰이 갱신됐거나 AI를 썼거나 질문한 서로 다른 사람(유지 · 가치 고착도와 같은 숫자 · 5분마다 새로 셈 · 지난 창의 AI 요청은 그날 마지막 시각만 남아 조금 덜 셀 수 있어요). 고착도 = DAU ÷ MAU(MAU 5명 밑은 가림).</p>
+      <p>질문 = 동기화된 채팅 질문(구독자 포함 · 지운 대화도 셈 · 대화 동기화를 끈 사람은 빠져요). 체험 시작 = 수익 · 유지와 같은 뜻. 답 → 행동 · 답 끝 = 아래 「기능 · AI 행동」 · 「AI 답 속도」와 같은 뜻.</p>
       <p>지금 = 5분 · 15분 · 1시간 안에 활동한 사람. 오늘 = 한국 시간 0시부터.</p>
     </div>
     <div class="live"><span class="label">지금 쓰는 사람</span><span><span class="num" id="a5">–</span>명</span><span>15분 <b id="a15">–</b> · 1시간 <b id="a60">–</b> · 1시간 물어본 사람 <b id="qa1">–</b></span></div>
@@ -1887,7 +1888,10 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   }
   // ── 추세 줄(지금 · 오늘) — 값 · 14일 곡선(오른쪽 끝 = 오늘 · 점선 = 아직 도는 중) · 전일 · 전주(같은 요일) · 7일 ──
   const KPI = [
-    { id: "kU", label: "쓴 사람", part: "trend" },
+    { id: "kU", label: "DAU", part: "reach" },
+    { id: "kW", label: "WAU", part: "reach" },
+    { id: "kM", label: "MAU", part: "reach" },
+    { id: "kR", label: "고착도", part: "reach" },
     { id: "kQ", label: "질문", part: "trend" },
     { id: "kS", label: "가입", part: "trend" },
     { id: "kT", label: "체험 시작", part: "biz" },
@@ -2011,13 +2015,28 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       kpiRow(id, { v: fmt(today) + unit, sub: sub, pts: pts, day: dayOf(tr.days_from), fmt: unitFmt(unit),
         deltas: [dCnt(today, m.y), dCnt(today, m.wk), dCnt(m.r7, m.p7)] });
     };
+    // DAU · WAU · MAU · 고착도(reach · 15일 날마다 굴림 · 곡선 = 끝 14점). 7일 = 꽉 찬 최근 7일(어제까지) 평균 ÷ 그 앞 7일 평균.
+    const rc = s.reach || null;
+    if (rc) {
+      const n = rc.dau.daily.length, off = n - 14;
+      const rday = (i) => { const q = dayAt(rc.days_from, off + i); return q.m + "/" + q.d; };
+      const avg = (a, i, j) => Math.round(sum(a, i, j) / (j - i));
+      const reachRow = (id, m, sub) => kpiRow(id, { v: fmt(m.today) + "명", sub: sub, pts: m.daily.slice(off), day: rday, fmt: unitFmt("명"),
+        deltas: [dCnt(m.today, m.y), dCnt(m.today, m.wk), dCnt(avg(m.daily, n - 8, n - 1), avg(m.daily, n - 15, n - 8))] });
+      reachRow("kU", rc.dau, "어제 " + fmt(rc.dau.daily[n - 2]) + "명");
+      reachRow("kW", rc.wau, "그날까지 7일 고유");
+      reachRow("kM", rc.mau, "그날까지 30일 고유");
+      const st = rc.stick;
+      const pool = (i, j) => { const mm = sum(rc.mau.daily, i, j); return mm >= 5 ? sum(rc.dau.daily, i, j) / mm : null; };
+      kpiRow("kR", { v: st.today === null ? "—" : pct(st.today), sub: st.today === null ? "MAU 5명 밑 가림" : "DAU ÷ MAU", pts: st.daily.slice(off), day: rday, fmt: pct,
+        deltas: [dPp(st.today, st.y), dPp(st.today, st.wk), dPp(pool(n - 8, n - 1), pool(n - 15, n - 8))] });
+    } else if (fresh.has("reach")) for (const id of ["kU", "kW", "kM", "kR"]) kpiEmpty(id, "못 불러왔어요");
     if (tr) {
-      cnt("kU", tr.users, tr.users.today, "명", "7일 " + fmt(tr.users.r7) + "명");
       const q = s.chat ? s.chat.questions : tr.questions.today;
       cnt("kQ", tr.questions, Math.max(q, 0), "개", "물어본 사람 " + fmt(s.chat ? s.chat.askers_today : tr.askers.today) + "명");
       const su = s.signups ? s.signups.total : tr.signups.today;
       cnt("kS", tr.signups, su, "명", s.signups ? "애플 " + fmt(s.signups.apple) + " · 게스트 " + fmt(s.signups.guest) : " ");
-    } else if (fresh.has("trend")) for (const id of ["kU", "kQ", "kS"]) kpiEmpty(id, "추세를 못 불러왔어요");
+    } else if (fresh.has("trend")) for (const id of ["kQ", "kS"]) kpiEmpty(id, "추세를 못 불러왔어요");
     // 체험 시작(사업 숫자 · 30일 중 끝 14일)
     const b = s.biz || null;
     if (b) {
@@ -2050,10 +2069,10 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   const CARD_OF = { hNow: null, hRev: null, hKeep: null, hFlow: null, hUse: null, hSug: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
-    snap: ["hNow"], trend: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
+    snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
     usage: ["hUse"], m117: ["hSug"], value: ["hVal"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "biz", "turn", "ux", "usage", "m117", "value", "fric"];
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "value", "fric"];
   const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage"], hSug: ["m117"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
@@ -2091,7 +2110,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (k === "value") renderValue(s.value || null);
     else if (k === "turn") renderTurn(s.turn || null);
     else if (k === "fric") renderFric(s.fric || null);
-    if (k === "snap" || k === "trend" || k === "biz" || k === "ux" || k === "turn") renderKpis();
+    if (k === "snap" || k === "trend" || k === "reach" || k === "biz" || k === "ux" || k === "turn") renderKpis();
   }
   function paint(k) {
     const cards = PART_CARDS[k].map((h) => CARD_OF[h]);
