@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wAzsM/dKqM6Q7pPaOE31o+DmSgGEgLc1oI3CIR2e8Jc='; style-src 'sha256-IxpJMn/fkG6NFCmWum6SAZSaLyvQkUnXomO/EARJFgY='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<title>Aria 메일 수신 거부</title>
+<style>
+  :root { color-scheme: light dark; --bg: #ffffff; --ink: #1d1d1f; --sub: #6e6e73; --line: #e5e5ea; --btn: #2563eb; --btn-ink: #ffffff; --ok: #15803d; --err: #b91c1c; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #000000; --ink: #f5f5f7; --sub: #a1a1a6; --line: #38383a; --btn: #2563eb; --ok: #4ade80; --err: #f87171; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); }
+  body { font: 17px/1.5 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Noto Sans KR", sans-serif; -webkit-text-size-adjust: 100%; }
+  main { max-width: 460px; margin: 0 auto; padding: max(48px, env(safe-area-inset-top)) 16px max(32px, env(safe-area-inset-bottom)); }
+  .brand { margin: 0 0 20px; color: var(--sub); font-size: 14px; font-weight: 600; letter-spacing: .02em; }
+  h1 { margin: 0 0 10px; font-size: 28px; line-height: 1.25; letter-spacing: -0.02em; }
+  p { margin: 0 0 16px; }
+  .lead { color: var(--sub); }
+  button { display: block; width: 100%; min-height: 56px; margin: 24px 0 0; border: 0; border-radius: 14px; background: var(--btn); color: var(--btn-ink);
+    font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  button[disabled] { opacity: .6; cursor: default; }
+  button[hidden] { display: none; }
+  .status { min-height: 1.5em; margin: 16px 0 0; font-weight: 600; }
+  .status.ok { color: var(--ok); }
+  .status.err { color: var(--err); }
+  .fine { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--sub); font-size: 13px; }
+  .fine a { color: var(--sub); }
+</style>
+</head>
+<body>
+<main>
+  <p class="brand">Aria</p>
+  <h1 id="title">메일 수신 거부</h1>
+  <p id="lead" class="lead">아래 버튼을 누르면 ‘오늘 요약 메일’과 ‘혜택·소식 메일’을 더 이상 보내지 않아요.</p>
+  <button id="go" type="button" hidden>수신 거부하기</button>
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+  <noscript><p>이 페이지는 JavaScript 가 필요해요. Aria 설정에서 메일을 끄거나 support@letsaria.com 으로 알려 주세요. · This page needs JavaScript. Turn emails off in Aria settings or email support@letsaria.com.</p></noscript>
+  <p id="fine" class="fine">보낸 곳: 주식회사 립슨 · 문의 support@letsaria.com</p>
+</main>
+<script>
+(function () {
+  var FN = "https://chcxqojugeuzusmjspdp.supabase.co/functions/v1/mail-unsub";
+  var q = new URLSearchParams(location.search);
+  var t = (q.get("t") || "").trim().toLowerCase();
+  var l = (q.get("l") || navigator.language || "").toLowerCase();
+  var ko = l.indexOf("ko") === 0;
+  var T = ko ? {
+    title: "메일 수신 거부",
+    lead: "아래 버튼을 누르면 ‘오늘 요약 메일’과 ‘혜택·소식 메일’을 더 이상 보내지 않아요.",
+    button: "수신 거부하기",
+    working: "처리하고 있어요…",
+    done: "수신 거부가 끝났어요. Aria 설정에서 언제든 다시 켤 수 있어요.",
+    retry: "잠시 후 다시 시도해 주세요. 계속 안 되면 support@letsaria.com 으로 알려 주세요.",
+    invalid: "링크가 올바르지 않아요. 메일의 ‘수신 거부’ 링크를 다시 눌러 주시거나 Aria 설정에서 끌 수 있어요.",
+    fine: "보낸 곳: 주식회사 립슨 · 문의 support@letsaria.com",
+    doc: "Aria 메일 수신 거부"
+  } : {
+    title: "Unsubscribe",
+    lead: "Tap the button below and we'll stop sending the “Today summary email” and “News & offers” emails.",
+    button: "Unsubscribe",
+    working: "Working on it…",
+    done: "You're unsubscribed. You can turn emails back on anytime in Aria settings.",
+    retry: "Please try again in a moment. If it keeps failing, email support@letsaria.com.",
+    invalid: "This link isn't valid. Open the “Unsubscribe” link in the email again, or turn emails off in Aria settings.",
+    fine: "From Lipson Inc. · Questions: support@letsaria.com",
+    doc: "Unsubscribe · Aria"
+  };
+  var $ = function (id) { return document.getElementById(id); };
+  document.documentElement.lang = ko ? "ko" : "en";
+  document.title = T.doc;
+  $("title").textContent = T.title;
+  $("lead").textContent = T.lead;
+  $("go").textContent = T.button;
+  $("fine").textContent = T.fine;
+  var status = $("status"), btn = $("go");
+  var valid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(t);
+  if (!valid) { btn.hidden = true; status.className = "status err"; status.textContent = T.invalid; return; }
+  btn.hidden = false;
+  btn.addEventListener("click", function () {
+    btn.disabled = true;
+    status.className = "status";
+    status.textContent = T.working;
+    fetch(FN + "?t=" + encodeURIComponent(t), {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: "List-Unsubscribe=One-Click",
+      mode: "cors", credentials: "omit", cache: "no-store", referrerPolicy: "no-referrer"
+    }).then(function (r) {
+      if (!r.ok) throw new Error("status");
+      btn.hidden = true;
+      status.className = "status ok";
+      status.textContent = T.done;
+    }).catch(function () {
+      btn.disabled = false;
+      status.className = "status err";
+      status.textContent = T.retry;
+    });
+  });
+})();
+</script>
+</body>
+</html>
