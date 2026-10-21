@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-A8cdK85ETj2OguSRwQkk36jqRcrD65o7LAOE+h0GS6s='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-4n09OYyEJHSJkRtPx6MdyX7ktEQjSHGYMU8mG/Mt3TI='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -535,6 +535,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <p>새 앱(1.1.7 빌드 448 이상)이 보낸 날 요약(기기 날짜)으로 세요. 앱은 끝난 날만 다음 실행에 올려서 오늘은 늘 비어 있어 「어제」까지 — 7일 = 어제까지 7일 · 지난 7일 = 그 앞 7일(▲▼ = 7일 − 지난 7일 · 주황 = 나빠짐) · 어제 = 어제 하루. 비율 = 모든 사람 · 날의 분자 합 ÷ 분모 합(작은 줄 = 분자/분모 · 한 번 보인 줄에서 여러 번 누를 수 있는 칸은 100%를 넘을 수 있어요) · 수 = 합(작은 줄 = 그 창 448 사람 1인당 · 지난 7일 칸 = 1인당 바뀐 %) · 몫 = 같은 무리의 합 중 그 자리. 「–」 = 기록 없음 · n&lt;10 = 모수 10 밑 · 회색 % = 20 밑. 수집 = 10월 27일(privacy.engage2_from) 뒤 날 · 원격 스위치 engage3 · engage4를 둘 다 켰을 때 · 시험 계정 빼고 · 개수만(글 · 검색어 · 사람 없음).</p>
       <p>쓰기 1라운드 끝 = 할일 · 일정 쓰기 턴 중 도구 한 번에 답까지 끝난 몫 · 결과 카드 2초 안 = 보낸 뒤 결과 카드가 보이기까지 2초 안 몫(작은 줄 = 8초 넘음) · 카드 전에 나감 = 카드가 뜨기 전에 화면을 떠난 몫 · AI 일정 → 다음 턴 고침 = Aria가 넣은 일정을 다음 턴에 고친 몫(낮을수록 좋아요) · 일정 고침 2초 안 = 일정 시각을 고치기까지 걸린 시간.</p>
       <p>이어서 칩 1·2·3번 = 그 칸에 칩이 선 줄 중 그 칸을 누른 몫 · 바로 하는 칩 · 묻는 칩 = 칩 누름 중 ▶ · ＋ · ⏱(바로 실행)과 말풍선(묻기)의 몫 · 입력칸 칩 누름 = 칩 줄이 선 번 중 누른 몫 · 칩 첫 누름 = 줄이 서고 처음 누르기까지 · 답 오류 = 답 턴 중 오류 · 오프라인 · 한도로 끝난 몫 · 다시 시도 성공 = [다시 시도] 뒤 답이 온 몫. 걸린 시간 막대 = 7일 구간 몫(1초 밑 · 1~2초 · 2~4초 · 4~8초 · 8초+).</p>
+      <p>다이내믹 아일랜드 제안 시각 = AI가 제안한 시각에 섬에 뜬 할 일(할 일마다 그날 처음 뜬 것 · 하루 최대 3) — 뜸 · 누름(알약 눌러 앱 열림 또는 섬 ✓ 완료) · 닫음(섬 ✕) · 누름률 = 누름 ÷ 뜸 · 닫음률 = 닫음 ÷ 뜸. 원격 스위치 engage3 · engage6을 켠 뒤부터 · 7일 · 지난 7일 · 어제는 위와 같은 셈(수 작은 줄 = 1인당).</p>
     </div>
     <p class="empty" id="aqEmpty">새 앱(448+) 숫자는 10월 27일부터 쌓여요.</p>
     <div class="chart chart-top">
@@ -545,6 +546,11 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <div class="chart-head"><div class="label">걸린 시간 · 7일</div><div class="sub">&nbsp;</div></div>
       <div class="legend"><span class="key"><i class="sw q1"></i>1초 밑</span><span class="key"><i class="sw q2"></i>~2초</span><span class="key"><i class="sw q3"></i>~4초</span><span class="key"><i class="sw q4"></i>~8초</span><span class="key"><i class="sw s2"></i>8초+</span></div>
       <svg id="chAqMs" viewBox="0 0 336 132" role="img" aria-label="최근 7일 결과 카드 · 일정 고침 · 칩 첫 누름까지 걸린 시간 구간별 몫"></svg>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">다이내믹 아일랜드 제안 시각</div><div class="sub" id="isCap">&nbsp;</div></div>
+      <p class="empty" id="isEmpty">새 앱(448+) 아일랜드 숫자는 10월 27일부터 쌓여요.</p>
+      <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="tIs"></tbody></table>
     </div>
   </section>
 
@@ -1840,6 +1846,21 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     }
     setText("ngSlCap", has ? "보임 " + fmt(seenAll) + "번" : " ");
   }
+  // ── 다이내믹 아일랜드 제안 시각(island · 0062 · engage6) — 「AI 답 품질 · 앱」 안 묶음 · 줄 모양 = 448 줄(m8Rows) ──
+  const IS_ROWS = [["island_shown", "뜸", null], ["island_tap", "누름", false], ["island_close", "닫음", true], ["island_tap_rate", "누름률", false], ["island_close_rate", "닫음률", true]];
+  // x = 응답 island · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴(0062 없음 포함).
+  function renderIsland(x, today) {
+    const ok = !!(x && x.rows && x.users && x.win && Array.isArray(x.metrics));
+    const has = ok && x.rows.d7 + x.rows.p7 > 0;
+    setText("isEmpty", x === null ? "아일랜드 숫자를 못 불러왔어요." : !ok ? "새 앱(448+) 아일랜드 숫자는 10월 27일부터 쌓여요." : has ? "" :
+      (x.from ? "새 앱(448+)이 " + md(x.from) + "부터 보내요" : "새 앱(448+)이 보내기 시작하면 쌓여요") +
+      (!x.on ? " · 지금은 수집 스위치(engage6)가 꺼져 있어요." : x.from && today && today > x.from ? " · 아직 들어온 기록이 없어요." : "."));
+    $("isEmpty").hidden = has;
+    setText("isCap", ok ? fmt(x.users.d7) + "명 · 기기·날 " + fmt(x.rows.d7) : " ");
+    const byKey = {};
+    if (ok) for (const r of x.metrics) if (r && typeof r.key === "string") byKey[r.key] = r;
+    m8Rows($("tIs"), IS_ROWS, byKey);
+  }
   // ── 기능 · AI 행동(ux · 서버 기록) ─────────────────────────────────────
   const FEAT_KO = {
     chat: "채팅 질문", task_new: "할일 만듦", task_ai: "할일 만듦 · AI", task_direct: "할일 만듦 · 직접", task_done: "할일 완료",
@@ -2386,12 +2407,12 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
     snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
-    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], value: ["hVal"], fric: ["hFric"],
+    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], value: ["hVal"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "value", "fric"];
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "value", "fric"];
   // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
-  const LATE = ["m448", "nudge"];
-  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage"], hSug: ["m117"], hAiq: ["m448"], hUx8: ["m448"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
+  const LATE = ["m448", "nudge", "island"];
+  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -2429,6 +2450,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (k === "m117") renderM117(s.m117 || null, s.kst_day);
     else if (k === "m448") renderM448(s.m448, s.kst_day);
     else if (k === "nudge") renderNudge(s.nudge, s.kst_day);
+    else if (k === "island") renderIsland(s.island, s.kst_day);
     else if (k === "ux") renderUx(s.ux || null, s.kst_day);
     else if (k === "value") renderValue(s.value || null);
     else if (k === "turn") renderTurn(s.turn || null);
@@ -2599,6 +2621,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   });
   renderM448(undefined, null); // 처음 — 줄 이름 + 「–」(새 숫자가 오면 채움)
   renderNudge(undefined, null);
+  renderIsland(undefined, null);
   session = regToken ? null : readSession();
   if (session) { document.body.dataset.view = "stats"; boot(); load(); } else lockUI("");
 })();
