@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Az8BS0AwZbaQxen7Al9z91RiJUmN1dBvzhjxetvSQG8='; style-src 'sha256-w5orErBKPsH5mJNbYZWDJN1ogyEBFN9PuIe9jgwS9yI='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-4NITHD7kUQVpjwnkAN0Dh4u53X8fJ4ojOqEyCAuPP/g='; style-src 'sha256-w5orErBKPsH5mJNbYZWDJN1ogyEBFN9PuIe9jgwS9yI='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -534,6 +534,28 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     </div>
   </section>
 
+  <section class="card block" aria-labelledby="hFric">
+    <h2 id="hFric">AI 답 막히는 곳</h2>
+    <p class="empty" id="frEmpty"></p>
+    <div id="frBody">
+      <div class="chart chart-top">
+        <div class="chart-head"><div class="label">막힘 지표</div><div class="sub" id="frCap">&nbsp;</div></div>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>24시간</th></tr></thead><tbody id="tFr"></tbody></table>
+      </div>
+      <div class="line">이어서 칩 누른 칸(7일) — 1번 <b id="frS1">–</b> · 2번 <b id="frS2">–</b> · 3번+ <b id="frS3">–</b> · 칩 하나당 <b id="frPer">–</b><br>앱 칸(보임 → 누름) <span id="frAppFu">–</span></div>
+      <div class="line">할일 목록 카드(7일) <b id="frTlCards">–</b>장 · 카드당 <b id="frTlRows">–</b>줄 · 24시간 <b id="frTlCards24">–</b>장<br>👍 <b id="frUp">–</b> · 👎 <b id="frDown">–</b>(7일) · 앱 칸 AI 되돌림 <span id="frAppUndo">–</span></div>
+      <div class="line">「물어보기」 단계 카드 — <b id="frAsk">측정 시작 전</b><br><span id="frAskSub">&nbsp;</span></div>
+      <div class="chart">
+        <div class="chart-head"><div class="label">갈래별 첫 글자 · 끝 · 24시간</div><div class="sub">p50 / p90 · 초</div></div>
+        <table><thead><tr><th>갈래</th><th>답</th><th>첫 글자</th><th>끝</th></tr></thead><tbody id="tFrR24"></tbody></table>
+        <details>
+          <summary>갈래별 · 7일</summary>
+          <table><thead><tr><th>갈래</th><th>답</th><th>첫 글자</th><th>끝</th></tr></thead><tbody id="tFrR7"></tbody></table>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section class="card block" aria-labelledby="hVal">
     <h2 id="hVal">유지 · 가치</h2>
     <p class="empty" id="valEmpty"></p>
@@ -628,6 +650,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     <p>할일의 운명 = 8~35일 전에 만든 할일(가져온 것 빼고 · 지운 것 포함)이 만든 뒤 7일 안에 완료됐나 · (완료 없이) 지워졌나 · 7일째에도 열려 있나 — 셋을 더하면 100%. AI = 채팅에서 Aria가 만든 것.</p>
     <p>가입 → 체험 · 구매 = 최근 60일 가입자 중 운영 구독과 이어진 사람이 가입한 날부터 며칠 만에 체험을 시작 · 첫 결제했나(한국 날짜 · 체험 없이 바로 산 것도 첫 결제 · 체험 끝 결제는 끝난 뒤에 채워져요). 가입 전 = 다른 계정에서 이어진 구독.</p>
     <p>AI 답 속도 = 채팅 함수가 잰 시각(함수에 요청이 닿은 때부터 · 앱까지 네트워크는 빠져서 앱에서 느끼는 시간은 조금 더 길어요) · 요청 하나 = 한 줄(도구 라운드마다). 첫 글자 = 질문의 첫 요청에서 답 글자가 처음 나간 때(목표 1초) · 끝 = 응답이 끝난 때 · 2초 넘은 끝 = 끝이 2초를 넘은 요청의 몫(목표 2초). 오류 = 실패 상태 · AI 오류 · 중간에 닫힘(앱이 끊음 · 길이 상한 · 거절은 오류에서 빼고 코드에만) · 끊김 = 스트림이 끝 표식 없이 끝난 몫. 원격 스위치 ops.turn_stats 를 켠 뒤부터 쌓이고 90일 보관 · 사람 · 글 없음 · 관리자 시험 요청은 빼요. 시각은 시간 단위로만 남겨요(24시간 = 지금 시간 포함 최근 24칸 · 7일 = 168칸 · 지금 칸은 덜 찬 채).</p>
+    <p>AI 답 막히는 곳 = 서버에 이미 남은 기록으로 AI 답이 막히는 자리를 늘 보는 표(중계 분석 10-21과 같은 뜻 · 개수 · 비율만). 7일 = 어제까지 7일(한국 날짜) · 지난 7일 = 그 앞 7일(▲▼ = 7일 − 지난 7일 · 주황 = 나빠짐) · 24시간 = 30분 전까지 24시간(뒤따르는 10분 · 30분 창이 다 찬 것만). 「—」 = 그 칸의 사람이 5명 밑이라 가림 · 「–」 = 기록 없음. 답 말풍선 = 질문 → 바로 다음 Aria 답이 생긴 기기 시각 차(0~10분 · 할일 만든 답 · 일정 넣은 답 따로). AI 할일 10분 안 지움 = 그 창에 Aria가 만든 할일 중 만든 뒤 10분 안 지운 몫(직접 만든 할일과 나란히 · 가져온 것 빼고). AI 일정 → 다음 답 고침 = 일정을 넣은 답 다음 답(10분 안)이 그 일정을 고치거나 지우거나 되돌린 몫. 이어서 칩 누름 = 칩이 선 답 중 바로 다음 질문이 칩 글과 같은 몫 · 누른 칸 = 1 · 2 · 3번+ 몫 · 칩 하나당 = 질문 칩(할일로 담기 · 날짜 칩 빼고) 하나당. 할일 목록 30분 안 완료 = 할일 목록 카드에 보인 할일 줄 중 30분 안에 끝난 몫(다른 곳에서 끝낸 것 포함). 결과 카드 되돌림 = 결과 카드가 선 답 중 [되돌리기]를 누른 몫. 👍👎 평가한 답 = 10월 15일(한국) 평가 단추 뒤 Aria 답 중 마지막 평가가 추천/비추천인 몫. 앱 칸 = 새 앱이 보내는 날 요약(이어서 칩 보임 · 누름 · AI 되돌림) — 아직 행이 없으면 「측정 시작 전」. 「물어보기」 단계 카드는 기기에만 있는 체크 목록이라 서버로 보임 · 수락을 못 세요(측정 시작 전 · 참고 = 하위 할일 만든 수 — 누가 만들었는지 몰라요). 갈래별 = AI 답 속도와 같은 익명 표(요청 5개 밑 = —). 숫자는 5분마다 새로 셈.</p>
   </div>
   <div class="foot"><button id="logout" class="link" type="button">이 기기에서 잠그기</button></div>
 </main>
@@ -1695,6 +1718,95 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
       caption: (i) => dl(i) + " · " + (d.n[i] ? "끝 " + sec(d.p50[i]) + " / " + sec(d.p90[i]) + " · 첫 글자 " + sec(d.first50[i]) + " · " + fmt(d.n[i]) + "개" : "기록 없음"),
     });
   }
+  // ── AI 답 막히는 곳(friction.ts) — 사람 5 밑 칸은 서버가 이미 지움(small) → 「—」 · 기록 없음 = 「–」 ──
+  const HID = "—";
+  // 바뀐 폭 — 비율은 %p(10 밑 소수 한 자리) · 초는 소수 한 자리. 0 근처 = 「=」. 나빠짐(worseUp 이면 오름) = 주황(nwarn).
+  function trendCell(c, d, worseUp, unit) {
+    if (typeof d !== "number" || !isFinite(d)) { c.textContent = "–"; return; }
+    const v = unit === "s" ? Math.abs(d) : Math.abs(d) * 100;
+    if (v < (unit === "s" ? 0.1 : 0.5)) { c.textContent = "="; return; }
+    c.textContent = (d > 0 ? "▲" : "▼") + (unit === "s" ? v.toFixed(1) + "초" : (v < 10 ? v.toFixed(1) : String(Math.round(v))) + "%p");
+    if ((d > 0) === worseUp) c.className = "nwarn";
+  }
+  // 칸 = 큰 글 + 작은 줄. small = 「—」 + 「5명 밑」.
+  function frCell(c, small, main, sub) {
+    if (small) { c.className = "short"; c.textContent = HID; const sm = document.createElement("span"); sm.className = "sm"; sm.textContent = "5명 밑"; c.appendChild(sm); return; }
+    const m = document.createElement("span");
+    m.textContent = main;
+    c.appendChild(m);
+    if (sub) { const sm = document.createElement("span"); sm.className = "sm"; sm.textContent = sub; c.appendChild(sm); }
+  }
+  const frRate = (x) => (x.small ? [true] : [false, x.n ? pct(x.rate) : "–", x.n ? fmt(x.k) + "/" + fmt(x.n) : ""]);
+  const frWait = (x) => (x.small ? [true] : [false, x.n && x.p50 !== null ? x.p50.toFixed(1) + "초" : "–", x.n && x.p90 !== null ? "p90 " + x.p90.toFixed(1) : ""]);
+  // 지난 7일 칸 = 화살표(7일 − 지난 7일) + 작은 줄(지난 7일 값).
+  function frRow(tb, label, t, kind, worseUp) {
+    const one = kind === "wait" ? frWait : frRate;
+    cellRow(tb, label, (tr) => {
+      td(tr, (c) => frCell(c, ...one(t.d7)));
+      td(tr, (c) => {
+        const p = one(t.p7);
+        if (p[0]) { frCell(c, true); return; }
+        trendCell(c, t.trend, worseUp, kind === "wait" ? "s" : "p");
+        if (p[1] !== "–") { const sm = document.createElement("span"); sm.className = "sm"; sm.textContent = "지난 " + p[1]; c.appendChild(sm); }
+      });
+      td(tr, (c) => frCell(c, ...one(t.h24)));
+    });
+  }
+  function frRoutes(id, rows) {
+    const tb = $(id);
+    clear(tb);
+    if (!rows.length) { cellRow(tb, "기록 없음", (tr) => { td(tr, () => {}); td(tr, () => {}); td(tr, () => {}); }); return; }
+    for (const r of rows) {
+      cellRow(tb, ROUTE_KO[r.route] || r.route, (tr) => {
+        td(tr, (c) => { c.textContent = fmt(r.n); });
+        td(tr, (c) => { c.textContent = r.small ? HID : pp(r.first); });
+        td(tr, (c) => { c.textContent = r.small ? HID : pp(r.total); });
+      });
+    }
+  }
+  function renderFric(f) {
+    setText("frEmpty", f ? "" : "막히는 곳 숫자를 못 불러왔어요.");
+    $("frBody").hidden = !f;
+    if (!f) { for (const id of ["tFr", "tFrR24", "tFrR7"]) clear($(id)); return; }
+    const W = f.windows;
+    setText("frCap", "7일 = " + md(W.d7.from) + "~" + md(W.d7.to));
+    const tb = $("tFr");
+    clear(tb);
+    frRow(tb, "답 말풍선 p50", f.wait.all, "wait", true);
+    frRow(tb, "└ 할일 만든 답", f.wait.task, "wait", true);
+    frRow(tb, "└ 일정 넣은 답", f.wait.cal, "wait", true);
+    frRow(tb, "AI 할일 10분 안 지움", f.task_del.ai, "rate", true);
+    frRow(tb, "직접 할일 10분 안 지움", f.task_del.direct, "rate", true);
+    frRow(tb, "AI 일정 → 다음 답 고침", f.cal_fix, "rate", true);
+    frRow(tb, "이어서 칩 누름", f.chips, "rate", false);
+    const tl = f.task_list;
+    const tlRate = (x) => ({ small: x.small, n: x.rows, k: x.done, rate: x.done_rate });
+    frRow(tb, "할일 목록 30분 안 완료", { h24: tlRate(tl.h24), d7: tlRate(tl.d7), p7: tlRate(tl.p7), trend: tl.trend }, "rate", false);
+    frRow(tb, "결과 카드 되돌림", f.undo, "rate", true);
+    frRow(tb, "👍👎 평가한 답", f.rated, "rate", false);
+    cellRow(tb, "물어보기 단계 카드", (tr) => td(tr, (c) => { c.colSpan = 3; c.className = "short"; c.textContent = "측정 시작 전"; }));
+    const ch = f.chips.d7;
+    const sl = (i) => (ch.small ? HID : pct(ch.slots[i]));
+    setText("frS1", sl(0));
+    setText("frS2", sl(1));
+    setText("frS3", sl(2));
+    setText("frPer", ch.small ? HID : pct(ch.per_chip));
+    const A = f.app, a7 = A.d7;
+    setText("frAppFu", !A.started || !(a7.fu_shown > 0) ? "측정 시작 전" : a7.small ? HID : fmt(a7.fu_shown) + " → " + fmt(a7.fu_taps) + " · " + pct(a7.fu_per));
+    setText("frAppUndo", !A.started ? "측정 시작 전" : a7.small ? HID : "100세션당 " + (a7.undo_per100 === null ? "–" : String(a7.undo_per100)));
+    setText("frTlCards", tl.d7.small ? HID : fmt(tl.d7.cards));
+    setText("frTlRows", tl.d7.small ? HID : tl.d7.rows_per_card === null ? "–" : String(Math.round(tl.d7.rows_per_card * 10) / 10));
+    setText("frTlCards24", tl.h24.small ? HID : fmt(tl.h24.cards));
+    const rd = f.rated.d7;
+    setText("frUp", rd.small ? HID : fmt(rd.up));
+    setText("frDown", rd.small ? HID : fmt(rd.down));
+    setText("frAsk", f.ask.measured ? "" : "측정 시작 전");
+    const sb = f.ask.subtasks.d7;
+    setText("frAskSub", "카드는 기기에만 있어 서버로 못 세요 · 참고 하위 할일(누가 만들었는지 모름) 7일 " +
+      (sb.small ? HID : fmt(sb.n) + "개 · 10분 안 지움 " + (sb.n ? pct(sb.rate) : "–")));
+    frRoutes("tFrR24", f.routes.h24);
+    frRoutes("tFrR7", f.routes.d7);
+  }
   function render(s) {
     last = s;
     setText("day", kstDayLabel(s.kst_day));
@@ -1717,6 +1829,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     renderUx(s.ux || null, s.kst_day);
     renderValue(s.value || null);
     renderTurn(s.turn || null);
+    renderFric(s.fric || null);
   }
   async function load() {
     if (busy) return;
