@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-L/7eikkjkldZiFfXYnwpK07yh1t2b1pXuhM11kIOxTc='; style-src 'sha256-kKXy4V+6gf+/A+f9eQtvMm0K5GpvHLikQTKR6HsGaA8='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-P7Xnkgm4tD8yOKlvmAO0+CsS15xIXVFDhOL/ivT8r/E='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -157,7 +157,7 @@ body[data-view="stats"] #lock { display: none; }
 .chart > .tiles { margin-top: 8px; }
 .chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .chart-head .sub { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
-.legend { display: flex; gap: 12px; margin-top: 6px; font-size: 12px; color: var(--ink-2); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 6px; font-size: 12px; color: var(--ink-2); }
 .key { display: inline-flex; align-items: center; gap: 5px; }
 .sw { width: 10px; height: 10px; border-radius: 3px; background: var(--s1); }
 .sw.exp { background: var(--s1-exp); }
@@ -288,10 +288,12 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <p>DAU · WAU · MAU = 그날 · 그날까지 7일 · 30일(한국 날짜) 동안 한 번이라도 앱을 열어 로그인 토큰이 갱신됐거나 AI를 썼거나 질문한 서로 다른 사람(유지 · 가치 고착도와 같은 숫자 · 5분마다 새로 셈 · 지난 창의 AI 요청은 그날 마지막 시각만 남아 조금 덜 셀 수 있어요). 고착도 = DAU ÷ MAU(MAU 5명 밑은 가림).</p>
       <p>질문 = 동기화된 채팅 질문(구독자 포함 · 지운 대화도 셈 · 대화 동기화를 끈 사람은 빠져요). 체험 시작 = 수익 · 유지와 같은 뜻. 답 → 행동 · 답 끝 = 아래 「기능 · AI 행동」 · 「AI 답 속도」와 같은 뜻.</p>
       <p>지금 = 5분 · 15분 · 1시간 안에 활동한 사람. 오늘 = 한국 시간 0시부터.</p>
+      <p>시험 계정(운영 설정 ops.test_users 목록)은 이 페이지의 모든 사람 · 건수에서 빼요. AI 답 속도 · 갈래별 표는 사람 칸이 없는 익명 기록이라 그대로예요.</p>
     </div>
     <div class="live"><span class="label">지금 쓰는 사람</span><span><span class="num" id="a5">–</span>명</span><span>15분 <b id="a15">–</b> · 1시간 <b id="a60">–</b> · 1시간 물어본 사람 <b id="qa1">–</b></span></div>
     <div class="kpis" id="kpis" role="list" aria-label="오늘 숫자와 최근 14일 추세"></div>
     <div class="line">구독 중 <b id="subNow">–</b>명 · 월간 <b id="subM">–</b> · 연간 <b id="subY">–</b></div>
+    <div class="line" id="tuLine" hidden>시험 계정 <b id="tuN">–</b>명 제외 · AI 답 속도 · 갈래별 표(익명)는 그대로</div>
     <div class="chart">
       <div class="chart-head"><div class="label">오늘 시간별 질문</div><div class="sub" id="chHrcap">&nbsp;</div></div>
       <svg id="chHr" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="오늘 0시부터 시간별 질문 수 막대 그래프"></svg>
@@ -524,6 +526,67 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     </div>
     <div class="line">빈 화면 본 수 <b id="seE">–</b> · 상품 못 불러옴 <b id="seL">–</b> · 오프라인 안내 <b id="seO">–</b></div>
     <div class="line">시냅스 검색 <b id="srN">–</b>번 · 결과 0 <b id="srZ">–</b></div>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hAiq">
+    <div class="hrow"><h2 id="hAiq">AI 답 품질 · 앱</h2><button class="info" type="button" aria-expanded="false" aria-controls="dAiq" aria-label="AI 답 품질 · 앱 도움말">ⓘ</button></div>
+    <div class="defs" id="dAiq" hidden>
+      <p>새 앱(1.1.7 빌드 448 이상)이 보낸 날 요약(기기 날짜)으로 세요. 앱은 끝난 날만 다음 실행에 올려서 오늘은 늘 비어 있어 「어제」까지 — 7일 = 어제까지 7일 · 지난 7일 = 그 앞 7일(▲▼ = 7일 − 지난 7일 · 주황 = 나빠짐) · 어제 = 어제 하루. 비율 = 모든 사람 · 날의 분자 합 ÷ 분모 합(작은 줄 = 분자/분모 · 한 번 보인 줄에서 여러 번 누를 수 있는 칸은 100%를 넘을 수 있어요) · 수 = 합(작은 줄 = 그 창 448 사람 1인당 · 지난 7일 칸 = 1인당 바뀐 %) · 몫 = 같은 무리의 합 중 그 자리. 「–」 = 기록 없음 · n&lt;10 = 모수 10 밑 · 회색 % = 20 밑. 수집 = 10월 27일(privacy.engage2_from) 뒤 날 · 원격 스위치 engage3 · engage4를 둘 다 켰을 때 · 시험 계정 빼고 · 개수만(글 · 검색어 · 사람 없음).</p>
+      <p>쓰기 1라운드 끝 = 할일 · 일정 쓰기 턴 중 도구 한 번에 답까지 끝난 몫 · 결과 카드 2초 안 = 보낸 뒤 결과 카드가 보이기까지 2초 안 몫(작은 줄 = 8초 넘음) · 카드 전에 나감 = 카드가 뜨기 전에 화면을 떠난 몫 · AI 일정 → 다음 턴 고침 = Aria가 넣은 일정을 다음 턴에 고친 몫(낮을수록 좋아요) · 일정 고침 2초 안 = 일정 시각을 고치기까지 걸린 시간.</p>
+      <p>이어서 칩 1·2·3번 = 그 칸에 칩이 선 줄 중 그 칸을 누른 몫 · 바로 하는 칩 · 묻는 칩 = 칩 누름 중 ▶ · ＋ · ⏱(바로 실행)과 말풍선(묻기)의 몫 · 입력칸 칩 누름 = 칩 줄이 선 번 중 누른 몫 · 칩 첫 누름 = 줄이 서고 처음 누르기까지 · 답 오류 = 답 턴 중 오류 · 오프라인 · 한도로 끝난 몫 · 다시 시도 성공 = [다시 시도] 뒤 답이 온 몫. 걸린 시간 막대 = 7일 구간 몫(1초 밑 · 1~2초 · 2~4초 · 4~8초 · 8초+).</p>
+    </div>
+    <p class="empty" id="aqEmpty">새 앱(448+) 숫자는 10월 27일부터 쌓여요.</p>
+    <div class="chart chart-top">
+      <div class="chart-head"><div class="label">AI 답 품질</div><div class="sub" id="aqCap">&nbsp;</div></div>
+      <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="tAq"></tbody></table>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">걸린 시간 · 7일</div><div class="sub">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="sw q1"></i>1초 밑</span><span class="key"><i class="sw q2"></i>~2초</span><span class="key"><i class="sw q3"></i>~4초</span><span class="key"><i class="sw q4"></i>~8초</span><span class="key"><i class="sw s2"></i>8초+</span></div>
+      <svg id="chAqMs" viewBox="0 0 336 132" role="img" aria-label="최근 7일 결과 카드 · 일정 고침 · 칩 첫 누름까지 걸린 시간 구간별 몫"></svg>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hUx8">
+    <div class="hrow"><h2 id="hUx8">화면별 UX · 앱</h2><button class="info" type="button" aria-expanded="false" aria-controls="dUx8" aria-label="화면별 UX · 앱 도움말">ⓘ</button></div>
+    <div class="defs" id="dUx8" hidden>
+      <p>영역별 표 = 위 「AI 답 품질 · 앱」과 같은 셈(7일 · 지난 7일 · 어제 · 비율 = 분자 합 ÷ 분모 합 · 수 = 합 + 1인당 · 몫 = 무리 중 자리). 누르면 펼쳐요 — 요약 줄 「나빠짐 N」 = 지난 7일보다 나빠진 줄 수(주황). 이름 앞 └ = 바로 위 줄의 세부.</p>
+      <p>되돌림 · 다시 엶 · 그만둠 · 실패 · 결과 0 · 튕김은 오르면 나쁨 · 완료 · 허용 · 누름 · 성공은 내리면 나쁨 · 입구 몫 · 바꾼 수 등은 색 없음. 뜻 정본 = 앱 지표 표(METRICS-448-COLUMNS · UX448-ALL).</p>
+    </div>
+    <p class="empty" id="u8Empty">새 앱(448+) 숫자는 10월 27일부터 쌓여요.</p>
+    <div class="chart chart-top">
+      <div class="chart-head"><div class="label">영역별(누르면 펼침)</div><div class="sub" id="u8Cap">&nbsp;</div></div>
+      <details id="u8d_chat"><summary id="u8s_chat">채팅 · 결과 카드</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_chat"></tbody></table>
+      </details>
+      <details id="u8d_sug"><summary id="u8s_sug">제안(하면 좋을 일)</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_sug"></tbody></table>
+      </details>
+      <details id="u8d_tasks"><summary id="u8s_tasks">할일 · 루틴</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_tasks"></tbody></table>
+      </details>
+      <details id="u8d_cal"><summary id="u8s_cal">캘린더</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_cal"></tbody></table>
+      </details>
+      <details id="u8d_scrap"><summary id="u8s_scrap">스크랩 · 시냅스 · 파일</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_scrap"></tbody></table>
+      </details>
+      <details id="u8d_ntf"><summary id="u8s_ntf">알림</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_ntf"></tbody></table>
+      </details>
+      <details id="u8d_onb"><summary id="u8s_onb">온보딩</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_onb"></tbody></table>
+      </details>
+      <details id="u8d_pay"><summary id="u8s_pay">결제 · 한도</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_pay"></tbody></table>
+      </details>
+      <details id="u8d_set"><summary id="u8s_set">설정 · 의견</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_set"></tbody></table>
+      </details>
+      <details id="u8d_dash"><summary id="u8s_dash">대시보드</summary>
+        <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="u8t_dash"></tbody></table>
+      </details>
     </div>
   </section>
 
@@ -1524,6 +1587,170 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     setText("srZ", sr.count >= MIN_N ? pct(sr.zero_rate) + " (" + fmt(sr.zero) + "번)" : SHORT);
     $("srZ").classList.toggle("dim", sr.count >= MIN_N && sr.count < SOLID_N);
   }
+  // ── 448 앱 칸(m448 · 0060 · 새 앱 1.1.7 빌드 448+) — AI 답 품질 먼저 · 화면별(영역마다 접어 둠). 칸 = 7일 · 지난 7일(▲▼ = 7일 − 지난 7일) · 어제 ──
+  // 줄 = [응답 열쇠(metrics448.ts M448_SPEC), 이름, 나빠짐 쪽(true = 오르면 나쁨 · false = 내리면 나쁨 · null = 색 없음)]. ms 줄 = 2초 안 몫.
+  // 응답에 없는 열쇠(옛 함수 · 못 불러옴)는 「–」. 영역 표는 HTML 에 있다(펼침 상태가 새로 고침에도 남게) — 여기선 줄 · 요약만 채운다.
+  const M8_AREAS = [["chat", "채팅 · 결과 카드"], ["sug", "제안(하면 좋을 일)"], ["tasks", "할일 · 루틴"], ["cal", "캘린더"], ["scrap", "스크랩 · 시냅스 · 파일"],
+    ["ntf", "알림"], ["onb", "온보딩"], ["pay", "결제 · 한도"], ["set", "설정 · 의견"], ["dash", "대시보드"]];
+  const M8_ROWS = {
+    ai: [
+      ["write_finish_round1_rate", "쓰기 1라운드 끝", false], ["add_turn_card_ms", "결과 카드 2초 안", false],
+      ["add_turn_leave_before_card_rate", "카드 전에 나감", true], ["add_turn_leave_before_card", "└ 나간 수", true],
+      ["ai_event_fix_next_turn_rate", "AI 일정 → 다음 턴 고침", true], ["event_fix_wait_ms", "일정 고침 2초 안", false],
+      ["followup_tap_slot1", "이어서 칩 1번 누름", false], ["followup_tap_slot2", "└ 2번", false], ["followup_tap_slot3", "└ 3번", false],
+      ["chip_action_tap", "바로 하는 칩 몫", null], ["chip_prompt_tap", "묻는 칩 몫", null], ["followup_chip_seen", "이어서 칩 보임", null],
+      ["composer_chip_tap_rate", "입력칸 칩 누름", false], ["first_chip_tap_ms", "칩 첫 누름 2초 안", false],
+      ["chat_turn_error_ratio", "답 오류", true], ["chat_turn_error_count", "└ 오류 수", true],
+      ["chat_retry_success_ratio", "다시 시도 성공", false], ["chat_retry_tap_count", "다시 시도 누름", true],
+    ],
+    chat: [
+      ["added_card_retime_rate", "카드 할일 시각 바꿈", null], ["ai_task_quick_delete_rate", "AI 할일 바로 지움", true], ["ai_task_dup_rate", "이미 있는 할일", true],
+      ["added_card_undo_rate", "결과 카드 되돌림", true], ["added_event_retime_rate", "카드 일정 시각 바꿈", null],
+      ["list_card_complete_30m_rate", "목록 카드 30분 안 완료", false], ["list_card_more_tap_rate", "목록 「더 보기」", null], ["list_row_move_rate", "목록 줄 날짜 옮김", null],
+      ["chat_draft_lost_on_switch", "대화 바꿀 때 초안 잃음", true], ["chat_offline_send_count", "오프라인 보냄", true], ["chat_offline_retry_ratio", "└ 다시 시도", null],
+      ["deeplink_miss_chat", "지운 대화 알림 탭", true], ["chat_stop_tap_count", "■ 멈춤", null], ["chat_stop_during_stream", "└ 글 흐를 때", null],
+      ["chat_stop_within_1s", "└ 보낸 뒤 1초 안", true], ["chat_delete_count", "대화 지움", null], ["chat_delete_undo", "└ 되돌림", null],
+      ["chat_copy_count", "복사", null], ["chat_copy_via_foot_ratio", "└ 답 끝 복사 기호로", null],
+    ],
+    sug: [["sug_dash_dismiss", "하면 좋을 일 ✕", null], ["sug_dash_dismiss_undo", "└ ✕ 되돌림", null], ["sug_plus_to_chat_rate", "＋ → 채팅으로", null]],
+    tasks: [
+      ["task_complete_undo_rate", "완료 되돌림", true], ["task_complete_reopen_10m_rate", "완료 10분 안 다시 엶", true], ["postpone_undo_rate", "날짜 옮김 되돌림", true],
+      ["postpone_menu_share", "꾹 눌러 날짜 옮김 몫", null], ["subtask_delete_restore_rate", "하위 할일 지움 되돌림", true],
+      ["task_detail_delete_cancel_rate", "상세 지우기 취소", null], ["task_delete_restore_rate", "할일 지움 되돌림", true],
+      ["task_add_save_fail_count", "할일 저장 실패", true], ["task_add_abandon_rate", "할일 추가 그만둠", true],
+      ["routine_defer_revert_rate", "루틴 미루기 되돌림", true], ["routine_skip_revert_rate", "루틴 건너뛰기 되돌림", true],
+      ["task_add_entry_toolbar_ratio", "추가 = 툴바 ＋", null], ["task_add_reach_tail_ratio", "추가 = 목록 끝 줄", null],
+      ["task_complete_via_swipe_ratio", "완료 = 밀기", null], ["task_complete_via_detail_ratio", "완료 = 상세", null],
+    ],
+    cal: [
+      ["cal_drag_move_count", "끌어 옮김", null], ["cal_drag_refused_ratio", "└ 거절됨", true], ["cal_drag_undo_ratio", "└ 되돌림", true],
+      ["event_save_fail_count", "일정 저장 실패", true], ["event_delete_fail_count", "일정 삭제 실패", true],
+      ["calendar_search_count", "캘린더 검색", null], ["calendar_search_zero_ratio", "└ 결과 0", true], ["add_entry_longpress_ratio", "빈 칸 길게 눌러 만듦", null],
+    ],
+    scrap: [
+      ["scrap_compose_discard_count", "스크랩 쓰다 버림", true], ["scrap_discard_with_text", "└ 글 있는 채", true], ["scrap_to_event_count", "스크랩 → 일정", null],
+      ["scrap_to_event_undo_ratio", "└ 되돌림", true], ["scrap_save_fail_count", "스크랩 저장 실패", true], ["synapse_search_zero_ratio", "시냅스 검색 결과 0", true],
+      ["synapse_zero_to_scrap_search_count", "└ 스크랩에서 찾기", null], ["files_empty_seen_count", "파일 빈 화면", null], ["files_empty_to_attach_ratio", "└ 첨부로 이어짐", false],
+      ["knowledge_merge_count", "시냅스 합치기", null], ["knowledge_merge_undo_ratio", "└ 되돌림", true], ["reminder_import_items_count", "미리 알림 가져온 할일", null],
+      ["reminder_import_undo_ratio", "└ 되돌림", true], ["scrap_pull_refresh_count", "당겨서 새로고침", null],
+    ],
+    ntf: [
+      ["ntf_action_undo_count", "알림 동작 되돌림", true], ["ntf_wrap_tomorrow_items_count", "알림에서 내일로 옮긴 할일", null],
+      ["ntf_talk_sent_count", "「Aria에게 말하기」", null], ["ntf_talk_fail_count", "└ 실패", true], ["ntf_talk_fail_reopen_ratio", "└ 실패 → 초안 엶", false],
+      ["ntf_talk_into_active_session_ratio", "앱 밖 질문 → 이어지던 대화", null],
+    ],
+    onb: [
+      ["onboarding_completion_rate", "온보딩 끝까지", false], ["onboarding_restart_rate", "중간부터 이어하기", null], ["onboarding_step_next_rate", "권한 단계 「다음」", false],
+      ["onboarding_notif_denied_count", "알림 거부", true], ["onboarding_location_grant_rate", "위치 허용", false], ["location_later_count", "위치 「나중에」", null],
+    ],
+    pay: [
+      ["paywall_cta_settings", "Pro 입구 누름 · 설정", false], ["paywall_cta_account", "└ 계정", false], ["paywall_cta_chat", "└ 채팅 한도", false],
+      ["paywall_cta_credit", "└ 동전", false], ["paywall_cta_timecapsule", "└ 타임캡슐", false], ["paywall_cta_nudge", "└ 넛지", false],
+      ["paywall_cta_moment", "└ 좋은 순간", false], ["paywall_cta_weekly", "└ 주간 브리핑", false], ["paywall_cta_theme", "└ 테마", false],
+      ["purchase_success_toast_count", "구매 성공 토스트", null], ["paywall_purchased_to_first_ask_count", "구매 뒤 첫 질문", false],
+      ["paywall_failed_count", "결제 실패", true], ["restore_nothing_count", "복원할 구매 없음", null], ["chat_quota_blocked_send", "한도 0 보내기 막힘", null],
+      ["chat_quota_pro_offer_tap_ratio", "└ Pro 권유 누름", false], ["quota_purchase_then_retry", "한도 → 구매 → 다시", null], ["quota_retry_tap_count", "한도 버블 다시 시도", null],
+    ],
+    set: [
+      ["settings_open_count_dashboard", "설정 연 탭 · 대시보드", null], ["settings_open_count_chat", "└ 채팅", null], ["settings_open_count_tasks", "└ 할일", null],
+      ["settings_open_count_calendar", "└ 캘린더", null], ["settings_open_count_synapse", "└ 시냅스", null], ["settings_open_count_scrap", "└ 스크랩", null],
+      ["tone_change_count", "말투 바꿈", null], ["tone_picker_exit_without_save_rate", "└ 고르다 그냥 나감", true],
+      ["settings_appearance_change_count", "화면 모드 · 언어 · 테마", null], ["feedback_sent_rate", "의견 보냄", false],
+      ["draft_discard_count", "쓰다 버림(의견 · 디데이)", true], ["save_failed_count", "저장 실패(디데이 · 리뷰)", true], ["info_alert_shown_count", "정보 알림 창", true],
+    ],
+    dash: [
+      ["dash_task_open_tab_jump", "할일 눌러 탭 이동", true], ["dash_return_30s_rate", "30초 안 대시보드로", null], ["widget_remove_undo_rate", "위젯 빼기 되돌림", true],
+      ["widget_remove_readd_rate", "뺀 위젯 다시 넣음", true], ["dash_edit_entry_toolbar", "편집 입구 · 툴바", null], ["dash_edit_entry_bottom", "└ 아래 단추", null],
+      ["dash_edit_entry_menu", "└ 위젯 메뉴", null], ["dash_edit_entry_lift", "└ 길게 눌러", null], ["dash_edit_abandon_rate", "편집 그만둠", true],
+      ["upnext_empty_next_action", "「지금」 빈 상태 → 할일 추가", false], ["today_tile_bounce", "「오늘 할일」 타일 튕김", true],
+    ],
+  };
+  const M8_MS = [["add_turn_card_ms", "보냄 → 결과 카드"], ["event_fix_wait_ms", "일정 고침까지"], ["first_chip_tap_ms", "칩 첫 누름까지"]];
+  const FEW = "n<10";
+  const per1 = (v) => (typeof v === "number" && isFinite(v) ? (v < 0.1 ? v.toFixed(2) : v < 10 ? v.toFixed(1) : fmt(Math.round(v))) : "–");
+  const fast2 = (x) => x.s[0] + x.s[1];
+  // 칸 하나 — 모수 0 = 「–」 · 10 밑 = n<10(작은 줄 그대로) · 20 밑 = 회색 % · 수 = 합 + 1인당.
+  function m8Cell(c, x, kind) {
+    if (!x) { c.textContent = "–"; return; }
+    if (kind === "count") {
+      if (x.pu === null && !x.n) { c.textContent = "–"; return; }
+      pctCell(c, fmt(x.n), x.pu === null ? [] : ["1인 " + per1(x.pu)], SOLID_N);
+      return;
+    }
+    const n = x.n;
+    if (!(n > 0)) { c.textContent = "–"; return; }
+    const sm = kind === "rate" ? fmt(x.k) + "/" + fmt(n) : kind === "share" ? fmt(x.k) + "번" : "8초+ " + pct(x.s[4]) + " · " + fmt(n) + "번";
+    if (n < MIN_N) { pctCell(c, FEW, [sm], SOLID_N); c.className = "short"; return; }
+    pctCell(c, pct(kind === "ms" ? fast2(x) : x.r), [sm], n);
+  }
+  // 지난 7일 칸 — 비율 · 몫 · ms = %p(trendCell) · 수 = 1인당 바뀐 % · 작은 줄 = 지난 값. 모수 10 밑 = 「–」. 나빠졌으면(주황) true.
+  function m8Delta(c, a, b, kind, worse) {
+    if (!a || !b) { c.textContent = "–"; return false; }
+    let d = null, sub = "";
+    if (kind === "count") {
+      sub = b.pu === null ? "" : "지난 1인 " + per1(b.pu);
+      if (typeof a.pu === "number" && typeof b.pu === "number" && b.pu > 0 && a.n + b.n >= MIN_N) {
+        const r = (a.pu - b.pu) / b.pu, v = Math.abs(r) * 100;
+        if (v < 0.5) c.textContent = "=";
+        else { c.textContent = (r > 0 ? "▲" : "▼") + (v < 10 ? v.toFixed(1) : String(Math.round(v))) + "%"; d = r; if ((r > 0) === worse) c.className = "nwarn"; }
+      } else c.textContent = "–";
+    } else {
+      const v = (x) => (kind === "ms" ? fast2(x) : x.r);
+      sub = b.n > 0 ? "지난 " + pct(v(b)) : "";
+      if (a.n >= MIN_N && b.n >= MIN_N) { d = v(a) - v(b); trendCell(c, d, worse, "p"); } else c.textContent = "–";
+    }
+    const bad = c.className === "nwarn";
+    if (sub) { const sp = document.createElement("span"); sp.className = "sm"; sp.textContent = sub; c.appendChild(sp); }
+    return bad && d !== null;
+  }
+  function m8Rows(tb, rows, byKey) {
+    clear(tb);
+    let bad = 0;
+    for (const [key, label, worse] of rows) {
+      const x = byKey[key] || null, kind = x ? x.kind : null;
+      cellRow(tb, label, (tr) => {
+        td(tr, (c) => m8Cell(c, x && x.d7, kind));
+        td(tr, (c) => { if (m8Delta(c, x && x.d7, x && x.p7, kind, worse)) bad++; });
+        td(tr, (c) => m8Cell(c, x && x.y, kind));
+      });
+    }
+    return bad;
+  }
+  // m = 응답 m448 · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴. 행 0 이면 「새 앱이 …부터 보내요」 + 줄은 「–」.
+  function renderM448(m, today) {
+    const ok = !!(m && m.rows && m.users && m.win && Array.isArray(m.metrics));
+    const has = ok && m.rows.d7 + m.rows.p7 > 0;
+    const note = m === null ? "새 앱 숫자를 못 불러왔어요." : !ok ? "새 앱(448+) 숫자는 10월 27일부터 쌓여요." : has ? "" :
+      (m.from ? "새 앱(448+)이 " + md(m.from) + "부터 보내요" : "새 앱(448+)이 보내기 시작하면 쌓여요") +
+      (!m.on ? " · 지금은 수집 스위치(engage4)가 꺼져 있어요." : m.from && today && today > m.from ? " · 아직 들어온 기록이 없어요." : ".");
+    setText("aqEmpty", note);
+    setText("u8Empty", note);
+    const byKey = {};
+    if (ok) for (const x of m.metrics) if (x && typeof x.key === "string") byKey[x.key] = x;
+    const mdS = (k) => { const q = String(k).split("-").map(Number); return q[1] + "/" + q[2]; };
+    const cap = ok ? mdS(m.win.d7[0]) + "~" + mdS(m.win.d7[1]) + " · " + fmt(m.users.d7) + "명 · 기기·날 " + fmt(m.rows.d7) : " ";
+    setText("aqCap", cap);
+    setText("u8Cap", cap);
+    m8Rows($("tAq"), M8_ROWS.ai, byKey);
+    // 걸린 시간 막대 — 7일 구간 몫(10 밑 = 아직 모자라요 · 20 밑 = 흐리게)
+    shareBars("chAqMs", M8_MS.map(([key, label]) => {
+      const x = byKey[key] ? byKey[key].d7 : null, n = x ? x.n : 0;
+      const l = label + (n ? " " + fmt(n) + "번" : "");
+      if (n < MIN_N) return { l: l, t: n ? SHORT : "–", segs: [] };
+      return {
+        l: l, dim: n < SOLID_N, warn: n < SOLID_N, t: "2초 안 " + pct(fast2(x)) + " · 8초+ " + pct(x.s[4]),
+        segs: [{ f: x.s[0], cls: "q1" }, { f: x.s[1], cls: "q2" }, { f: x.s[2], cls: "q3" }, { f: x.s[3], cls: "q4" }, { f: x.s[4], cls: "s2" }],
+      };
+    }));
+    // 영역별 — 요약 = 이름 · 줄 수 · 나빠짐 수(주황)
+    for (const [area, name] of M8_AREAS) {
+      const bad = m8Rows($("u8t_" + area), M8_ROWS[area], byKey);
+      const sm = $("u8s_" + area);
+      clear(sm);
+      sm.appendChild(document.createTextNode(name + " · " + M8_ROWS[area].length + "줄"));
+      if (bad) { const w = document.createElement("span"); w.className = "nwarn"; w.textContent = " · 나빠짐 " + bad; sm.appendChild(w); }
+    }
+  }
   // ── 기능 · AI 행동(ux · 서버 기록) ─────────────────────────────────────
   const FEAT_KO = {
     chat: "채팅 질문", task_new: "할일 만듦", task_ai: "할일 만듦 · AI", task_direct: "할일 만듦 · 직접", task_done: "할일 완료",
@@ -2066,14 +2293,16 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   }
 
   // ── 덩어리 → 카드 그리기 ──────────────────────────────────────────────
-  const CARD_OF = { hNow: null, hRev: null, hKeep: null, hFlow: null, hUse: null, hSug: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
+  const CARD_OF = { hNow: null, hRev: null, hKeep: null, hFlow: null, hUse: null, hSug: null, hAiq: null, hUx8: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
     snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
-    usage: ["hUse"], m117: ["hSug"], value: ["hVal"], fric: ["hFric"],
+    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], value: ["hVal"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "value", "fric"];
-  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage"], hSug: ["m117"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "value", "fric"];
+  // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
+  const LATE = ["m448"];
+  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage"], hSug: ["m117"], hAiq: ["m448"], hUx8: ["m448"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -2102,10 +2331,14 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       setText("subNow", fmt(s.subs.active));
       setText("subM", fmt(s.subs.monthly));
       setText("subY", fmt(s.subs.yearly));
+      const tu = typeof s.test_users === "number" && s.test_users > 0 ? s.test_users : 0;
+      $("tuLine").hidden = !tu;
+      setText("tuN", fmt(tu));
       hourChart(s.hourly);
     } else if (k === "biz") renderBiz(s.biz || null);
     else if (k === "usage") renderUsage(s.usage || null, s.kst_day);
     else if (k === "m117") renderM117(s.m117 || null, s.kst_day);
+    else if (k === "m448") renderM448(s.m448, s.kst_day);
     else if (k === "ux") renderUx(s.ux || null, s.kst_day);
     else if (k === "value") renderValue(s.value || null);
     else if (k === "turn") renderTurn(s.turn || null);
@@ -2142,7 +2375,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     const snap = {};
     for (const key in s) if (PARTS.indexOf(key) < 0) snap[key] = s[key];
     onFrame("snap", snap);
-    for (const p of PARTS) if (p !== "snap") onFrame(p, s[p] === undefined ? null : s[p]);
+    for (const p of PARTS) if (p !== "snap" && (p in s || LATE.indexOf(p) < 0)) onFrame(p, s[p] === undefined ? null : s[p]);
   }
   // text/event-stream 읽기 — `data: {"k":…,"v":…}` 덩어리마다 바로 그린다. 끝 줄(end)을 받았으면 true.
   async function readFrames(r) {
@@ -2243,6 +2476,8 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       if (!r.ok) throw new Error("http " + r.status);
       const ended = await readFrames(r);
       if (!ended || !cur) throw new Error("cut");
+      // 옛 함수(늦게 생긴 덩어리 줄 없음 · 롤백) — 저장된 숫자로 그린 칸을 「–」 로 되돌린다.
+      for (const p of LATE) if (!fresh.has(p)) { delete cur[p]; paint(p); }
       lastOkAt = Date.now();
       unskel();
       saveCache(cur);
@@ -2272,6 +2507,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden && document.body.dataset.view === "stats" && Date.now() - lastOkAt > 20000) load();
   });
+  renderM448(undefined, null); // 처음 — 줄 이름 + 「–」(새 숫자가 오면 채움)
   session = regToken ? null : readSession();
   if (session) { document.body.dataset.view = "stats"; boot(); load(); } else lockUI("");
 })();
