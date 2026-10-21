@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-CLQjIZA2tqQDQ9P0BL3MuYLCDTs45ECig/NUMQ69vUg='; style-src 'sha256-2aa4RN7+rwbBoC9qMUCUWYvHJhUPmvV0qwFDkJAfgcQ='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Az8BS0AwZbaQxen7Al9z91RiJUmN1dBvzhjxetvSQG8='; style-src 'sha256-w5orErBKPsH5mJNbYZWDJN1ogyEBFN9PuIe9jgwS9yI='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -30,6 +30,10 @@
   --stale: #b26a00;
   --btn: #000000;
   --btn-ink: #ffffff;
+  --q1: #86b6ef;
+  --q2: #3987e5;
+  --q3: #1c5cab;
+  --q4: #0d366b;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -48,6 +52,10 @@
     --stale: #ff9f0a;
     --btn: #ffffff;
     --btn-ink: #000000;
+    --q1: #184f95;
+    --q2: #256abf;
+    --q3: #5598e7;
+    --q4: #9ec5f4;
   }
 }
 :root[data-theme="dark"] {
@@ -66,6 +74,10 @@
   --stale: #ff9f0a;
   --btn: #ffffff;
   --btn-ink: #000000;
+  --q1: #184f95;
+  --q2: #256abf;
+  --q3: #5598e7;
+  --q4: #9ec5f4;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -160,6 +172,16 @@ td.short { font-size: 11px; color: var(--ink-2); }
 .dimbar { fill: var(--ink-2); opacity: 0.45; }
 .fwarn { fill: var(--stale); font-size: 13px; font-weight: 700; font-family: inherit; font-variant-numeric: tabular-nums; }
 .seg-open { fill: var(--hair); }
+.q1 { fill: var(--q1); }
+.q2 { fill: var(--q2); }
+.q3 { fill: var(--q3); }
+.q4 { fill: var(--q4); }
+.sw.q1 { background: var(--q1); }
+.sw.q2 { background: var(--q2); }
+.sw.q3 { background: var(--q3); }
+.sw.q4 { background: var(--q4); }
+.line b.dim { color: var(--ink-2); }
+.line b.nwarn { color: var(--stale); }
 svg { display: block; width: 100%; height: auto; margin-top: 6px; touch-action: pan-y; outline: none; }
 svg:focus-visible { box-shadow: 0 0 0 2px var(--s1); border-radius: 6px; }
 .s1 { fill: var(--s1); }
@@ -364,7 +386,6 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
         </div>
         <div class="line">첫 픽셀 <span id="sPaint">–</span><br>완성 <span id="sFinal">–</span></div>
       </div>
-      <p class="empty">제안 수락률 — 1.1.7 부터(표면별 보임·수락·시간 바꿈·기타)</p>
     </div>
 
     <div class="chart">
@@ -389,6 +410,43 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
       <table id="pwTable"><thead><tr><th>계기</th><th>봄</th><th>버튼</th><th>구매</th><th>구매율</th></tr></thead><tbody id="tPw"></tbody></table>
       <p class="empty" id="pwEmpty"></p>
       <div class="line">권유 토스트 <b id="pwOffer">–</b>번 → 결제 화면 <b id="pwOfferShown">–</b>번</div>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hSug">
+    <h2 id="hSug">제안 수락 · 앱 흐름</h2>
+    <p class="empty" id="m7Empty"></p>
+    <div id="m7Body">
+    <div class="chart chart-top">
+      <div class="chart-head"><div class="label">제안 수락률 · 7일</div><div class="sub" id="sgCap">&nbsp;</div></div>
+      <table><thead><tr><th>제안 자리</th><th>보인 세션</th><th>수락</th><th>미룸</th><th>그 밖</th></tr></thead><tbody id="tSg"></tbody></table>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">묶음 수락 · 7일</div><div class="sub" id="bdCap">&nbsp;</div></div>
+      <table><thead><tr><th>묶음 자리</th><th>수락 누름</th><th>묶음</th><th>건/번</th><th>이것만 1·2·3+</th></tr></thead><tbody id="tBd"></tbody></table>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">제안 수락률 · 14일</div><div class="sub" id="chSgcap">&nbsp;</div></div>
+      <svg id="chSg" viewBox="0 0 336 130" role="img" tabindex="0" aria-label="어제까지 14일 날마다 제안 수락률(여섯 자리 합) 선 그래프"></svg>
+      <p class="empty" id="sgDayEmpty"></p>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">알림 · 7일</div><div class="sub" id="ntCap">&nbsp;</div></div>
+      <table><thead><tr><th>알림</th><th>뜸</th><th>열어 봄</th><th>바로 완료</th><th>미룸</th></tr></thead><tbody id="tNt"></tbody></table>
+    </div>
+    <div class="line">들어온 길 · 위젯 <b id="enW">–</b> · 제어 센터 <b id="enC">–</b> · 시리 <b id="enS">–</b> · 빠른 동작 <b id="enQ">–</b> · 알림 <b id="enN">–</b><br><span id="enSub">&nbsp;</span></div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">탭별 방문 · 머문 시간 · 7일</div><div class="sub" id="tbCap">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="sw q1"></i>10초 밑</span><span class="key"><i class="sw q2"></i>~1분</span><span class="key"><i class="sw q3"></i>1~5분</span><span class="key"><i class="sw q4"></i>5분+</span></div>
+      <svg id="chTab" viewBox="0 0 336 308" role="img" aria-label="최근 7일 탭마다 방문 수와 한 번 머문 시간 구간별 몫"></svg>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">할일 완료한 곳 · 7일</div><div class="sub" id="dnCap">&nbsp;</div></div>
+      <svg id="chDone" viewBox="0 0 336 224" role="img" aria-label="최근 7일 할일을 끝낸 곳마다 수와 몫"></svg>
+      <p class="empty" id="dnEmpty"></p>
+    </div>
+    <div class="line">빈 화면 본 수 <b id="seE">–</b> · 상품 못 불러옴 <b id="seL">–</b> · 오프라인 안내 <b id="seO">–</b></div>
+    <div class="line">시냅스 검색 <b id="srN">–</b>번 · 결과 0 <b id="srZ">–</b></div>
     </div>
   </section>
 
@@ -434,6 +492,45 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
       <p class="empty" id="obEmpty"></p>
       <table id="obTable"><thead><tr><th>단계</th><th>7일</th><th>28일</th></tr></thead><tbody id="tOb"></tbody></table>
       <div class="line" id="obPick">&nbsp;</div>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hSpeed">
+    <h2 id="hSpeed">AI 답 속도</h2>
+    <p class="empty" id="tsEmpty"></p>
+    <div id="tsBody">
+      <div class="tiles">
+        <div class="tile">
+          <div class="label">첫 글자 · 24시간</div>
+          <div class="mid"><span class="num" id="tsFirst">–</span></div>
+          <div class="sub" id="tsFirstSub">&nbsp;</div>
+        </div>
+        <div class="tile">
+          <div class="label">2초 넘은 끝</div>
+          <div class="mid"><span class="num" id="tsOver">–</span></div>
+          <div class="sub" id="tsOverSub">&nbsp;</div>
+        </div>
+        <div class="tile">
+          <div class="label">오류</div>
+          <div class="mid"><span class="num" id="tsErr">–</span></div>
+          <div class="sub" id="tsErrSub">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line">24시간 답 <b id="tsN">–</b>개 · 끝 p50 <b id="tsTot">–</b> · p90 <b id="tsTot90">–</b> · 첫 바이트 <b id="tsFb">–</b><br>7일 답 <b id="tsN7">–</b>개 · 끝 p50 <b id="tsTot7">–</b> · 첫 글자 <b id="tsFirst7">–</b> · 끊김 <b id="tsCut7">–</b></div>
+      <div class="chart">
+        <div class="chart-head"><div class="label">끝까지 걸린 시간 · 14일</div><div class="sub" id="chTscap">&nbsp;</div></div>
+        <div class="legend"><span class="key"><i class="ln"></i>끝 p50</span><span class="key"><i class="ln s2"></i>끝 p90</span><span class="key"><i class="ln s3"></i>첫 글자 p50</span></div>
+        <svg id="chTs" viewBox="0 0 336 130" role="img" tabindex="0" aria-label="오늘까지 14일 날마다 AI 답이 끝까지 걸린 시간 p50 · p90 과 첫 글자 p50 선 그래프 · 점선 = 2초 목표"></svg>
+      </div>
+      <div class="chart">
+        <div class="chart-head"><div class="label">갈래별 · 24시간</div><div class="sub">p50 / p90 · 초</div></div>
+        <table><thead><tr><th>갈래</th><th>답</th><th>첫 바이트</th><th>첫 글자</th><th>끝</th></tr></thead><tbody id="tTs24"></tbody></table>
+        <details>
+          <summary>갈래별 · 7일</summary>
+          <table><thead><tr><th>갈래</th><th>답</th><th>첫 바이트</th><th>첫 글자</th><th>끝</th></tr></thead><tbody id="tTs7"></tbody></table>
+        </details>
+      </div>
+      <div class="line">오류 코드(7일) — <span id="tsCodes">–</span></div>
     </div>
   </section>
 
@@ -510,8 +607,16 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     <p>흐름 = 최근 7일 가입한 사람 중 한 번이라도 그 단계를 한 사람. 첫 질문 · 첫 할 일은 서버에 남은 기록 기준이라 조금 덜 셀 수 있어요. 오늘 = 한국 시간 0시부터.</p>
     <p>앱 사용 = 앱(1.1.5+)이 하루가 끝나면 다음 실행 때 올리는 날 요약(기기 · 날 한 줄 · 수만). 10월 26일부터 쌓이고 화면 답 · 알림 끔은 10월 27일부터(1.1.6+). 오늘은 비어 있고 어제도 앱을 다시 연 사람만큼 늦게 채워져요. 7일 · 28일 = 어제까지 · 날 = 기기 날짜.</p>
     <p>칩 누름률 = 누른 수 ÷ 그 자리에 칩이 선 세션 수(한 세션에 여러 번 누르면 100%를 넘을 수 있어요). 대시보드 칩 = 대시보드 칩 덱(「하면 좋을 일」 카드 아님) · 입력칸 칩 = 입력칸 위 · 이어서 칩 = 답 아래 · 새 기능 카드 = 안 써 본 기능 카드. 칩 누른 세션 = 이 넷 중 하나라도 누른 세션. AI 되돌림 · 다시 물음 · 도구 다시 부름 = 100세션당 횟수.</p>
-    <p>화면 답 한 탭: 지금 시작 = ▶ 지금 시작 · 미루기·내일로(섞임) = ⋯ 미루기/날짜 시트가 열린 수(취소해도 셈) + 저녁 「내일 하면 좋을 일」 [수락] · 시간 직접. 대시보드 「하면 좋을 일」 [수락] · 시간 직접 [적용] · 2·3순위 [수락] · 캘린더 제안 · 채팅 답 카드 버튼은 아직 세지 않아요 → 제안 수락률은 1.1.7 부터. 첫 행동까지 = 브리핑 화면이 보인 뒤 첫 탭까지. 글만 답 = 화면 대신 글로만 답한 몫 · 기본 화면(L0) = 서버 문구 없이 기기 기본 화면으로 끝난 몫. 브리핑 본 날 · 알림 끔은 기기 하루 0/1이라 보임 수가 아니에요.</p>
+    <p>화면 답 한 탭: 지금 시작 = ▶ 지금 시작 · 미루기·내일로(섞임) = ⋯ 미루기/날짜 시트가 열린 수(취소해도 셈) + 저녁 「내일 하면 좋을 일」 [수락] · 시간 직접. 대시보드 「하면 좋을 일」 [수락] · 시간 직접 [적용] · 2·3순위 [수락] · 캘린더 제안 · 채팅 답 카드 버튼은 이 표에 안 세요 → 아래 「제안 수락 · 앱 흐름」(446+). 첫 행동까지 = 브리핑 화면이 보인 뒤 첫 탭까지. 글만 답 = 화면 대신 글로만 답한 몫 · 기본 화면(L0) = 서버 문구 없이 기기 기본 화면으로 끝난 몫. 브리핑 본 날 · 알림 끔은 기기 하루 0/1이라 보임 수가 아니에요.</p>
     <p>답 평가 = 최근 7일(오늘 포함) 답마다 마지막 [추천]/[비추천](취소는 뺌) · 이유 = 비추천 칩. 결제 화면 계기별 = 최근 7일 화면 수(같은 화면은 한 번) · 버튼 = 체험/구독 버튼 누름 · 구매 = 체험 시작 포함 · 구매율 = 구매 ÷ 봄.</p>
+    <p>제안 수락률 = 새 앱(1.1.6 빌드 446 이상)이 보낸 날 요약(어제까지 7일 · 기기 날짜)으로 (그대로 받음 + 시각 고름) ÷ 그 자리가 보인 세션 수. 그대로 = [수락] · ▶ 지금 시작 · 저녁 [수락] · 골든타임 [넣기] · 시각 = 시간 직접 고름 · 미룸 = 미루기 시트에서 고른 뒤(열기만은 안 셈) · 그 밖 = Aria에게 · 열기 · 완료 · 쪼개기 · 닫기. 한 세션에 여러 번 받으면 100%를 넘을 수 있어요. 14일 선 = 여섯 자리 합(보인 세션 10 밑인 날은 비움). 아직 모자라요 = 모수 10 밑 · 회색 % = 20 밑.</p>
+    <p>묶음 수락 = 「하면 좋을 일」 묶음(대시보드 · 저녁 내일 · 채팅 「지금」 판)에서 수락을 누른 수 중 [N개 수락] 몫(누름 기준) · 건/번 = [N개 수락] 한 번에 받아들인 평균 건수 · 이것만 1·2·3+ = [이것만 수락]을 누른 줄 위치 몫(1 = 큰 카드). 묶음으로 받은 건도 위 제안 수락률에 한 건씩 그대로 들어가요. 아직 모자라요 = 누름 10 밑 · 회색 = 20 밑.</p>
+    <p>섞임 풀림: 새 앱(1.1.6 빌드 446 이상)부터 미루기는 시트에서 고른 뒤만 · 저녁 「내일 하면 좋을 일」 [수락]은 제안 수락으로 세요 → 위 화면 답 「미루기·내일로(섞임)」 칸도 446+ 기기 몫은 더 섞이지 않아요(1.1.6 이하 기기 몫은 그대로 섞임 · 칸 이름은 그대로 둬요).</p>
+    <p>알림 = 기기에 뜬 수(앱 안에서 뜸 · 눌러 엶 · 앱에 올 때 알림 센터에 남은 것 — 안 열고 지운 것은 못 세서 실제보다 적어요) 중 눌러 열어 본 · 알림 단추로 바로 완료한 · 미룬 몫. 일정 · 브리핑은 완료 · 미룸 단추가 없어 「·」 · 장소 알림은 세지 않아요.</p>
+    <p>들어온 길 = 앱 바깥에서 앱을 연 수 — 위젯(홈 · 잠금 화면 · 실시간 활동) · 제어 센터 단추 · 시리 단축어 · 앱 아이콘 길게 누르기 · 알림. 세션 몫 = 446+ 기기 세션 중.</p>
+    <p>탭별 방문 = 탭에 한 번 들어와 머문 시간 구간별 방문 수(1초 밑 지나침은 빼요) · 막대 = 10초 밑 · 10초~1분 · 1~5분 · 5분+ 몫. 할일 = 할일 탭(캘린더 보기 빼고) · 설정 = 설정 시트.</p>
+    <p>할일 완료한 곳 = 끝낸 할일마다 그 자리 하나 — 할일 탭 · 대시보드 · 채팅(AI 완료 포함) · 위젯 · 실시간 활동 · 알람 · 워치 · 알림 [완료].</p>
+    <p>빈 화면 본 수 = 빈 상태 화면(시냅스 빈 화면 포함) · 결제 화면 상품 못 불러옴 · 채팅 오프라인 안내를 본 수(세션마다 자리마다 1). 검색 결과 0 = 시냅스 검색 중 결과가 없던 몫(검색어는 남기지 않아요).</p>
     <p>기능 쓰임 = 최근 7일(오늘 포함) 서버에 남은 기록으로 기능마다 쓴 사람 · 7일 활동 사람(앱을 열었거나 AI를 쓴 사람) 중 몫 · 횟수. 지운 것은 빼요(채팅 질문만 지운 대화도 셈). 할일 AI = 채팅에서 Aria가 만든 것 · 기록 · 사진·파일 = 스크랩 · 시냅스 새 낱말 = AI가 뽑은 것. 대화 동기화를 끈 사람의 채팅은 빠져요.</p>
     <p>AI 답 → 행동 = 최근 7일 Aria 답 중 할일 만듦 · 완료 · 기록 만듦 · 결과 카드(정렬 · 수정 · 기억 등) 중 하나라도 한 답의 몫. 카드 붙은 답 = 화면 카드가 붙은 답 · 이어 물음 = 질문이 있던 대화 중 2번 이상 물은 대화의 몫. 14일 선 = 날마다 그 몫.</p>
     <p>하루 질문 수 = 어제까지 7일(UTC 날) 질문한 사람·날마다 질문 수 구간(구독자는 요청 단위라 조금 더 셈). 온보딩 단계 = 앱 1.1.5+ 초기 설정 기록이 있는 사람(10월 25일부터 · 단계별 그 단계에 온 사람 · 몫은 시작 화면 대비).</p>
@@ -522,6 +627,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     <p>기능 이어 쓰기 = 지난 7일(8~14일 전)에 그 기능을 쓴 사람 중 이번 7일(오늘 포함)에도 쓴 몫. 기능 뜻은 기능 쓰임과 같아요(지운 것 뺌).</p>
     <p>할일의 운명 = 8~35일 전에 만든 할일(가져온 것 빼고 · 지운 것 포함)이 만든 뒤 7일 안에 완료됐나 · (완료 없이) 지워졌나 · 7일째에도 열려 있나 — 셋을 더하면 100%. AI = 채팅에서 Aria가 만든 것.</p>
     <p>가입 → 체험 · 구매 = 최근 60일 가입자 중 운영 구독과 이어진 사람이 가입한 날부터 며칠 만에 체험을 시작 · 첫 결제했나(한국 날짜 · 체험 없이 바로 산 것도 첫 결제 · 체험 끝 결제는 끝난 뒤에 채워져요). 가입 전 = 다른 계정에서 이어진 구독.</p>
+    <p>AI 답 속도 = 채팅 함수가 잰 시각(함수에 요청이 닿은 때부터 · 앱까지 네트워크는 빠져서 앱에서 느끼는 시간은 조금 더 길어요) · 요청 하나 = 한 줄(도구 라운드마다). 첫 글자 = 질문의 첫 요청에서 답 글자가 처음 나간 때(목표 1초) · 끝 = 응답이 끝난 때 · 2초 넘은 끝 = 끝이 2초를 넘은 요청의 몫(목표 2초). 오류 = 실패 상태 · AI 오류 · 중간에 닫힘(앱이 끊음 · 길이 상한 · 거절은 오류에서 빼고 코드에만) · 끊김 = 스트림이 끝 표식 없이 끝난 몫. 원격 스위치 ops.turn_stats 를 켠 뒤부터 쌓이고 90일 보관 · 사람 · 글 없음 · 관리자 시험 요청은 빼요. 시각은 시간 단위로만 남겨요(24시간 = 지금 시간 포함 최근 24칸 · 7일 = 168칸 · 지금 칸은 덜 찬 채).</p>
   </div>
   <div class="foot"><button id="logout" class="link" type="button">이 기기에서 잠그기</button></div>
 </main>
@@ -823,7 +929,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     c.sel = i >= 0 && i < c.n ? i : null;
     caption(c);
   }
-  for (const id of ["chHr", "chRev", "chRet", "chTr", "chSu", "chUse", "chTap", "chAct", "chStk"]) {
+  for (const id of ["chHr", "chRev", "chRet", "chTr", "chSu", "chUse", "chTap", "chAct", "chStk", "chTs"]) {
     const s = $(id);
     s.addEventListener("pointerdown", pick);
     s.addEventListener("pointermove", pick);
@@ -838,6 +944,21 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     });
     s.addEventListener("blur", () => { const c = charts[id]; if (c) { c.sel = null; caption(c); } });
   }
+  // 1.1.7 제안 수락률 선(chSg) — 위와 같은 짚기 · 화살표(목록과 따로 단다 · 덩어리 독립).
+  {
+    const s = $("chSg"), off = () => { const c = charts.chSg; if (c) { c.sel = null; caption(c); } };
+    s.addEventListener("pointerdown", pick);
+    s.addEventListener("pointermove", pick);
+    s.addEventListener("pointerleave", off);
+    s.addEventListener("blur", off);
+    s.addEventListener("keydown", (ev) => {
+      const c = charts.chSg;
+      if (!c || (ev.key !== "ArrowLeft" && ev.key !== "ArrowRight")) return;
+      c.sel = Math.max(0, Math.min(c.n - 1, (c.sel == null ? c.start : c.sel) + (ev.key === "ArrowLeft" ? -1 : 1)));
+      caption(c);
+      ev.preventDefault();
+    });
+  }
   // 선 그래프 — 주 8칸 · 0% 바닥 · 위 눈금 하나 · 빈 값(아직)은 끊는다.
   // o.cap = 위 끝 상한(기본 100% · 누름률처럼 넘을 수 있는 값은 더 크게) · o.ticks = 이름 붙일 칸(기본 전부) · 칸이 많으면(>12) 점은 홀로 선 값만.
   const LH = 130, LTOP = 14, LBOT = 18;
@@ -848,12 +969,13 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     const n = Math.max(1, pts.length), band = CW / n;
     let mx = 0;
     pts.forEach((p) => series.forEach((s) => { const v = p[s.key]; if (typeof v === "number" && v > mx) mx = v; }));
-    const top = Math.min(o.cap || 1, Math.max(0.1, Math.ceil(mx * 10) / 10));
+    const top = Math.min(o.cap || 1, Math.max(o.floor || 0.1, Math.ceil(mx * 10) / 10));
     const yOf = (v) => base - (Math.min(v, top) / top) * plotH;
     const hl = el("rect", { x: 0, y: 2, width: band, height: base - 2, rx: 6, class: "hl", visibility: "hidden" }, svg);
     el("line", { x1: 0, x2: CW, y1: LTOP + 0.5, y2: LTOP + 0.5, class: "grid-line" }, svg);
     el("line", { x1: 0, x2: CW, y1: base + 0.5, y2: base + 0.5, class: "axis" }, svg);
-    txt(svg, 0, LTOP - 3, Math.round(top * 100) + "%", "tick");
+    txt(svg, 0, LTOP - 3, o.topLabel ? o.topLabel(top) : Math.round(top * 100) + "%", "tick");
+    if (o.goal && o.goal <= top) el("line", { x1: 0, x2: CW, y1: yOf(o.goal) + 0.5, y2: yOf(o.goal) + 0.5, class: "grid-line", "stroke-dasharray": "4 4" }, svg);
     series.forEach((s) => {
       let d = "", pen = false;
       pts.forEach((p, i) => {
@@ -1153,6 +1275,152 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     setText("pwOffer", pw ? fmt(pw.offers) : "–");
     setText("pwOfferShown", pw ? fmt(pw.offer_shown) : "–");
   }
+  // ── 제안 수락 · 앱 흐름(m117 · 앱 1.1.7 · 0057) — 행 없으면 「1.1.7 앱이 …부터 보내요」 · 모수 10 밑 = 아직 모자라요 · 20 밑 = n 강조 + 회색 % ──
+  // (MIN_N · SOLID_N · SHORT · cellRow · td 는 아래 유지 · 가치 칸과 같은 것 — 그리기 때만 부른다)
+  const SUG_KO = { hero: "대시보드 큰 카드", next: "2·3순위", evening: "저녁 내일", cal: "캘린더", chat: "채팅 카드", golden: "골든타임" };
+  const NTF_KO = { task: "할일", event: "일정", routine: "루틴", briefing: "브리핑" };
+  const TAB_KO = { dashboard: "대시보드", chat: "채팅", tasks: "할일", calendar: "캘린더", synapse: "시냅스", scrap: "스크랩", settings: "설정" };
+  const DONE_KO = { list: "할일 탭", dashboard: "대시보드", chat: "채팅", widget: "위젯", live: "실시간 활동", watch: "워치", notification: "알림" };
+  const BUNDLE_KO = { dash: "대시보드", evening: "저녁 내일", chat: "채팅 「지금」" };
+  // 표 칸 — 큰 글(%) + 작은 줄들. 모수 20 밑 = 회색 %.
+  function pctCell(c, main, smalls, base) {
+    const m = document.createElement("span");
+    m.textContent = main;
+    if (base < SOLID_N) m.className = "dim";
+    c.appendChild(m);
+    for (const t of smalls) { const sm = document.createElement("span"); sm.className = "sm"; sm.textContent = t; c.appendChild(sm); }
+  }
+  // 모수 칸 하나 + 비율 칸들. 모수 20 밑 = 강조 · 10 밑 = 비율 칸들을 「아직 모자라요」 한 칸으로.
+  function nRow(tb, label, n, span, fill) {
+    cellRow(tb, label, (tr) => {
+      td(tr, (c) => { c.textContent = fmt(n); if (n < SOLID_N) c.className = "nwarn"; });
+      if (n < MIN_N) td(tr, (c) => { c.colSpan = span; c.className = "short"; c.textContent = SHORT; });
+      else fill(tr);
+    });
+  }
+  // 몫 막대(합 100%) — 칸 사이 2px 틈 · 양 끝 둥글게 · 칸이 없으면 회색 길만. rows = [{ l, t, segs: [{ f, cls }], dim, warn }]
+  function shareBars(id, rows) {
+    const svg = $(id);
+    clear(svg);
+    const RH = 44;
+    svg.setAttribute("viewBox", "0 0 " + CW + " " + Math.max(1, rows.length) * RH);
+    rows.forEach((row, i) => {
+      const y = i * RH;
+      txt(svg, 0, y + 15, row.l, "flabel");
+      txt(svg, CW, y + 15, row.t, row.warn ? "fwarn" : "fval", "end");
+      const segs = (row.segs || []).map((sg) => ({ w: Math.max(0, Math.min(1, Number(sg.f) || 0)) * CW, cls: sg.cls })).filter((sg) => sg.w >= 1);
+      if (!segs.length) { el("rect", { x: 0, y: y + 23, width: CW, height: 10, rx: 5, class: "track" }, svg); return; }
+      const clip = el("clipPath", { id: id + "c" + i }, svg);
+      el("rect", { x: 0, y: y + 23, width: CW, height: 10, rx: 5 }, clip);
+      const g = el("g", { "clip-path": "url(#" + id + "c" + i + ")", opacity: row.dim ? 0.45 : 1 }, svg);
+      let x = 0;
+      segs.forEach((sg, j) => {
+        const w = Math.min(sg.w, CW - x) - (j < segs.length - 1 ? 2 : 0);
+        if (w >= 1) el("rect", { x: x, y: y + 23, width: w, height: 10, class: sg.cls }, g);
+        x += sg.w;
+      });
+    });
+  }
+  function renderM117(m, today) {
+    const L = m ? m.last7 : null, sd = m ? m.suggest_daily : null;
+    const has = !!(m && (L.rows > 0 || sd.rows.some((v) => v > 0)));
+    $("m7Body").hidden = !has;
+    setText("m7Empty", has ? "" : !m ? "새 앱 숫자를 못 불러왔어요." :
+      (m.from ? "새 앱(446+)이 " + md(m.from) + "부터 보내요" : "새 앱(446+)이 보내기 시작하면 쌓여요") +
+      (!m.on ? " · 지금은 수집 스위치가 꺼져 있어요." : m.from && today && today > m.from ? " · 아직 들어온 기록이 없어요." : "."));
+    if (!has) {
+      for (const id of ["tSg", "tBd", "tNt", "chSg", "chTab", "chDone"]) clear($(id));
+      delete charts.chSg;
+      return;
+    }
+
+    // 제안 수락률 — 전체 + 여섯 자리
+    const sg = m.suggest, all = sg.all;
+    setText("sgCap", fmt(L.users) + "명 · 기기·날 " + fmt(L.rows));
+    const tb = $("tSg");
+    clear(tb);
+    const sugRow = (label, x) => nRow(tb, label, x.shown, 3, (tr) => {
+      td(tr, (c) => pctCell(c, pct(x.take_per), ["그대로 " + pct(x.accept_per), "시각 " + pct(x.retime_per)], x.shown));
+      td(tr, (c) => pctCell(c, pct(x.postpone_per), [fmt(x.postpone) + "번"], x.shown));
+      td(tr, (c) => pctCell(c, pct(x.other_per), [fmt(x.other) + "번"], x.shown));
+    });
+    sugRow("전체", all);
+    for (const x of sg.surfaces) sugRow(SUG_KO[x.key] || x.key, x);
+
+    // 묶음 수락 — 수락 누름 중 [N개 수락] 몫 · 한 번에 받은 건수 · [이것만 수락] 줄 위치 몫(누름 10 밑 = 아직 모자라요)
+    const bt = $("tBd");
+    clear(bt);
+    for (const x of m.bundle) {
+      const oneN = x.one.reduce((a, v) => a + v, 0);
+      nRow(bt, BUNDLE_KO[x.key] || x.key, x.taps, 3, (tr) => {
+        td(tr, (c) => pctCell(c, pct(x.all_share), [fmt(x.all) + "번"], x.taps));
+        td(tr, (c) => pctCell(c, x.all > 0 ? nf.format(Math.round(x.items_per_all * 10) / 10) + "건" : "–", [fmt(x.items) + "건"], x.taps));
+        td(tr, (c) => pctCell(c, oneN > 0 ? x.pos_share.map((v) => Math.round(v * 100)).join("·") + "%" : "–", [fmt(oneN) + "번"], x.taps));
+      });
+    }
+    setText("bdCap", "수락 누름 " + fmt(m.bundle.reduce((a, x) => a + x.taps, 0)) + "번");
+
+    // 14일 선 — 보인 세션 10 밑인 날은 비움
+    const n = sd.shown.length;
+    const dl = (i) => (i === n - 1 ? "어제" : (() => { const q = dayAt(sd.days_from, i); return q.m + "/" + q.d; })());
+    const pts = sd.shown.map((v, i) => ({ label: dl(i), a: v >= MIN_N ? sd.take_per[i] : null }));
+    const lineHas = pts.some((q) => q.a !== null);
+    $("chSg").toggleAttribute("hidden", !lineHas);
+    setText("sgDayEmpty", lineHas ? "" : SHORT + " · 날마다 보인 세션 10 밑");
+    if (lineHas) {
+      const lastPt = (() => { for (let i = n - 1; i >= 0; i--) if (pts[i].a !== null) return i; return n - 1; })();
+      lineChart("chSg", pts, [{ key: "a", cls: "k1" }], {
+        cap: 2, ticks: [0, Math.floor(n / 2), n - 1], start: lastPt,
+        caption: (i) => dl(i) + " · " + (sd.shown[i] ? (pts[i].a === null ? SHORT : pct(pts[i].a)) + " · " + fmt(sd.taken[i]) + "/" + fmt(sd.shown[i]) : "보임 없음"),
+      });
+    } else { clear($("chSg")); delete charts.chSg; setText("chSgcap", " "); }
+
+    // 알림 — 뜬 수 중 열어 봄 · 바로 완료 · 미룸(칸 없는 종류는 「·」)
+    const nt = $("tNt");
+    clear(nt);
+    const opt = (c, k, rate, base) => { if (k === null) { c.className = "short"; c.textContent = "·"; } else pctCell(c, pct(rate), [fmt(k)], base); };
+    for (const x of m.notify) nRow(nt, NTF_KO[x.key] || x.key, x.sent, 3, (tr) => {
+      td(tr, (c) => pctCell(c, pct(x.open_rate), [fmt(x.opened)], x.sent));
+      td(tr, (c) => opt(c, x.done, x.done_rate, x.sent));
+      td(tr, (c) => opt(c, x.postpone, x.postpone_rate, x.sent));
+    });
+    setText("ntCap", "뜬 알림 " + fmt(m.notify.reduce((a, x) => a + x.sent, 0)) + "개");
+
+    // 들어온 길
+    const en = m.entry;
+    for (const [id, k] of [["enW", "widget"], ["enC", "control"], ["enS", "siri"], ["enQ", "quick"], ["enN", "notification"]]) setText(id, fmt(en[k]));
+    setText("enSub", en.total ? "합 " + fmt(en.total) + "번 · 446+ 세션 " + fmt(L.sessions) + "의 " + (L.sessions >= MIN_N ? pct(en.per_session) : "–") : "아직 앱 바깥에서 연 기록이 없어요");
+
+    // 탭별 방문 · 머문 시간 — 막대 = 구간 몫(방문 10 밑 = 아직 모자라요)
+    setText("tbCap", "방문 " + fmt(m.tabs.reduce((a, x) => a + x.visits, 0)) + "번");
+    shareBars("chTab", m.tabs.map((x) => {
+      const l = (TAB_KO[x.key] || x.key) + " " + fmt(x.visits) + "번";
+      if (x.visits < MIN_N) return { l: l, t: SHORT, segs: [] };
+      const f = (i) => x.bins[i] / x.visits;
+      return {
+        l: l, dim: x.visits < SOLID_N, warn: x.visits < SOLID_N, t: "1분+ " + pct(f(2) + f(3)) + " · 10초 밑 " + pct(f(0)),
+        segs: [{ f: f(0), cls: "q1" }, { f: f(1), cls: "q2" }, { f: f(2), cls: "q3" }, { f: f(3), cls: "q4" }],
+      };
+    }));
+
+    // 할일 완료한 곳 — 몫
+    const dn = m.done, dnOk = dn.total >= MIN_N;
+    setText("dnCap", "완료 " + fmt(dn.total) + "개");
+    $("chDone").toggleAttribute("hidden", !dnOk);
+    setText("dnEmpty", dnOk ? "" : SHORT);
+    if (dnOk) hbars("chDone", dn.paths.map((x) => ({ l: DONE_KO[x.key] || x.key, f: x.share, dim: dn.total < SOLID_N, warn: dn.total < SOLID_N, t: fmt(x.n) + " · " + pct(x.share) })));
+    else clear($("chDone"));
+
+    // 빈 화면 · 검색 결과 0
+    setText("seE", fmt(m.seen.empty));
+    setText("seL", fmt(m.seen.load_fail));
+    setText("seO", fmt(m.seen.offline));
+    const sr = m.search;
+    setText("srN", fmt(sr.count));
+    $("srN").classList.toggle("nwarn", sr.count > 0 && sr.count < SOLID_N);
+    setText("srZ", sr.count >= MIN_N ? pct(sr.zero_rate) + " (" + fmt(sr.zero) + "번)" : SHORT);
+    $("srZ").classList.toggle("dim", sr.count >= MIN_N && sr.count < SOLID_N);
+  }
   // ── 기능 · AI 행동(ux · 서버 기록) ─────────────────────────────────────
   const FEAT_KO = {
     chat: "채팅 질문", task_new: "할일 만듦", task_ai: "할일 만듦 · AI", task_direct: "할일 만듦 · 직접", task_done: "할일 완료",
@@ -1378,6 +1646,55 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
       });
     }
   }
+  // ── AI 답 속도(turn · turnstats 0056) ─────────────────────────────────
+  const ROUTE_KO = {
+    card: "채팅 · 카드", tools: "채팅 · 옛 판", chat: "채팅 · 도구 없음", quickpath: "간단 · 빠른 길", quick: "간단", briefing: "브리핑",
+    research: "웹 찾기", important: "계획 · 정리", graph: "시냅스 연결", thinking: "깊은 생각", background: "요약", photoname: "사진 이름", none: "역할 없음", other: "기타",
+  };
+  const CODE_KO = {
+    cancel: "앱이 끊음", no_stop: "중간에 닫힘", stream_error: "스트림 오류", too_long: "입력 너무 김", max_tokens: "길이 상한", refusal: "거절",
+    overloaded_error: "과부하", rate_limit_error: "속도 제한", api_error: "API 오류", invalid_request_error: "요청 오류",
+  };
+  // 초 — 10초 밑은 소수 한 자리 고정(1.0 · 0.4) · 그 위는 정수.
+  const secN = (v) => (typeof v === "number" && isFinite(v) ? (v < 9950 ? (Math.round(v / 100) / 10).toFixed(1) : fmt(Math.round(v / 1000))) : "–");
+  const sec = (v) => (typeof v === "number" && isFinite(v) ? secN(v) + "초" : "–");
+  const pp = (p) => (p && p.p50 !== null ? secN(p.p50) + " / " + secN(p.p90) : "–");
+  const codeKo = (c) => CODE_KO[c] || (/^http_\d{3}$/.test(c) ? "HTTP " + c.slice(5) : c);
+  function renderTurn(t) {
+    const has = !!(t && t.has);
+    setText("tsEmpty", !t ? "AI 답 속도 숫자를 못 불러왔어요(0056 표 확인)." : has ? "" : "켜면 쌓여요(ops.turn_stats)");
+    $("tsBody").hidden = !has;
+    if (!has) { clear($("chTs")); return; }
+    const h = t.h24, w = t.d7;
+    setText("tsFirst", sec(h.first_preamble.p50));
+    setText("tsFirstSub", h.first_preamble.p50 !== null ? "p90 " + sec(h.first_preamble.p90) + " · 목표 1초" : "24시간 답 없음");
+    setText("tsOver", pct(h.over2s_rate));
+    setText("tsOverSub", h.n > 0 ? fmt(h.over2s) + "/" + fmt(h.n) + few(h.n) + " · 7일 " + pct(w.over2s_rate) : "7일 " + pct(w.over2s_rate));
+    setText("tsErr", pct(h.error_rate));
+    setText("tsErrSub", "끊김 " + pct(h.cut_rate) + " · 7일 오류 " + pct(w.error_rate));
+    setText("tsN", fmt(h.n));
+    setText("tsTot", sec(h.total.p50));
+    setText("tsTot90", sec(h.total.p90));
+    setText("tsFb", sec(h.first_byte.p50));
+    setText("tsN7", fmt(w.n));
+    setText("tsTot7", sec(w.total.p50));
+    setText("tsFirst7", sec(w.first_preamble.p50));
+    setText("tsCut7", pct(w.cut_rate));
+    const rowsOf = (rs) => rs.map((r) => [ROUTE_KO[r.route] || r.route, fmt(r.n), pp(r.first_byte), pp(r.preamble), pp(r.total)]);
+    tableRows("tTs24", rowsOf(t.routes24));
+    tableRows("tTs7", rowsOf(t.routes7));
+    setText("tsCodes", t.codes7.length ? t.codes7.map((c) => codeKo(c.code) + " " + fmt(c.n)).join(" · ") : "없음");
+    const d = t.daily, n = d.n.length;
+    const dl = (i) => (i === n - 1 ? "오늘" : (() => { const q = dayAt(d.days_from, i); return q.m + "/" + q.d; })());
+    const s1 = (v) => (typeof v === "number" ? v / 1000 : null);
+    const pts = d.n.map((v, i) => ({ label: dl(i), a: s1(d.p50[i]), b: s1(d.p90[i]), c: s1(d.first50[i]) }));
+    const lastPt = (() => { for (let i = n - 1; i >= 0; i--) if (d.n[i] > 0) return i; return n - 1; })();
+    lineChart("chTs", pts, [{ key: "a", cls: "k1" }, { key: "b", cls: "k2" }, { key: "c", cls: "k3" }], {
+      cap: 60, floor: 2.5, goal: t.goal_ms.final / 1000, topLabel: (v) => nf.format(v) + "초",
+      ticks: [0, Math.floor(n / 2), n - 1], start: lastPt,
+      caption: (i) => dl(i) + " · " + (d.n[i] ? "끝 " + sec(d.p50[i]) + " / " + sec(d.p90[i]) + " · 첫 글자 " + sec(d.first50[i]) + " · " + fmt(d.n[i]) + "개" : "기록 없음"),
+    });
+  }
   function render(s) {
     last = s;
     setText("day", kstDayLabel(s.kst_day));
@@ -1396,8 +1713,10 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
     hourChart(s.hourly);
     renderBiz(s.biz || null);
     renderUsage(s.usage || null, s.kst_day);
+    renderM117(s.m117 || null, s.kst_day);
     renderUx(s.ux || null, s.kst_day);
     renderValue(s.value || null);
+    renderTurn(s.turn || null);
   }
   async function load() {
     if (busy) return;
