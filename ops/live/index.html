@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YFEjhCWRQgyw8aiQJHjBNxHTAD9XDlYNOfRKbMPQ+yM='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ClbcjQEtIxjNwxCbpX6udZKPDd/lOmemJzNhqdlecRA='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -380,6 +380,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <div class="hrow"><h2 id="hFlow">유입</h2><button class="info" type="button" aria-expanded="false" aria-controls="dFlow" aria-label="유입 도움말">ⓘ</button></div>
     <div class="defs" id="dFlow" hidden>
       <p>흐름 = 최근 7일 가입한 사람 중 한 번이라도 그 단계를 한 사람. 첫 질문 · 첫 할 일은 서버에 남은 기록 기준이라 조금 덜 셀 수 있어요. 오늘 = 한국 시간 0시부터.</p>
+      <p>Apple Ads 귀속 = 1.1.6 출시(10월 21일 21:26) 뒤 새 가입(게스트 포함 · 시험 계정 빼고 · 맥 앱 보류 중이라 iOS · iPad) 중 앱이 보낸 Apple 광고 귀속 행이 있는 몫 · 진짜 귀속 = Apple이 광고 설치라고 답함 · 광고 아님 = Apple이 광고가 아니라고 답함(false) · 흉내(test) 행은 「행 있음」에만 들어가요. 7일 = 한국 시간 6일 전 0시부터(출시 앞은 잘라요) · 서버가 몇 분 늦게 다시 묻기도 해서 막 가입한 사람은 늦게 차요. 숫자만(캠페인 · 키워드 · 사람 없음). Apple 설치 대비는 중계 보고로.</p>
     </div>
     <div class="chart chart-top">
       <div class="chart-head"><div class="label">가입 · 30일</div><div class="sub" id="chSucap">&nbsp;</div></div>
@@ -393,6 +394,10 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
         <summary>표로 보기</summary>
         <table><thead><tr><th>날</th><th>애플</th><th>게스트</th><th>체험 시작</th></tr></thead><tbody id="tDay"></tbody></table>
       </details>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">Apple Ads 귀속</div><div class="sub" id="adCap">&nbsp;</div></div>
+      <table><thead><tr><th>새 가입(1.1.6 뒤)</th><th>오늘</th><th>7일</th></tr></thead><tbody id="tAd"></tbody></table>
     </div>
   </section>
 
@@ -1907,6 +1912,23 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     if (ok) for (const r of g.metrics) if (r && typeof r.key === "string") byKey[r.key] = r;
     m8Rows($(tb), rowsDef, byKey);
   }
+  // ── Apple Ads 귀속(ads · 0054 ads_attributions 읽기만) — 「유입」 끝 작은 표 · 새 가입 중 귀속 행 있음 몫 · 진짜 귀속 · 광고 아님 ──
+  // x = 응답 ads · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴.
+  function renderAds(x) {
+    const ok = !!(x && x.today && x.d7 && (x.sw === "on" || x.sw === "off"));
+    setText("adCap", x === null ? "Apple Ads 숫자를 못 불러왔어요." : ok ? "스위치 " + (x.sw === "on" ? "켜짐" : "꺼짐") +
+      (x.today.test + x.d7.test > 0 ? " · 흉내 행 " + fmt(x.d7.test) : "") : " ");
+    const tb = $("tAd");
+    clear(tb);
+    const cols = ok ? [x.today, x.d7] : [null, null];
+    cellRow(tb, "가입", (tr) => { for (const g of cols) td(tr, (c) => { c.textContent = g ? fmt(g.signups) : "–"; }); });
+    cellRow(tb, "귀속 행 있음", (tr) => { for (const g of cols) td(tr, (c) => {
+      if (!g || !(g.signups > 0)) { c.textContent = "–"; return; }
+      pctCell(c, pct(g.rate), [fmt(g.rows) + "/" + fmt(g.signups)], g.signups);
+    }); });
+    cellRow(tb, "진짜 귀속(광고)", (tr) => { for (const g of cols) td(tr, (c) => { c.textContent = g ? fmt(g.real) : "–"; }); });
+    cellRow(tb, "광고 아님(false)", (tr) => { for (const g of cols) td(tr, (c) => { c.textContent = g ? fmt(g.nonad) : "–"; }); });
+  }
   function renderM453(x) {
     const ok = !!(x && x.snooze && x.remind);
     m453Group(x === null ? null : ok ? x.snooze : undefined, SN_ROWS, "tSn", "snCap", "snEmpty", ok && !x.snooze.on ? "수집 스위치(engage7)가 꺼져 있어요." : "");
@@ -2543,12 +2565,12 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
     snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
-    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], m453: ["hUx8"], value: ["hVal"], fric: ["hFric"],
+    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], m453: ["hUx8"], ads: ["hFlow"], value: ["hVal"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "m453", "value", "fric"];
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "value", "fric"];
   // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
-  const LATE = ["m448", "nudge", "island", "payflow", "offer50", "m453"];
-  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448", "m453"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
+  const LATE = ["m448", "nudge", "island", "payflow", "offer50", "m453", "ads"];
+  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz", "ads"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448", "m453"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -2590,6 +2612,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (k === "payflow") renderPayflow(s.payflow);
     else if (k === "offer50") renderOffer50(s.offer50);
     else if (k === "m453") renderM453(s.m453);
+    else if (k === "ads") renderAds(s.ads);
     else if (k === "ux") renderUx(s.ux || null, s.kst_day);
     else if (k === "value") renderValue(s.value || null);
     else if (k === "turn") renderTurn(s.turn || null);
@@ -2764,6 +2787,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   renderPayflow(undefined);
   renderOffer50(undefined);
   renderM453(undefined);
+  renderAds(undefined);
   session = regToken ? null : readSession();
   if (session) { document.body.dataset.view = "stats"; boot(); load(); } else lockUI("");
 })();
