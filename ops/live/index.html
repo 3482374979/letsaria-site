@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-u0Nsb3e6E42VPonW8l1Ia4D3bBwNKRicya5/AZR0X4I='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-KcdzGPFfHlFEzajfk8LeLAUi9lFQA+MRrGbVez8Ugt4='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -405,6 +405,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <p>섞임 풀림: 새 앱(1.1.6 빌드 446 이상)부터 미루기는 시트에서 고른 뒤만 · 저녁 「내일 하면 좋을 일」 [수락]은 제안 수락으로 세요 → 위 화면 답 「미루기·내일로(섞임)」 칸도 446+ 기기 몫은 더 섞이지 않아요(1.1.6 이하 기기 몫은 그대로 섞임 · 칸 이름은 그대로 둬요).</p>
       <p>답 평가 = 최근 7일(오늘 포함) 답마다 마지막 [추천]/[비추천](취소는 뺌) · 이유 = 비추천 칩. 결제 화면 계기별 = 최근 7일 화면 수(같은 화면은 한 번) · 버튼 = 체험/구독 버튼 누름 · 구매 = 체험 시작 포함 · 구매율 = 구매 ÷ 봄.</p>
       <p>결제 화면 → 체험 → 해지 → 유료 = 결제 화면 · 가격 실험(예: 첫 달 50%) 전후를 같은 줄로 견줘요. 기준 = ops.paywall_cta_from(바꾼 날 · 시각) · 있으면 후 = 기준부터 최대 7일 · 전 = 바로 앞 같은 길이 · 없으면 최근 7일 vs 지난 7일. 화면 봄 · 누름률 = 결제 화면 기록(같은 화면은 한 번 · 주 단추 누른 화면 ÷ 본 화면). 체험 시작 · 해지 · 유료 전환 = 그 창에 시작한 체험(애플 알림) — 해지 = 체험 중 자동 갱신 끔 ÷ 체험 시작 · 유료 전환 = 결제됨 ÷ 체험이 끝난 것 · 진행 = 아직 체험 중(숫자가 더 바뀌어요). 바뀜 = 후 − 전(율 = %p · 수 = %) · 주황 = 나빠짐 · 표본 적음 = 모수 30 밑. 시험 계정 빼고 · 개수만.</p>
+      <p>첫 달 50% 창 = 새 앱이 계기(체험 중 자동 갱신 끔 · 체험이 끝났는데 결제 안 함 · 그 뒤 결제 화면 다시 엶)를 보면 서버가 대상인지 다시 보고 여는 60분 할인 창(사람마다 하나 · 끝나면 30일 쉼). 열림 = 그날 연 창 · 서명 = 할인가 구매를 눌러 서명받은 창 · 사용 = 애플이 할인 결제를 알린 창 · 안 쓰고 끝남 = 마감 2시간 뒤까지 안 쓴 창(체험 중 결제는 체험이 끝나는 날 늦게 알려져 사용으로 옮겨질 수 있어요). 날 = KST 최근 14일 중 기록 있는 날 + 14일 합. 사용률 = 사용 ÷ (사용 + 안 쓰고 끝남) · 표본 적음 = 모수 30 밑. 스위치 = pro.firstmonth50(꺼짐이면 창이 안 열려요). 시험 계정 빼고 · 개수만.</p>
     </div>
     <div class="tiles">
       <div class="tile">
@@ -488,6 +489,12 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <table><thead><tr><th>지표</th><th id="pcThB">전</th><th id="pcThA">후</th><th>바뀜</th></tr></thead><tbody id="tPc"></tbody></table>
       <div class="line" id="pcWin">&nbsp;</div>
     </div>
+
+    <div class="chart">
+      <div class="chart-head"><div class="label">첫 달 50% 창</div><div class="sub" id="ofCap">&nbsp;</div></div>
+      <table><thead><tr><th>날</th><th>열림</th><th>서명</th><th>사용</th><th>안 쓰고 끝남</th></tr></thead><tbody id="tOf"></tbody></table>
+      <div class="line">사용률 <b id="ofRate">–</b><span id="ofRateSub"></span> · 지금 열린 창 <b id="ofOpen">–</b><br>스위치 <b id="ofSw">–</b> · pro.firstmonth50</div>
+    </div>
   </section>
 
   <section class="card block" aria-labelledby="hSug">
@@ -495,7 +502,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <div class="defs" id="dSug" hidden>
       <p>제안 수락률 = 새 앱(1.1.6 빌드 446 이상)이 보낸 날 요약(어제까지 7일 · 기기 날짜)으로 (그대로 받음 + 시각 고름) ÷ 그 자리가 보인 세션 수. 그대로 = [수락] · ▶ 지금 시작 · 저녁 [수락] · 골든타임 [넣기] · 시각 = 시간 직접 고름 · 미룸 = 미루기 시트에서 고른 뒤(열기만은 안 셈) · 그 밖 = Aria에게 · 열기 · 완료 · 쪼개기 · 닫기. 한 세션에 여러 번 받으면 100%를 넘을 수 있어요. 14일 선 = 여섯 자리 합(보인 세션 10 밑인 날은 비움). 아직 모자라요 = 모수 10 밑 · 회색 % = 20 밑.</p>
       <p>묶음 수락 = 「하면 좋을 일」 묶음(대시보드 · 저녁 내일 · 채팅 「지금」 판)에서 수락을 누른 수 중 [N개 수락] 몫(누름 기준) · 건/번 = [N개 수락] 한 번에 받아들인 평균 건수 · 이것만 1·2·3+ = [이것만 수락]을 누른 줄 위치 몫(1 = 큰 카드). 묶음으로 받은 건도 위 제안 수락률에 한 건씩 그대로 들어가요. 아직 모자라요 = 누름 10 밑 · 회색 = 20 밑.</p>
-      <p>알림 = 기기에 뜬 수(앱 안에서 뜸 · 눌러 엶 · 앱에 올 때 알림 센터에 남은 것 — 안 열고 지운 것은 못 세서 실제보다 적어요) 중 눌러 열어 본 · 알림 단추로 바로 완료한 · 미룬 몫. 일정 · 브리핑은 완료 · 미룸 단추가 없어 「·」 · 장소 알림은 세지 않아요.</p>
+      <p>알림 = 기기에 뜬 수(앱 안에서 뜸 · 눌러 엶 · 앱에 올 때 알림 센터에 남은 것 — 안 열고 지운 것은 못 세서 실제보다 적어요) 중 눌러 열어 본 · 알림 단추로 바로 완료한 · 미룬 몫. 일정 · 브리핑은 완료 · 미룸 단추가 없어 「·」 · 장소 알림은 세지 않아요. 브리핑 = 아침 브리핑 · 저녁 하루 정리 · 주간 돌아보기 알림 — 451+ 아침·저녁 알림(기분 체크인 대신)은 briefing · dayReview 로 셈이라 이 줄에 들어가요.</p>
       <p>들어온 길 = 앱 바깥에서 앱을 연 수 — 위젯(홈 · 잠금 화면 · 실시간 활동) · 제어 센터 단추 · 시리 단축어 · 앱 아이콘 길게 누르기 · 알림. 세션 몫 = 446+ 기기 세션 중.</p>
       <p>탭별 방문 = 탭에 한 번 들어와 머문 시간 구간별 방문 수(1초 밑 지나침은 빼요) · 막대 = 10초 밑 · 10초~1분 · 1~5분 · 5분+ 몫. 할일 = 할일 탭(캘린더 보기 빼고) · 설정 = 설정 시트.</p>
       <p>할일 완료한 곳 = 끝낸 할일마다 그 자리 하나 — 할일 탭 · 대시보드 · 채팅(AI 완료 포함) · 위젯 · 실시간 활동 · 알람 · 워치 · 알림 [완료].</p>
@@ -619,6 +626,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <div class="chart">
       <div class="chart-head"><div class="label">자리별 보임 → 누름 · 7일</div><div class="sub" id="ngSlCap">&nbsp;</div></div>
       <table><thead><tr><th>자리</th><th>보임</th><th>누름</th><th>닫음</th><th>지난 7일</th></tr></thead><tbody id="tNgS"></tbody></table>
+      <p class="empty" id="ngCkNote">「알림 · 기분 체크인」은 앱 450 이하만 — 451부터 아침 · 저녁 알림이 기분 체크인 대신 오늘 브리핑 · 하루 정리라 0이 정상이에요. 451+ 아침·저녁 알림 = briefing · dayReview 로 셈(「제안 수락 · 앱 흐름」 알림 표 브리핑 줄). 날 요약에 앱 판 칸이 없어 판별로는 못 나눠요.</p>
     </div>
   </section>
 
@@ -1787,7 +1795,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   // 열쇠 = 응답 열쇠(nudge448.ts NUDGE_GROUPS · NUDGE_SLOTS). 응답 없음(옛 함수 · 처음) = 줄 이름 + 「–」.
   const NG_KO = { g1: "g1 · 할일만", g2: "g2 · 처음", g3: "g3 · 질문함" };
   const SLOT_KO = {
-    ntf_first: "알림 · 첫 질문 권유", ntf_morning: "알림 · 빈 아침 판", ntf_checkin: "알림 · 기분 체크인", ntf_nudge: "알림 · 능동 넛지",
+    ntf_first: "알림 · 첫 질문 권유", ntf_morning: "알림 · 빈 아침 판", ntf_checkin: "알림 · 기분 체크인(~450)", ntf_nudge: "알림 · 능동 넛지",
     dash_firstday: "대시보드 · Aria와 첫날", dash_mission: "대시보드 · 처음 3일 미션", dash_starter: "대시보드 · 추천 타일 칩", dash_discover: "대시보드 · 안 써 본 기능",
     dash_story: "대시보드 · 「말로 남겨」", dash_synapse: "대시보드 · 시냅스 칩", tasks_empty: "할일 빈 상태", task_inline: "할일 ✦ 한 줄",
     routine_replan: "루틴 시간 다시 짜기", snooze: "미룸 토스트 「Aria와 정리」", synapse_empty: "시냅스 빈 화면", dash_split: "큰 카드 [쪼개기]",
@@ -1928,6 +1936,29 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     cellRow(tb, "체험 시작", (tr) => { td(tr, (c) => pcCount(c, B && B.trials)); td(tr, (c) => pcCount(c, A && A.trials)); td(tr, (c) => pcDelta(c, A && A.trials, B && B.trials, "count", false, S)); });
     cellRow(tb, "체험 해지", (tr) => { td(tr, (c) => pcRate(c, cx(B), S)); td(tr, (c) => pcRate(c, cx(A), S)); td(tr, (c) => pcDelta(c, cx(A), cx(B), "rate", true, S)); });
     cellRow(tb, "유료 전환", (tr) => { td(tr, (c) => pcRate(c, pd(B), S, wait(B))); td(tr, (c) => pcRate(c, pd(A), S, wait(A))); td(tr, (c) => pcDelta(c, pd(A), pd(B), "rate", false, S)); });
+  }
+  // ── 첫 달 50% 창(offer50 · 0064 promo_offer_stats · 스위치 pro.firstmonth50) — 「앱 사용」 결제 흐름 아래 · KST 14일 중 기록 있는 날 + 14일 합 ──
+  // x = 응답 offer50 · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴. 꺼짐 + 기록 0 = 「꺼짐 · 0」.
+  const OF_COLS = ["opened", "signed", "redeemed", "expired"];
+  const ofDay = (k) => { const q = String(k).split("-").map(Number); return q[1] + "/" + q[2]; };
+  function renderOffer50(x) {
+    const ok = !!(x && x.total && Array.isArray(x.daily) && typeof x.switch === "string");
+    const on = ok && x.switch === "on";
+    const T = ok ? x.total : null;
+    const S = ok && x.small_n > 0 ? x.small_n : 30;
+    setText("ofCap", x === null ? "첫 달 50% 숫자를 못 불러왔어요." : !ok ? " " :
+      on ? "켜짐 · 지금 열린 창 " + fmt(x.open_now) : T.opened > 0 ? "꺼짐 · " + x.days + "일 창 " + fmt(T.opened) : "꺼짐 · 0");
+    const tb = $("tOf");
+    clear(tb);
+    const four = (r) => (tr) => { for (const k of OF_COLS) td(tr, (c) => pcCount(c, r ? r[k] : undefined)); };
+    if (ok) for (const r of x.daily.slice().reverse()) if (r && OF_COLS.some((k) => r[k] > 0)) cellRow(tb, ofDay(r.d), four(r));
+    cellRow(tb, ok ? x.days + "일 합" : "합", four(T));
+    const n = ok ? x.ended : 0, rate = $("ofRate");
+    rate.textContent = ok && n > 0 ? pc1(x.use_rate) : "–";
+    rate.className = ok && n > 0 && n < S ? "dim" : "";
+    setText("ofRateSub", ok && n > 0 ? " " + fmt(T.redeemed) + "/" + fmt(n) + (n < S ? " · 표본 적음" : "") : "");
+    setText("ofOpen", ok ? fmt(x.open_now) : "–");
+    setText("ofSw", ok ? (on ? "켜짐" : "꺼짐") : "–");
   }
 
   // ── 기능 · AI 행동(ux · 서버 기록) ─────────────────────────────────────
@@ -2476,12 +2507,12 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
     snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
-    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], value: ["hVal"], fric: ["hFric"],
+    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], value: ["hVal"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "value", "fric"];
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "value", "fric"];
   // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
-  const LATE = ["m448", "nudge", "island", "payflow"];
-  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage", "payflow"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
+  const LATE = ["m448", "nudge", "island", "payflow", "offer50"];
+  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -2521,6 +2552,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (k === "nudge") renderNudge(s.nudge, s.kst_day);
     else if (k === "island") renderIsland(s.island, s.kst_day);
     else if (k === "payflow") renderPayflow(s.payflow);
+    else if (k === "offer50") renderOffer50(s.offer50);
     else if (k === "ux") renderUx(s.ux || null, s.kst_day);
     else if (k === "value") renderValue(s.value || null);
     else if (k === "turn") renderTurn(s.turn || null);
@@ -2693,6 +2725,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   renderNudge(undefined, null);
   renderIsland(undefined, null);
   renderPayflow(undefined);
+  renderOffer50(undefined);
   session = regToken ? null : readSession();
   if (session) { document.body.dataset.view = "stats"; boot(); load(); } else lockUI("");
 })();
