@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-4n09OYyEJHSJkRtPx6MdyX7ktEQjSHGYMU8mG/Mt3TI='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-7+YluqPZHlgHVTNSKVrG8phKCpI+h2BL12DYoA5PRBI='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -404,6 +404,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <p>화면 답 한 탭: 지금 시작 = ▶ 지금 시작 · 미루기·내일로(섞임) = ⋯ 미루기/날짜 시트가 열린 수(취소해도 셈) + 저녁 「내일 하면 좋을 일」 [수락] · 시간 직접. 대시보드 「하면 좋을 일」 [수락] · 시간 직접 [적용] · 2·3순위 [수락] · 캘린더 제안 · 채팅 답 카드 버튼은 이 표에 안 세요 → 아래 「제안 수락 · 앱 흐름」(446+). 첫 행동까지 = 브리핑 화면이 보인 뒤 첫 탭까지. 글만 답 = 화면 대신 글로만 답한 몫 · 기본 화면(L0) = 서버 문구 없이 기기 기본 화면으로 끝난 몫. 브리핑 본 날 · 알림 끔은 기기 하루 0/1이라 보임 수가 아니에요.</p>
       <p>섞임 풀림: 새 앱(1.1.6 빌드 446 이상)부터 미루기는 시트에서 고른 뒤만 · 저녁 「내일 하면 좋을 일」 [수락]은 제안 수락으로 세요 → 위 화면 답 「미루기·내일로(섞임)」 칸도 446+ 기기 몫은 더 섞이지 않아요(1.1.6 이하 기기 몫은 그대로 섞임 · 칸 이름은 그대로 둬요).</p>
       <p>답 평가 = 최근 7일(오늘 포함) 답마다 마지막 [추천]/[비추천](취소는 뺌) · 이유 = 비추천 칩. 결제 화면 계기별 = 최근 7일 화면 수(같은 화면은 한 번) · 버튼 = 체험/구독 버튼 누름 · 구매 = 체험 시작 포함 · 구매율 = 구매 ÷ 봄.</p>
+      <p>결제 화면 → 체험 → 해지 → 유료 = 결제 화면 · 가격 실험(예: 첫 달 50%) 전후를 같은 줄로 견줘요. 기준 = ops.paywall_cta_from(바꾼 날 · 시각) · 있으면 후 = 기준부터 최대 7일 · 전 = 바로 앞 같은 길이 · 없으면 최근 7일 vs 지난 7일. 화면 봄 · 누름률 = 결제 화면 기록(같은 화면은 한 번 · 주 단추 누른 화면 ÷ 본 화면). 체험 시작 · 해지 · 유료 전환 = 그 창에 시작한 체험(애플 알림) — 해지 = 체험 중 자동 갱신 끔 ÷ 체험 시작 · 유료 전환 = 결제됨 ÷ 체험이 끝난 것 · 진행 = 아직 체험 중(숫자가 더 바뀌어요). 바뀜 = 후 − 전(율 = %p · 수 = %) · 주황 = 나빠짐 · 표본 적음 = 모수 30 밑. 시험 계정 빼고 · 개수만.</p>
     </div>
     <div class="tiles">
       <div class="tile">
@@ -480,6 +481,12 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <table id="pwTable"><thead><tr><th>계기</th><th>봄</th><th>버튼</th><th>구매</th><th>구매율</th></tr></thead><tbody id="tPw"></tbody></table>
       <p class="empty" id="pwEmpty"></p>
       <div class="line">권유 토스트 <b id="pwOffer">–</b>번 → 결제 화면 <b id="pwOfferShown">–</b>번</div>
+    </div>
+
+    <div class="chart">
+      <div class="chart-head"><div class="label">결제 화면 → 체험 → 해지 → 유료</div><div class="sub" id="pcCap">&nbsp;</div></div>
+      <table><thead><tr><th>지표</th><th id="pcThB">전</th><th id="pcThA">후</th><th>바뀜</th></tr></thead><tbody id="tPc"></tbody></table>
+      <div class="line" id="pcWin">&nbsp;</div>
     </div>
   </section>
 
@@ -1861,6 +1868,67 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     if (ok) for (const r of x.metrics) if (r && typeof r.key === "string") byKey[r.key] = r;
     m8Rows($("tIs"), IS_ROWS, byKey);
   }
+  // ── 결제 화면 → 체험 → 해지 → 유료(payflow · 기준 = ops.paywall_cta_from · 없으면 최근 7일 vs 지난 7일) — 「앱 사용」 결제 화면 아래 · 표본 적음 = 모수 30 밑 ──
+  // x = 응답 payflow · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴.
+  const pc1 = (r) => (typeof r === "number" && isFinite(r) ? (r < 0.1 ? (Math.round(r * 1000) / 10).toFixed(1) : String(Math.round(r * 100))) + "%" : "–");
+  const hmS = (s) => { const q = String(s).split(" "), d = q[0].split("-").map(Number); return d[1] + "/" + d[2] + " " + (q[1] || ""); };
+  function pcSm(c, t) { if (!t) return; const sm = document.createElement("span"); sm.className = "sm"; sm.textContent = t; c.appendChild(sm); }
+  function pcCount(c, v) { c.textContent = typeof v === "number" ? fmt(v) : "–"; }
+  // 율 칸 — 큰 글 % + 작은 줄 k/n · 모수 small 밑 = 회색 % + 「표본 적음」 · 모수 0 = 「–」(+ 덧붙임).
+  function pcRate(c, x, small, more) {
+    if (!x || !(x.n > 0)) { c.textContent = "–"; pcSm(c, more); return; }
+    const m = document.createElement("span");
+    m.textContent = pc1(x.r);
+    if (x.n < small) m.className = "dim";
+    c.appendChild(m);
+    pcSm(c, fmt(x.k) + "/" + fmt(x.n));
+    if (x.n < small) pcSm(c, "표본 적음");
+    pcSm(c, more);
+  }
+  // 바뀜 칸 — 율 = %p(trendCell) · 수 = 바뀐 %(같은 길이 창) · 한쪽이 비면 「–」 · 모수 small 밑이면 작은 줄 「표본 적음」.
+  function pcDelta(c, a, b, kind, worseUp, small) {
+    if (kind === "count") {
+      if (typeof a !== "number" || typeof b !== "number" || !(b > 0)) { c.textContent = "–"; return; }
+      const r = (a - b) / b, v = Math.abs(r) * 100;
+      c.textContent = v < 0.5 ? "=" : (r > 0 ? "▲" : "▼") + (v < 10 ? v.toFixed(1) : String(Math.round(v))) + "%";
+      if (v >= 0.5 && (r > 0) === worseUp) c.className = "nwarn";
+      return;
+    }
+    if (!a || !b || !(a.n > 0) || !(b.n > 0)) { c.textContent = "–"; return; }
+    trendCell(c, a.r - b.r, worseUp, "p");
+    if (a.n < small || b.n < small) pcSm(c, "표본 적음");
+  }
+  function renderPayflow(x) {
+    const ok = !!(x && x.before && x.after && typeof x.state === "string");
+    const on = ok && x.state === "on";
+    const B = ok ? x.before : null, A = ok ? x.after : null;
+    const S = ok && x.small_n > 0 ? x.small_n : 30;
+    // 캡션은 짧게(긴 제목 옆) — 창 길이는 아래 두 줄에. 0시 기준은 날짜만.
+    const sp = ok && x.split ? hmS(x.split).replace(/ 00:00$/, "") : "";
+    setText("pcCap", x === null ? "결제 흐름 숫자를 못 불러왔어요." : !ok ? " " : on ? "기준 " + sp :
+      x.state === "wait" && sp ? "기준 " + sp + " 아직 전" : x.state === "bad" ? "기준일 모양이 달라요" : "최근 7일 비교");
+    const nb = on || !ok ? "전" : "지난 7일", na = on || !ok ? "후" : "최근 7일";
+    setText("pcThB", nb);
+    setText("pcThA", na);
+    const wl = $("pcWin");
+    clear(wl);
+    if (ok) {
+      wl.appendChild(document.createTextNode(nb + " " + hmS(B.from) + " ~ " + hmS(B.to)));
+      wl.appendChild(document.createElement("br"));
+      wl.appendChild(document.createTextNode(na + " " + hmS(A.from) + " ~ " + hmS(A.to)));
+    } else wl.appendChild(document.createTextNode(" "));
+    const rc = (k, n, r) => ({ k: k, n: n, r: r });
+    const tap = (w) => (w ? rc(w.taps, w.views, w.tap_rate) : null), cx = (w) => (w ? rc(w.cancelled, w.trials, w.cancel_rate) : null);
+    const pd = (w) => (w ? rc(w.paid, w.decided, w.paid_rate) : null), wait = (w) => (w && w.pending > 0 ? "진행 " + fmt(w.pending) : "");
+    const tb = $("tPc");
+    clear(tb);
+    cellRow(tb, "화면 봄", (tr) => { td(tr, (c) => pcCount(c, B && B.views)); td(tr, (c) => pcCount(c, A && A.views)); td(tr, (c) => pcDelta(c, A && A.views, B && B.views, "count", false, S)); });
+    cellRow(tb, "누름률", (tr) => { td(tr, (c) => pcRate(c, tap(B), S)); td(tr, (c) => pcRate(c, tap(A), S)); td(tr, (c) => pcDelta(c, tap(A), tap(B), "rate", false, S)); });
+    cellRow(tb, "체험 시작", (tr) => { td(tr, (c) => pcCount(c, B && B.trials)); td(tr, (c) => pcCount(c, A && A.trials)); td(tr, (c) => pcDelta(c, A && A.trials, B && B.trials, "count", false, S)); });
+    cellRow(tb, "체험 해지", (tr) => { td(tr, (c) => pcRate(c, cx(B), S)); td(tr, (c) => pcRate(c, cx(A), S)); td(tr, (c) => pcDelta(c, cx(A), cx(B), "rate", true, S)); });
+    cellRow(tb, "유료 전환", (tr) => { td(tr, (c) => pcRate(c, pd(B), S, wait(B))); td(tr, (c) => pcRate(c, pd(A), S, wait(A))); td(tr, (c) => pcDelta(c, pd(A), pd(B), "rate", false, S)); });
+  }
+
   // ── 기능 · AI 행동(ux · 서버 기록) ─────────────────────────────────────
   const FEAT_KO = {
     chat: "채팅 질문", task_new: "할일 만듦", task_ai: "할일 만듦 · AI", task_direct: "할일 만듦 · 직접", task_done: "할일 완료",
@@ -2407,12 +2475,12 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
     snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
-    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], value: ["hVal"], fric: ["hFric"],
+    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], value: ["hVal"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "value", "fric"];
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "value", "fric"];
   // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
-  const LATE = ["m448", "nudge", "island"];
-  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
+  const LATE = ["m448", "nudge", "island", "payflow"];
+  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz"], hUse: ["usage", "payflow"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -2451,6 +2519,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (k === "m448") renderM448(s.m448, s.kst_day);
     else if (k === "nudge") renderNudge(s.nudge, s.kst_day);
     else if (k === "island") renderIsland(s.island, s.kst_day);
+    else if (k === "payflow") renderPayflow(s.payflow);
     else if (k === "ux") renderUx(s.ux || null, s.kst_day);
     else if (k === "value") renderValue(s.value || null);
     else if (k === "turn") renderTurn(s.turn || null);
@@ -2622,6 +2691,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   renderM448(undefined, null); // 처음 — 줄 이름 + 「–」(새 숫자가 오면 채움)
   renderNudge(undefined, null);
   renderIsland(undefined, null);
+  renderPayflow(undefined);
   session = regToken ? null : readSession();
   if (session) { document.body.dataset.view = "stats"; boot(); load(); } else lockUI("");
 })();
