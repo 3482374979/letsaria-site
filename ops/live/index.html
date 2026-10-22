@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ClbcjQEtIxjNwxCbpX6udZKPDd/lOmemJzNhqdlecRA='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-eftpOVU3mL7YDaqMRsI+48pG8OCZjVLF3OtVFsJ5HRM='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -578,7 +578,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <div class="defs" id="dUx8" hidden>
       <p>영역별 표 = 위 「AI 답 품질 · 앱」과 같은 셈(7일 · 지난 7일 · 어제 · 비율 = 분자 합 ÷ 분모 합 · 수 = 합 + 1인당 · 몫 = 무리 중 자리). 누르면 펼쳐요 — 요약 줄 「나빠짐 N」 = 지난 7일보다 나빠진 줄 수(주황). 이름 앞 └ = 바로 위 줄의 세부.</p>
       <p>되돌림 · 다시 엶 · 그만둠 · 실패 · 결과 0 · 튕김은 오르면 나쁨 · 완료 · 허용 · 누름 · 성공은 내리면 나쁨 · 입구 몫 · 바꾼 수 등은 색 없음. 뜻 정본 = 앱 지표 표(METRICS-448-COLUMNS · UX448-ALL).</p>
-      <p>453 표 둘(0067 · 같은 셈 · 시험 계정 빼고 · 개수만) — 할 일 탭 제안 멈춤 = 할 일 탭 제안을 수락 없이 닫음 · 「7일 멈출까요?」 토스트 뜸 · [멈추기] · 멈추기 몫(÷ 뜸) · 7일 뒤 저절로 다시 켬 · 설정 › AI 기능 「할 일 탭 제안」 켬 · 7일 멈춤 · 끔(원격 스위치 engage3 · engage7을 켠 뒤부터). 미리 알림 연동 = 켬 · 끔 · 권한 거부 · 안내 토스트 · 맞추기 바퀴(└ 바뀐 것 없음) · 실패 · 목록 없어 멈춤 · 건수(새로 · 고침 · 지움 · 충돌 이긴 쪽 · 이음 · 중복 정리 · 기다림) · 옛 캘린더 미러 일정 걷음 — 앱 453은 기기 안에서만 세요(앱이 보내기 시작하면 쌓여요).</p>
+      <p>453 표 둘(0067 · 같은 셈 · 시험 계정 빼고 · 개수만) — 할 일 탭 제안 멈춤 = 할 일 탭 제안을 수락 없이 닫음 · 「7일 멈출까요?」 토스트 뜸 · [멈추기] · 멈추기 몫(÷ 뜸) · 7일 뒤 저절로 다시 켬 · 설정 › AI 기능 「할 일 탭 제안」 켬 · 7일 멈춤 · 끔(원격 스위치 engage3 · engage7을 켠 뒤부터). 미리 알림 연동 = 켬 · 끔 · 권한 거부 · 안내 토스트 · 맞추기 바퀴(└ 바뀐 것 없음) · 실패 · 목록 없어 멈춤 · 건수(새로 · 고침 · 지움 · 충돌 이긴 쪽 · 이음 · 중복 정리 · 기다림) · 옛 캘린더 미러 일정 걷음(원격 스위치 engage3 · engage8을 켠 뒤부터 · 보내는 앱 판부터).</p>
     </div>
     <p class="empty" id="u8Empty">새 앱(448+) 숫자는 10월 27일부터 쌓여요.</p>
     <div class="chart chart-top">
@@ -1932,7 +1932,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   function renderM453(x) {
     const ok = !!(x && x.snooze && x.remind);
     m453Group(x === null ? null : ok ? x.snooze : undefined, SN_ROWS, "tSn", "snCap", "snEmpty", ok && !x.snooze.on ? "수집 스위치(engage7)가 꺼져 있어요." : "");
-    m453Group(x === null ? null : ok ? x.remind : undefined, RM_ROWS, "tRm", "rmCap", "rmEmpty", "앱 453은 기기 안에서만 세요(보내기 전).");
+    m453Group(x === null ? null : ok ? x.remind : undefined, RM_ROWS, "tRm", "rmCap", "rmEmpty", ok && !x.remind.on ? "수집 스위치(engage8)가 꺼져 있어요." : "");
   }
   // ── 결제 화면 → 체험 → 해지 → 유료(payflow · 기준 = ops.paywall_cta_from · 없으면 최근 7일 vs 지난 7일) — 「앱 사용」 결제 화면 아래 · 표본 적음 = 모수 30 밑 ──
   // x = 응답 payflow · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴.
