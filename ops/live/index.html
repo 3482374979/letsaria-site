@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-7+YluqPZHlgHVTNSKVrG8phKCpI+h2BL12DYoA5PRBI='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-u0Nsb3e6E42VPonW8l1Ia4D3bBwNKRicya5/AZR0X4I='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -1870,7 +1870,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   }
   // ── 결제 화면 → 체험 → 해지 → 유료(payflow · 기준 = ops.paywall_cta_from · 없으면 최근 7일 vs 지난 7일) — 「앱 사용」 결제 화면 아래 · 표본 적음 = 모수 30 밑 ──
   // x = 응답 payflow · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴.
-  const pc1 = (r) => (typeof r === "number" && isFinite(r) ? (r < 0.1 ? (Math.round(r * 1000) / 10).toFixed(1) : String(Math.round(r * 100))) + "%" : "–");
+  const pc1 = (r) => (typeof r === "number" && isFinite(r) ? (r > 0 && r < 0.1 ? (Math.round(r * 1000) / 10).toFixed(1) : String(Math.round(r * 100))) + "%" : "–");
   const hmS = (s) => { const q = String(s).split(" "), d = q[0].split("-").map(Number); return d[1] + "/" + d[2] + " " + (q[1] || ""); };
   function pcSm(c, t) { if (!t) return; const sm = document.createElement("span"); sm.className = "sm"; sm.textContent = t; c.appendChild(sm); }
   function pcCount(c, v) { c.textContent = typeof v === "number" ? fmt(v) : "–"; }
@@ -1885,13 +1885,14 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     if (x.n < small) pcSm(c, "표본 적음");
     pcSm(c, more);
   }
-  // 바뀜 칸 — 율 = %p(trendCell) · 수 = 바뀐 %(같은 길이 창) · 한쪽이 비면 「–」 · 모수 small 밑이면 작은 줄 「표본 적음」.
+  // 바뀜 칸 — 율 = %p(trendCell) · 수 = 바뀐 %(같은 길이 창) · 한쪽이 비면 「–」 · 모수(수 = 전 값) small 밑이면 작은 줄 「표본 적음」.
   function pcDelta(c, a, b, kind, worseUp, small) {
     if (kind === "count") {
       if (typeof a !== "number" || typeof b !== "number" || !(b > 0)) { c.textContent = "–"; return; }
       const r = (a - b) / b, v = Math.abs(r) * 100;
       c.textContent = v < 0.5 ? "=" : (r > 0 ? "▲" : "▼") + (v < 10 ? v.toFixed(1) : String(Math.round(v))) + "%";
       if (v >= 0.5 && (r > 0) === worseUp) c.className = "nwarn";
+      if (b < small) pcSm(c, "표본 적음");
       return;
     }
     if (!a || !b || !(a.n > 0) || !(b.n > 0)) { c.textContent = "–"; return; }
