@@ -12,6 +12,9 @@ if(m){t=m[1];s(t)}else if(l.hash){s(cur);return}else{t=g();if(t!=='ko'&&t!=='en'
 if(t!==cur)l.replace(t==='en'?'/en/':'/');
 })();
 </script>
+<script>
+(function(){try{var r=document.documentElement;if(window.matchMedia&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){r.classList.add('story-on');addEventListener('load',function(){if(!window.__ariaStory)r.classList.remove('story-on')})}}catch(e){}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="referrer" content="no-referrer">
@@ -37,7 +40,9 @@ if(t!==cur)l.replace(t==='en'?'/en/':'/');
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="/start/aria-icon.png">
 <link rel="apple-touch-icon" href="/start/aria-icon.png">
-<link rel="stylesheet" href="/home.css">
+<link rel="preload" as="image" href="/assets/home452/en-0-talk-900.webp" imagesrcset="/assets/home452/en-0-talk-600.webp 600w, /assets/home452/en-0-talk-900.webp 900w" imagesizes="(min-width: 960px) 340px, 264px" fetchpriority="high">
+<link rel="stylesheet" href="/home452.css">
+<script src="/home452.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -80,193 +85,138 @@ if(t!==cur)l.replace(t==='en'?'/en/':'/');
 </header>
 
 <main>
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <img class="hero-icon" src="/start/aria-icon.png" width="76" height="76" alt="Aria app icon">
-      <h1><span class="h1-name">Aria</span><span class="h1-line">Just say it.<br>Tasks and events, sorted.</span></h1>
-      <p class="hero-sub">Tasks and calendar in one AI assistant. One sentence is all it takes.</p>
-      <div class="cta">
-        <a class="btn" href="https://apps.apple.com/app/id6776524212">Get it on the App Store</a>
-        <p class="cta-note">Free to start · iPhone · iPad · Mac · Apple Watch</p>
+<!-- Story: as you scroll, the app screen on the right (top on phones) changes scene by scene. Screens = real app captures (demo data). -->
+<section class="story wrap" aria-label="A tour of Aria">
+  <div class="steps">
+    <header class="step step-hero is-on" id="talk">
+      <div class="txt">
+        <h1>Just say it.<br>Tasks and events, sorted.</h1>
+        <p class="sub">Aria is an AI assistant that turns one sentence into tasks and events, and shows your whole day on one screen when you ask.</p>
+        <div class="cta">
+          <a class="badge" href="https://apps.apple.com/app/id6776524212"><img src="/assets/home452/appstore-badge-en.svg" width="144" height="48" alt="Download on the App Store"></a>
+          <p class="cta-note">Free to start on iPhone, iPad, Mac and Apple Watch.</p>
+        </div>
       </div>
+      <figure class="shot"><img class="screen" src="/assets/home452/en-0-talk-900.webp" srcset="/assets/home452/en-0-talk-600.webp 600w, /assets/home452/en-0-talk-900.webp 900w" sizes="(min-width: 960px) 300px, 264px" width="900" height="1957" decoding="async" alt="Aria chat: “What should I do next?” answered with a day timeline and task cards"></figure>
+    </header>
+
+    <article class="step" id="morning">
+      <div class="txt">
+        <h2>Mornings:<br>only what matters.</h2>
+        <p class="lead">Your briefing covers what you finished yesterday and what to start first today, in two or three sentences. You can listen to it, too.</p>
+        <ul class="todo">
+          <li>The Today dashboard lays out your day on a timeline and points to what fits the free time between events.</li>
+          <li>In the evening, review what is left and what slipped, then reschedule everything at once.</li>
+        </ul>
+      </div>
+      <figure class="shot"><img class="screen" src="/assets/home452/en-1-brief-900.webp" srcset="/assets/home452/en-1-brief-600.webp 600w, /assets/home452/en-1-brief-900.webp 900w" sizes="(min-width: 960px) 300px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="Aria dashboard: the morning briefing and today’s timeline"></figure>
+    </article>
+
+    <article class="step" id="tasks">
+      <div class="txt">
+        <h2>Tasks that fit<br>your free time.</h2>
+        <p class="lead">Aria suggests what fits before your next event. Take a suggestion and it goes straight onto your calendar, with Undo right there.</p>
+        <ul class="todo">
+          <li>Organize with repeating tasks, subtasks and categories, or sort them in an Eisenhower matrix of important and urgent.</li>
+          <li>Tasks that can’t be missed ring as alarms, even in Silent mode or a Focus. Set deadline reminders and location reminders, too.</li>
+        </ul>
+      </div>
+      <figure class="shot"><img class="screen" src="/assets/home452/en-2-tasks-900.webp" srcset="/assets/home452/en-2-tasks-600.webp 600w, /assets/home452/en-2-tasks-900.webp 900w" sizes="(min-width: 960px) 300px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="Aria chat: a suggested task added to the calendar, with Undo"></figure>
+    </article>
+
+    <article class="step" id="calendar">
+      <div class="txt">
+        <h2>Tasks and calendar,<br>together.</h2>
+        <p class="lead">Events on top, the day’s tasks below, and free time marked in between. Drag a task onto the timetable to give it a time.</p>
+        <ul class="todo">
+          <li>Switch between Day, 3-Day, Week and Month.</li>
+          <li>See your device calendar events alongside, and import Apple Reminders.</li>
+          <li>Write “tomorrow at 3 pm” and Aria understands.</li>
+        </ul>
+      </div>
+      <figure class="shot"><img class="screen" src="/assets/home452/en-3-calendar-900.webp" srcset="/assets/home452/en-3-calendar-600.webp 600w, /assets/home452/en-3-calendar-900.webp 900w" sizes="(min-width: 960px) 300px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="Aria calendar: events, free time and today’s tasks on one screen"></figure>
+    </article>
+
+    <article class="step" id="memory">
+      <div class="txt">
+        <h2>Your notes,<br>connected.</h2>
+        <p class="lead">Notes, links and files gather in Scrap, and Synapse maps the people, topics and ideas in them.</p>
+        <ul class="todo">
+          <li>Search by meaning, even when the words differ, and jump to anything on the map.</li>
+          <li>What you tell Aria carries into later chats. View, edit or delete those memories in Settings.</li>
+        </ul>
+      </div>
+      <figure class="shot"><img class="screen" src="/assets/home452/en-4-synapse-900.webp" srcset="/assets/home452/en-4-synapse-600.webp 600w, /assets/home452/en-4-synapse-900.webp 900w" sizes="(min-width: 960px) 300px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="Aria Synapse: a map of connected topics and people"></figure>
+    </article>
+  </div>
+
+  <div class="stage">
+    <div class="phone" aria-hidden="true">
+      <img class="scr on" src="/assets/home452/en-0-talk-900.webp" srcset="/assets/home452/en-0-talk-600.webp 600w, /assets/home452/en-0-talk-900.webp 900w" sizes="(min-width: 960px) 340px, 264px" width="900" height="1957" fetchpriority="high" decoding="async" alt="">
+      <img class="scr" src="/assets/home452/en-1-brief-900.webp" srcset="/assets/home452/en-1-brief-600.webp 600w, /assets/home452/en-1-brief-900.webp 900w" sizes="(min-width: 960px) 340px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="">
+      <img class="scr" src="/assets/home452/en-2-tasks-900.webp" srcset="/assets/home452/en-2-tasks-600.webp 600w, /assets/home452/en-2-tasks-900.webp 900w" sizes="(min-width: 960px) 340px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="">
+      <img class="scr" src="/assets/home452/en-3-calendar-900.webp" srcset="/assets/home452/en-3-calendar-600.webp 600w, /assets/home452/en-3-calendar-900.webp 900w" sizes="(min-width: 960px) 340px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="">
+      <img class="scr" src="/assets/home452/en-4-synapse-900.webp" srcset="/assets/home452/en-4-synapse-600.webp 600w, /assets/home452/en-4-synapse-900.webp 900w" sizes="(min-width: 960px) 340px, 264px" width="900" height="1957" loading="lazy" decoding="async" alt="">
     </div>
-    <div class="hero-media">
-      <img src="/assets/home/en/home-chat.webp" width="800" height="1353" decoding="async" style="display:block;width:100%;height:auto;border-radius:36px" alt="Aria chat screen: one sentence split into task and event cards">
-    </div>
+    <nav class="rail" aria-label="Scenes">
+      <ol>
+        <li><a href="#talk" aria-current="step">Talk</a></li>
+        <li><a href="#morning">Briefing</a></li>
+        <li><a href="#tasks">Tasks</a></li>
+        <li><a href="#calendar">Calendar</a></li>
+        <li><a href="#memory">Synapse</a></li>
+      </ol>
+      <span class="rail-now" aria-hidden="true"></span>
+    </nav>
   </div>
 </section>
 
-<section class="feat" id="talk">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Just say it</p>
-      <h2>One sentence.<br>Tasks and events.</h2>
-      <p class="lead">“Report by Friday, team meeting tomorrow at 3 pm.” Say it or type it, and Aria turns it into one task and one event.</p>
-      <ul class="points">
-        <li>Say a lot at once and Aria splits it into task suggestions. Tap Add all to keep them.</li>
-        <li>When you need fresh information, Aria searches the web and answers with sources.</li>
-        <li>Record a meeting or lecture to get a transcript, a summary and to-dos.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-chat.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria chat screen: one sentence split into task and event cards"></figure>
-  </div>
-</section>
-
-<section class="feat" id="morning">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Morning briefing · Dashboard</p>
-      <h2>Mornings:<br>only what matters.</h2>
-      <p class="lead">Your briefing gives today’s schedule and what to do first in two or three sentences. You can listen to it, too.</p>
-      <ul class="points">
-        <li>Tap Start today to begin your first task with a timer. The time left shows on your Lock Screen and in the Dynamic Island.</li>
-        <li>The Today dashboard lays out your day on a timeline. Prefer a graph? Choose it when you edit widgets.</li>
-        <li>In the evening, review what is left and what slipped, then reschedule everything at once. A weekly briefing looks back when the week ends.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-briefing.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria dashboard: the day-flow graph and morning briefing"></figure>
-  </div>
-</section>
-
-<section class="feat" id="plan">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Tasks · Calendar</p>
-      <h2>Tasks and calendar,<br>together.</h2>
-      <p class="lead">Move between Today, Upcoming, Someday and Inbox lists and Day, 3-Day, Week and Month calendars, and see tasks and events side by side.</p>
-      <ul class="points">
-        <li>Drag a task onto the timetable to give it a time, and drag events to move them.</li>
-        <li>Write “tomorrow at 3 pm” and Aria understands.</li>
-        <li>Sort tasks with an Eisenhower matrix: four boxes of important and urgent.</li>
-        <li>See your device calendar events alongside, and import Apple Reminders.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-calendar.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria calendar: month view with the day’s tasks and events below"></figure>
-  </div>
-</section>
-
-<section class="feat" id="remind">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Subtasks · Reminders</p>
-      <h2>Big tasks, small steps.<br>Reminders that stick.</h2>
-      <p class="lead">Break a big task into subtasks. Set the due date and reminder right below.</p>
-      <ul class="points">
-        <li>Check off subtasks right from the list.</li>
-        <li>Tasks that can’t be missed ring as alarms, even in Silent mode or a Focus.</li>
-        <li>Set reminders for each stage of a deadline, and for when you arrive at or leave a place.</li>
-        <li>Slide a ruler to pick the alarm time and date in one go.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-subtasks.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria task detail: subtasks with due date and reminder"></figure>
-  </div>
-</section>
-
-<section class="feat" id="routine">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Routines</p>
-      <h2>Routines,<br>step by step.</h2>
-      <p class="lead">Turn what you do every day into a routine, and your streak builds.</p>
-      <ul class="points">
-        <li>A timer for each step leads you to the next one.</li>
-        <li>Check routines off right from a widget, and look back on the week in your weekly briefing.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-routine.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria routine walkthrough: a step timer"></figure>
-  </div>
-</section>
-
-<section class="feat" id="photo">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Photo and screenshot to plan</p>
-      <h2>From a photo<br>to a plan.</h2>
-      <p class="lead">Share a flyer photo, a screenshot of a notice or a PDF schedule with Aria. It finds the dates and suggests events and reminders.</p>
-      <ul class="points">
-        <li>Share it to Aria and it sorts the content into events, tasks and scraps. You can also save it as is to your scraps.</li>
-        <li>Aria can look at photos you attach and turn them into tasks, even on the free plan.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-photo-schedule.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria screen: three events found in a shared photo with an Add all button"></figure>
-  </div>
-</section>
-
-<section class="feat" id="memory">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Memory · Synapse</p>
-      <h2>Your notes,<br>connected.</h2>
-      <p class="lead">Keep notes, links and files in one place with Scrap. Synapse maps the people, topics and ideas in them.</p>
-      <ul class="points">
-        <li>Search by meaning even when the words differ, and jump straight to anything on the Synapse map.</li>
-        <li>People in your Synapse appear on the dashboard under People, with their related events and tasks.</li>
-        <li>Time Capsule brings back this day from a week to a year ago.</li>
-        <li>What you tell Aria carries into later chats, and you can view, edit and delete memories in Settings.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-synapse.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria dashboard: the Synapse map and Scrap"></figure>
-  </div>
-</section>
-
-<section class="feat" id="widgets">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">Widgets · Shortcuts</p>
-      <h2>Before you open the app,<br>on your Home Screen.</h2>
-      <p class="lead">Put task, routine, D-day and monthly calendar widgets on your Home Screen and Lock Screen, and finish tasks right from a widget.</p>
-      <ul class="points">
-        <li>Reach Aria from Control Center, the Action button, Siri and Shortcuts.</li>
-        <li>Press and hold the app icon for the Ask Aria and Add task quick actions.</li>
-      </ul>
-    </div>
-    <figure class="shot"><img src="/assets/home/en/home-widgets.webp" width="800" height="1353" loading="lazy" decoding="async" alt="Aria task, routine and D-day widgets on an iPhone Home Screen"></figure>
-  </div>
-</section>
-
-<section class="feat" id="devices">
-  <div class="wrap feat-in">
-    <div class="feat-text">
-      <p class="eyebrow">iPhone · iPad · Mac · Apple Watch</p>
-      <h2>All the way to your wrist,<br>one shared record.</h2>
-      <p class="lead">Sign in with Apple and your devices share the same record. Aria supports Korean and English.</p>
-      <ul class="devices">
-        <li><b>iPhone</b><span>Home Screen and Lock Screen widgets, Control Center, Action button, Dynamic Island</span></li>
+<section class="sec" id="more">
+  <div class="wrap">
+    <h2>And there’s more.</h2>
+    <ul class="more">
+      <li id="routine"><b>Routines</b><span>Turn what you do every day into a routine. A timer leads each step, and your streak builds.</span></li>
+      <li id="photo"><b>From a photo to a plan</b><span>Share a flyer photo, a screenshot of a notice or a PDF schedule. Aria finds the dates and suggests events and reminders.</span></li>
+      <li><b>Recordings</b><span>Record a meeting or lecture to get a transcript, a summary and to-dos.</span></li>
+      <li><b>Web search</b><span>When you need fresh information, Aria searches the web and answers with sources.</span></li>
+      <li><b>Focus timer</b><span>Start a task and a timer runs. The time left shows on your Lock Screen and in the Dynamic Island.</span></li>
+      <li id="widgets"><b>Widgets and Siri</b><span>Home Screen and Lock Screen widgets, Control Center, the Action button, Siri and Shortcuts.</span></li>
+    </ul>
+    <div id="devices">
+      <ul class="devices" aria-label="Supported devices">
+        <li><b>iPhone</b><span>Widgets, Control Center, Action button, Dynamic Island</span></li>
         <li><b>iPad</b><span>Tasks and calendar together on a bigger screen</span></li>
         <li><b>Mac</b><span>Aria one click away in the menu bar</span></li>
-        <li><b>Apple Watch<em>New</em></b><span>Check off today’s tasks on your wrist and ask Aria by voice</span></li>
+        <li><b>Apple Watch</b><span>Check off today’s tasks on your wrist and ask Aria by voice</span></li>
       </ul>
+      <p class="fine">Sign in with Apple and your devices share the same record. Aria supports English and Korean.</p>
     </div>
-    <figure class="shot shot-watch"><img src="/assets/home/home-watch.webp" width="720" height="1008" loading="lazy" decoding="async" alt="Aria on Apple Watch: all of today’s tasks done"></figure>
   </div>
 </section>
 
-<section class="feat band" id="privacy">
-  <div class="wrap feat-in solo">
-    <p class="eyebrow">Privacy · AI</p>
+<section class="sec band" id="privacy">
+  <div class="wrap">
     <h2>Only after you agree,<br>only what is needed.</h2>
-    <ul class="points">
+    <ul class="todo">
       <li>When you start, Aria first explains what goes where, and uses AI only after you agree.</li>
       <li>Chat, briefings, automatic organizing and Synapse use Anthropic (Claude). Search by meaning uses OpenAI embeddings. You can withdraw consent anytime in Settings › Info.</li>
       <li>Only what a request needs is sent, over an encrypted connection, and never your account identifier or email. Aria and its AI providers do not use your data to train AI models.</li>
       <li>There are no ads in the app. You can start without signing in, and delete your account and data right in the app.</li>
     </ul>
-    <p class="more"><a href="/en/ai-notice.html">AI Notice ›</a><a href="/en/privacy.html">Privacy Policy ›</a></p>
+    <p class="links"><a href="/en/ai-notice.html">AI Notice ›</a><a href="/en/privacy.html">Privacy Policy ›</a></p>
   </div>
 </section>
 
-<section class="feat" id="pricing">
-  <div class="wrap feat-in solo">
-    <p class="eyebrow">Pricing</p>
+<section class="sec" id="pricing">
+  <div class="wrap">
     <h2>Start free.</h2>
-    <p class="lead">Every feature that is not AI is free. Choose Aria Pro only when you want to do more.</p>
+    <p class="lead">The basics, like managing tasks and events, are free. Choose Aria Pro only when you want to do more.</p>
     <div class="plans">
       <div class="plan">
         <h3>Free</h3>
         <p class="tag">Yours the moment you download</p>
-        <ul class="points">
-          <li>Every non-AI feature is free</li>
+        <ul class="todo">
+          <li>Tasks, events and calendar</li>
           <li>20 AI questions a day, refilled daily</li>
           <li>AI looks at photos you attach and turns them into tasks</li>
           <li>Web search and Look it up, 3 times a day</li>
@@ -275,10 +225,13 @@ if(t!==cur)l.replace(t==='en'?'/en/':'/');
       <div class="plan pro">
         <h3>Aria Pro</h3>
         <p class="tag">Monthly or yearly, auto-renewing subscription</p>
-        <ul class="points">
+        <ul class="todo">
           <li>Up to 200 AI questions a day</li>
           <li>Web search and Look it up, 10 times a day</li>
-          <li>Multiple alarms per task</li>
+          <li>Multiple alarms per task, and reminders until it’s done</li>
+          <li>Fill free time with tasks automatically</li>
+          <li>Weekly report and stats, and Time Capsule look-backs</li>
+          <li>6 personal themes</li>
         </ul>
       </div>
     </div>
@@ -286,14 +239,13 @@ if(t!==cur)l.replace(t==='en'?'/en/':'/');
   </div>
 </section>
 
-<section class="feat" id="faq">
-  <div class="wrap feat-in solo">
-    <p class="eyebrow">FAQ</p>
+<section class="sec" id="faq">
+  <div class="wrap">
     <h2>Questions</h2>
     <div class="faq">
       <details>
         <summary>Is it really free?</summary>
-        <p>Yes. You can download it free from the App Store, and every non-AI feature is free. AI questions are free up to 20 a day, refilled every day.</p>
+        <p>Yes. You can download it free from the App Store, and the basics, like managing tasks and events, are free. AI questions are free up to 20 a day, refilled every day.</p>
       </details>
       <details>
         <summary>Do I have to sign in?</summary>
@@ -305,19 +257,24 @@ if(t!==cur)l.replace(t==='en'?'/en/':'/');
       </details>
       <details>
         <summary>What about my existing calendar and reminders?</summary>
-        <p>Aria shows your device calendar events alongside your own, and can import your Apple Reminders lists. It only reads Reminders and never deletes or changes them. Need help? Write to <a href="/en/support.html">Support</a>.</p>
+        <p>Aria shows your device calendar events alongside your own, and can import your Apple Reminders lists. Importing only reads your reminders and never deletes or changes them. Need help? Write to <a href="/en/support.html">Support</a>.</p>
       </details>
     </div>
   </div>
 </section>
 
-<section class="end">
+<section class="end" id="start">
   <div class="wrap">
-    <img class="hero-icon" src="/start/aria-icon.png" width="76" height="76" loading="lazy" alt="">
+    <svg class="mascot" viewBox="0 0 240 240" width="92" height="92" aria-hidden="true" focusable="false">
+      <defs><linearGradient id="aria-skin" gradientUnits="userSpaceOnUse" x1="0" y1="46" x2="0" y2="198.56"><stop offset="0" style="stop-color:var(--m1)"/><stop offset="0.55" style="stop-color:var(--m2)"/><stop offset="1" style="stop-color:var(--m3)"/></linearGradient></defs>
+      <path d="M79.91 63.82A54 54 0 0 1 160.09 63.82A170 170 0 0 1 195.62 125.37A54 54 0 0 1 155.54 194.81A170 170 0 0 1 84.46 194.81A54 54 0 0 1 44.38 125.37A170 170 0 0 1 79.91 63.82Z" fill="url(#aria-skin)"/>
+      <ellipse class="eye" cx="101" cy="132" rx="7.6" ry="12.3" style="fill:var(--m-eye)"/>
+      <ellipse class="eye" cx="139" cy="132" rx="7.6" ry="12.3" style="fill:var(--m-eye)"/>
+    </svg>
     <h2>Start your day.<br>Just say it.</h2>
     <div class="cta">
-      <a class="btn" href="https://apps.apple.com/app/id6776524212">Get it on the App Store</a>
-      <p class="cta-note">Free to start</p>
+      <a class="badge" href="https://apps.apple.com/app/id6776524212"><img src="/assets/home452/appstore-badge-en.svg" width="144" height="48" loading="lazy" alt="Download on the App Store"></a>
+      <p class="cta-note">Free to start.</p>
     </div>
   </div>
 </section>
