@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-eftpOVU3mL7YDaqMRsI+48pG8OCZjVLF3OtVFsJ5HRM='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-waPxbx4KPr70HIJs8h3UATaA2+wL/P2XX46FLuasoBM='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -398,6 +398,30 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <div class="chart">
       <div class="chart-head"><div class="label">Apple Ads 귀속</div><div class="sub" id="adCap">&nbsp;</div></div>
       <table><thead><tr><th>새 가입(1.1.6 뒤)</th><th>오늘</th><th>7일</th></tr></thead><tbody id="tAd"></tbody></table>
+    </div>
+  </section>
+
+  <section class="card block" aria-labelledby="hConv">
+    <div class="hrow"><h2 id="hConv">결제 전환 · 할인</h2><button class="info" type="button" aria-expanded="false" aria-controls="dConv" aria-label="결제 전환 · 할인 도움말">ⓘ</button></div>
+    <div class="defs" id="dConv" hidden>
+      <p>입구별 결제 전환 = 결제 화면을 연 곳(온보딩 · AI 동전 · 채팅 한도 · 설정 · 권유 토스트 …)마다 그 화면을 본 사람 중 체험/구독 버튼을 누른 사람 · 구매(체험 시작 포함)한 사람 몫. 같은 사람이 여러 번 열어도 한 명 · 전체 = 아무 입구로든 본 사람. 7일 · 30일 = 한국 시간 오늘 포함(0시부터). 아래 「앱 사용」 결제 화면 계기별은 화면 수 · 여기는 사람 수예요.</p>
+      <p>권유 토스트 → 7일 안 체험 = 가치 순간 토스트(할 일 5개 · 3일째 · 디데이 · 연속 기록 … — 할인 아님)를 본 사람마다 창 안 첫 토스트부터 7일 안에 무료 체험을 시작한 몫(애플 알림 기준). 토스트와 결제 화면 기록이 안 이어져 같은 사람 · 시간으로 잇는 셈이에요. 결제 화면 = 7일 안 그 토스트로 결제 화면을 연 사람 · 이미 체험 = 토스트 전에 체험한 사람(모수에서 뺌) · 진행 = 7일이 아직 안 지나 숫자가 더 바뀌어요.</p>
+      <p>할인별 애플 구매 알림 = 애플이 보낸 구매 알림(새 구독 · 갱신 · 오퍼 적용) 수를 할인 종류로 — 무료 체험 · 프로모션 할인(첫 달 50% · 연간 첫해 30% 같은 서명 오퍼) · 오퍼 코드 · 윈백 · 할인 없음(정가). 결제 = 그중 돈을 낸 것(무료 체험 · 무료 오퍼 달 빼고) — 할인 결제는 값을 몰라 「수익」 금액엔 안 넣어요. 연간 = 연간 상품 몫 · 7일 · 30일 = 구매 시각 기준. 첫 달 50% 창(열림 → 서명 → 사용)은 「앱 사용」 끝 표.</p>
+      <p>빼는 것: 시험 계정 · 결제 화면을 한 사람이 하루(한국 시간)에 한 입구로 20번 넘게 본 묶음(그날 그 입구 기록만 · 10월 23일 기준 세 사람 78~100번). 숫자만(사람 · 거래 없음) · 표본 적음 = 모수 30 밑.</p>
+    </div>
+    <div class="chart chart-top">
+      <div class="chart-head"><div class="label">입구별 결제 전환 · 사람</div><div class="sub" id="cvCap">&nbsp;</div></div>
+      <table><thead><tr><th>입구</th><th>누름 7일</th><th>구매 7일</th><th>누름 30일</th><th>구매 30일</th></tr></thead><tbody id="tCv"></tbody></table>
+      <p class="empty" id="cvEmpty"></p>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">권유 토스트 → 7일 안 체험</div><div class="sub" id="tsCap">&nbsp;</div></div>
+      <table><thead><tr><th>토스트</th><th>본 사람</th><th>결제 화면</th><th>체험</th></tr></thead><tbody id="tTs"></tbody></table>
+      <div class="line" id="tsLine">&nbsp;</div>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">할인별 애플 구매 알림</div><div class="sub" id="ocCap">&nbsp;</div></div>
+      <table><thead><tr><th>할인</th><th>7일</th><th>30일</th><th>결제 · 30일</th></tr></thead><tbody id="tOc"></tbody></table>
     </div>
   </section>
 
@@ -1369,6 +1393,8 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   const ENTRY_KO = {
     onboarding: "온보딩", alarm: "알람", credit: "AI 동전", settings: "설정", chat_quota: "채팅 한도", dday: "디데이",
     nudge_dday: "권유 · 디데이", nudge_tasks5: "권유 · 할 일 5개", nudge_day3: "권유 · 3일째",
+    account: "계정", timecapsule: "타임캡슐", nag: "끝낼 때까지 알림", free_slot: "빈 시간 넣기", weekly_report: "주간 리포트", theme: "테마",
+    untagged: "입구 없음", moment_streak: "권유 · 연속 기록", moment_alldone: "권유 · 다 끝냄", weekly_preview: "권유 · 주간 미리 보기",
   };
   const REASON_KO = [["wrong", "틀린 정보"], ["unhelpful", "도움 안 됨"], ["too_long", "너무 길어요"], ["other", "기타"], ["none", "이유 없음"]];
   const ACTION_KO = [["start", "지금 시작"], ["complete", "완료"], ["postpone", "미루기·내일로(섞임)"], ["insert", "넣기"], ["open", "열기"]];
@@ -2018,6 +2044,62 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     setText("ofOpen", ok ? fmt(x.open_now) : "–");
     setText("ofSw", ok ? (on ? "켜짐" : "꺼짐") : "–");
   }
+  // ── 결제 전환 · 할인(promo · 10-23) — 입구별 사람(7일 · 30일) · 권유 토스트 → 7일 안 체험(30일 창 + 7일 줄) · 할인별 애플 구매 알림 ──
+  // x = 응답 promo · undefined = 열쇠 없음(옛 함수 · 처음) · null = 못 불러옴. 율 칸 = 결제 흐름과 같은 pcRate(모수 30 밑 = 회색 + 「표본 적음」).
+  const OFFER_KO = [["trial", "무료 체험"], ["promo", "프로모션 할인"], ["code", "오퍼 코드"], ["winback", "윈백"], ["none", "할인 없음(정가)"]];
+  function renderPromo(x) {
+    const ok = !!(x && x.funnel && x.funnel.d7 && x.funnel.d30 && x.toast && x.toast.d7 && x.toast.d30 && Array.isArray(x.offers));
+    const S = ok && x.small_n > 0 ? x.small_n : 30;
+    const rc = (k, n, r) => ({ k: k, n: n, r: r });
+    // ① 입구별 — 30일 줄 차례(본 사람 많은 것부터) · 7일 칸은 같은 입구 · 끝 줄 = 전체
+    const F7 = ok ? x.funnel.d7 : null, F30 = ok ? x.funnel.d30 : null;
+    setText("cvCap", x === null ? "결제 전환 숫자를 못 불러왔어요." : !ok ? " " :
+      F30.all.shown ? "30일 본 " + fmt(F30.all.shown) + "명 · 구매 " + pc1(F30.all.buy_rate) : "30일 0명");
+    const tb = $("tCv");
+    clear(tb);
+    const by7 = new Map(ok ? F7.entries.map((e) => [e.entry, e]) : []);
+    const four = (a, b) => (tr) => {
+      td(tr, (c) => pcRate(c, a ? rc(a.cta, a.shown, a.cta_rate) : null, S));
+      td(tr, (c) => pcRate(c, a ? rc(a.bought, a.shown, a.buy_rate) : null, S));
+      td(tr, (c) => pcRate(c, b ? rc(b.cta, b.shown, b.cta_rate) : null, S));
+      td(tr, (c) => pcRate(c, b ? rc(b.bought, b.shown, b.buy_rate) : null, S));
+    };
+    if (ok) for (const e of F30.entries) cellRow(tb, ENTRY_KO[e.entry] || e.entry, four(by7.get(e.entry), e));
+    if (ok && F30.all.shown > 0) cellRow(tb, "전체", four(F7.all, F30.all));
+    setText("cvEmpty", ok && !F30.all.shown ? "최근 30일 결제 화면 기록이 없어요." : "");
+    // ② 권유 토스트 — 30일 창(토스트마다 · 끝 줄 = 전체) + 최근 7일 한 줄
+    const T30 = ok ? x.toast.d30 : null, T7 = ok ? x.toast.d7 : null, TD = ok && x.trial_days > 0 ? x.trial_days : 7;
+    setText("tsCap", ok ? "30일 · " + TD + "일 안" : " ");
+    const tt = $("tTs");
+    clear(tt);
+    const tRow = (t) => (tr) => {
+      td(tr, (c) => { pcCount(c, t.people); if (t.already > 0) pcSm(c, "이미 체험 " + fmt(t.already)); });
+      td(tr, (c) => pcRate(c, rc(t.opened, t.base, t.open_rate), S));
+      td(tr, (c) => pcRate(c, rc(t.trials, t.base, t.trial_rate), S, t.pending > 0 ? "진행 " + fmt(t.pending) : ""));
+    };
+    if (ok) for (const t of T30.toasts) cellRow(tt, ENTRY_KO[t.entry] || t.entry, tRow(t));
+    if (ok && T30.all.people > 0) cellRow(tt, "전체", tRow(T30.all));
+    setText("tsLine", !ok ? " " : !T30.all.people ? "최근 30일 권유 토스트 기록이 없어요." :
+      "최근 7일 본 " + fmt(T7.all.people) + "명 · 체험 " + fmt(T7.all.trials) + (T7.all.pending > 0 ? " · 진행 " + fmt(T7.all.pending) : ""));
+    // ③ 할인별 — 다섯 줄 늘 · 30일 칸 작은 줄 = 새 · 갱신 · 적용 · 연간(0 은 뺌)
+    const oc = $("tOc");
+    clear(oc);
+    const offs = ok ? x.offers : [];
+    let disc = 0;
+    for (const [k, nm] of OFFER_KO) {
+      const o = offs.find((y) => y && y.kind === k) || null;
+      if (o && k !== "trial" && k !== "none") disc += o.d30;
+      cellRow(oc, nm, (tr) => {
+        td(tr, (c) => pcCount(c, o ? o.d7 : undefined));
+        td(tr, (c) => {
+          pcCount(c, o ? o.d30 : undefined);
+          if (o && o.d30 > 0) pcSm(c, [["새", o.new30], ["갱신", o.renew30], ["적용", o.redeem30], ["연간", o.yearly30]].filter((q) => q[1] > 0).map((q) => q[0] + " " + fmt(q[1])).join(" · "));
+        });
+        td(tr, (c) => pcCount(c, o ? o.paid30 : undefined));
+      });
+    }
+    setText("ocCap", ok ? "30일 할인 오퍼 " + fmt(disc) + "건" : " ");
+  }
 
   // ── 기능 · AI 행동(ux · 서버 기록) ─────────────────────────────────────
   const FEAT_KO = {
@@ -2561,16 +2643,16 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   }
 
   // ── 덩어리 → 카드 그리기 ──────────────────────────────────────────────
-  const CARD_OF = { hNow: null, hRev: null, hKeep: null, hFlow: null, hUse: null, hSug: null, hAiq: null, hUx8: null, hNdg: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
+  const CARD_OF = { hNow: null, hRev: null, hKeep: null, hFlow: null, hConv: null, hUse: null, hSug: null, hAiq: null, hUx8: null, hNdg: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
     snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
-    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], m453: ["hUx8"], ads: ["hFlow"], value: ["hVal"], fric: ["hFric"],
+    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], m453: ["hUx8"], ads: ["hFlow"], promo: ["hConv"], value: ["hVal"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "value", "fric"];
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo", "value", "fric"];
   // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
-  const LATE = ["m448", "nudge", "island", "payflow", "offer50", "m453", "ads"];
-  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz", "ads"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448", "m453"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
+  const LATE = ["m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo"];
+  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz", "ads"], hConv: ["promo"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448", "m453"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -2613,6 +2695,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (k === "offer50") renderOffer50(s.offer50);
     else if (k === "m453") renderM453(s.m453);
     else if (k === "ads") renderAds(s.ads);
+    else if (k === "promo") renderPromo(s.promo);
     else if (k === "ux") renderUx(s.ux || null, s.kst_day);
     else if (k === "value") renderValue(s.value || null);
     else if (k === "turn") renderTurn(s.turn || null);
@@ -2788,6 +2871,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   renderOffer50(undefined);
   renderM453(undefined);
   renderAds(undefined);
+  renderPromo(undefined);
   session = regToken ? null : readSession();
   if (session) { document.body.dataset.view = "stats"; boot(); load(); } else lockUI("");
 })();
