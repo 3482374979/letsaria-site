@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-waPxbx4KPr70HIJs8h3UATaA2+wL/P2XX46FLuasoBM='; style-src 'sha256-loNXE2B+7xdKt+PoEQU4nJOzrhCaVOgjHzJLD7ijoQE='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wPBUD81mxlVFMCQH8F78iETC1phuPF6TrjIB54M9XDQ='; style-src 'sha256-yoyDcH/X3WwahEZu9cX5tHU0yN/ebhjjSFEW4kdaKg8='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f4f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Aria 현황">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -16,16 +16,17 @@
 <style>
 :root {
   color-scheme: light;
-  --bg: #f2f2f7;
-  --card: #ffffff;
-  --ink: #000000;
-  --ink-2: #6e6e73;
-  --hair: #e5e5ea;
+  --bg: #f4f4f2;
+  --card: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #85847e;
+  --ink-sub: #52514e;
+  --hair: #e4e3df;
   --s1: #2a78d6;
   --s1-exp: #86b6ef;
   --s2: #eb6834;
   --s3: #1baf7a;
-  --hl: #f2f2f7;
+  --hl: #efeeea;
   --live: #1f9d55;
   --stale: #b26a00;
   --btn: #000000;
@@ -42,16 +43,17 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #000000;
-    --card: #1c1c1e;
-    --ink: #ffffff;
-    --ink-2: #98989d;
-    --hair: #38383a;
+    --bg: #0f0f0e;
+    --card: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #8d8c84;
+    --ink-sub: #c3c2b7;
+    --hair: #2b2b29;
     --s1: #3987e5;
     --s1-exp: #1c5cab;
     --s2: #d95926;
     --s3: #199e70;
-    --hl: #2c2c2e;
+    --hl: #262624;
     --live: #30d158;
     --stale: #ff9f0a;
     --btn: #ffffff;
@@ -68,16 +70,17 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #000000;
-  --card: #1c1c1e;
-  --ink: #ffffff;
-  --ink-2: #98989d;
-  --hair: #38383a;
+  --bg: #0f0f0e;
+  --card: #1a1a19;
+  --ink: #f0efec;
+  --ink-2: #8d8c84;
+  --ink-sub: #c3c2b7;
+  --hair: #2b2b29;
   --s1: #3987e5;
   --s1-exp: #1c5cab;
   --s2: #d95926;
   --s3: #199e70;
-  --hl: #2c2c2e;
+  --hl: #262624;
   --live: #30d158;
   --stale: #ff9f0a;
   --btn: #ffffff;
@@ -108,9 +111,9 @@ main {
   padding: calc(12px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));
 }
 header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-h1 { margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
+h1 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
 h2 { margin: 0 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
-.day { margin: 2px 0 16px; color: var(--ink-2); font-size: 15px; min-height: 20px; }
+.day { margin: 2px 0 16px; color: var(--ink-2); font-size: 13px; min-height: 18px; }
 .status {
   display: inline-flex; align-items: center; gap: 6px;
   border: 0; border-radius: 999px; padding: 6px 10px;
@@ -263,6 +266,85 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 body[data-state="cached"] .dot { background: var(--s1-exp); }
 .foot { margin-top: 12px; text-align: center; }
 .link { border: 0; background: none; color: var(--ink-2); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 8px; }
+/* 맨 위 한눈에(OPSVIZ458 · 10-23 「관2」) — 시안 template.html 값 그대로(글 15px · 제목 17px · 카드 16px 둥글게 · 타일 둘씩). 이름은 v 로 시작(아래 예전 덩어리 이름과 안 겹침). */
+.vt { font-size: 15px; line-height: 1.45; }
+.vt h2 { font-size: 17px; margin: 28px 0 10px; letter-spacing: -0.01em; }
+.vt > section:first-child h2 { margin-top: 12px; }
+.vt h2 small { font-weight: 400; color: var(--ink-2); font-size: 13px; margin-left: 6px; }
+.vt .card { border-radius: 16px; padding: 14px 14px 12px; }
+.vt .card + .card { margin-top: 0; }
+.vgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.vtile { min-width: 0; }
+.vtile .k { font-size: 13px; color: var(--ink-sub); }
+.vtile .v { font-size: clamp(22px, 7.4vw, 30px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 650; letter-spacing: -0.02em; line-height: 1.15; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.vtile .c { font-size: 12px; color: var(--ink-2); margin-top: 2px; min-height: 17px; overflow-wrap: anywhere; }
+.vtile .c.vx { margin-top: 12px; }
+.vtile svg { height: 34px; margin-top: 6px; }
+.vwk { display: grid; gap: 10px; }
+.vwkrow { display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: 10px; }
+.vwkrow .k { font-size: 14px; color: var(--ink-sub); }
+.vbars { display: grid; gap: 3px; }
+.vb { height: 10px; width: 0; border-radius: 0 4px 4px 0; background: var(--ink-2); opacity: 0.45; }
+.vb.now { background: var(--s1); opacity: 1; }
+.vwkrow .n { font-size: 13px; color: var(--ink-sub); font-variant-numeric: tabular-nums; }
+.vwkrow .n b { color: var(--ink); font-weight: 600; }
+.vlegend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-sub); margin: 2px 0 6px; }
+.vlegend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.vlegend i.c1 { background: var(--s1); }
+.vlegend i.c2 { background: var(--s2); }
+.vnote { font-size: 12px; color: var(--ink-2); margin: 8px 0 0; }
+.vfacts { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; font-size: 13px; color: var(--ink-sub); }
+.vfacts b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.vhbar { display: grid; grid-template-columns: 104px minmax(0, 1fr) 78px; gap: 8px; align-items: center; margin: 6px 0; font-size: 13px; }
+.vhbar .k { color: var(--ink-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vhbar .tr { display: block; height: 12px; }
+.vhbar .fill { height: 12px; width: 0; border-radius: 0 4px 4px 0; background: var(--s1); }
+.vhbar .fill.base { background: var(--ink-2); opacity: 0.5; }
+.vhbar .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; }
+.vhbar .v small { color: var(--ink-2); font-size: 11px; }
+.vsub { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--hair); }
+.vsubh { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.vsubh .vlab { font-size: 14px; font-weight: 600; color: var(--ink); }
+.vsubh .vcap { font-size: 12px; color: var(--ink-2); text-align: right; }
+.vchart { margin-top: 2px; }
+.vax { fill: var(--ink-2); font-size: 10px; font-family: inherit; font-variant-numeric: tabular-nums; }
+.vend { fill: var(--ink-sub); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+.vgl { stroke: var(--hair); stroke-width: 1; }
+.vhit { fill: transparent; }
+.vf1 { fill: var(--s1); }
+.vf2 { fill: var(--s2); }
+.vln { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.vk1 { stroke: var(--s1); }
+.vk2 { stroke: var(--s2); }
+.vdot { fill: var(--card); stroke-width: 2; }
+.vpt { stroke: var(--card); stroke-width: 2; }
+.vt .vmore-h { margin-bottom: 0; }
+details.vmore { margin-top: 10px; }
+details.vmore > summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+  padding: 12px 14px; border-radius: 14px; background: var(--card); color: var(--ink); font-size: 15px;
+}
+details.vmore > summary::-webkit-details-marker { display: none; }
+details.vmore > summary span:last-child { color: var(--ink-2); font-size: 13px; text-align: right; }
+details.vmore[open] > summary { margin-bottom: 10px; }
+#vtip {
+  position: fixed; left: 0; top: 0; z-index: 9; pointer-events: none; opacity: 0; transition: opacity 0.1s;
+  padding: 5px 8px; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: 12px; white-space: nowrap;
+}
+/* 스켈레톤 · 저장된 숫자 — 맨 위 덩어리는 칸(section) 단위로 카드마다 띠 */
+.vsec.skel .card { overflow: hidden; }
+.vsec.skel .card > * { opacity: 0; }
+.vsec.wait .card > * { opacity: 0.55; }
+.vsec.skel .card::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 45%; pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--band) 50%, transparent);
+  animation: band 1.6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+.vsec.grow { overflow: hidden; transition: height 0.28s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .vsec.skel .card::after { animation: none; height: 100%; }
+  .vsec.grow { transition: none; }
+}
 </style>
 </head>
 <body data-view="lock" data-state="idle">
@@ -271,7 +353,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <h1>Aria 현황</h1>
     <button id="status" class="status" type="button" aria-live="polite"><i class="dot"></i><span id="state">불러오는 중</span></button>
   </header>
-  <p class="day" id="day">&nbsp;</p>
+  <p class="day"><span id="day">&nbsp;</span><span class="block" id="dayNote"></span></p>
 
   <section id="lock" class="card lock">
     <p class="lock-title" id="lockTitle">회장님만 볼 수 있어요</p>
@@ -280,126 +362,42 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     <p class="msg" id="lockMsg" role="status" aria-live="polite"></p>
   </section>
 
-  <section class="card block" aria-labelledby="hNow">
-    <div class="hrow"><h2 id="hNow">지금 · 오늘</h2><button class="info" type="button" aria-expanded="false" aria-controls="dNow" aria-label="지금 · 오늘 도움말">ⓘ</button></div>
-    <div class="defs" id="dNow" hidden>
-      <p>숫자만 보여요. 이름·이메일·대화 내용은 없어요. 1분마다 새로 고침 — 열면 이 기기에 저장된 마지막 숫자를 먼저(시각 표시) 보여 주고 새 숫자로 바꿔요.</p>
-      <p>추세 줄 = 최근 14일 날마다(오른쪽 끝 = 오늘 · 점선 = 아직 도는 중). 전일 = 오늘 지금까지 ÷ 어제 같은 시각까지 · 전주 = 지난주 같은 요일 같은 시각까지 · 7일 = 최근 7일 합 ÷ 그 앞 7일(DAU · WAU · MAU · 고착도는 꽉 찬 최근 7일(어제까지) 평균 ÷ 그 앞 7일 평균). 비교 바탕이 10 밑이면 % 대신 차이(▲2). 답 → 행동은 %p 차이 · 답 끝은 초 차이(7일 = 날마다 값을 답 수로 묶은 것). 초록 = 좋아짐 · 주황 = 나빠짐.</p>
-      <p>DAU · WAU · MAU = 그날 · 그날까지 7일 · 30일(한국 날짜) 동안 한 번이라도 앱을 열어 로그인 토큰이 갱신됐거나 AI를 썼거나 질문한 서로 다른 사람(유지 · 가치 고착도와 같은 숫자 · 5분마다 새로 셈 · 지난 창의 AI 요청은 그날 마지막 시각만 남아 조금 덜 셀 수 있어요). 고착도 = DAU ÷ MAU(MAU 5명 밑은 가림).</p>
-      <p>질문 = 동기화된 채팅 질문(구독자 포함 · 지운 대화도 셈 · 대화 동기화를 끈 사람은 빠져요). 체험 시작 = 수익 · 유지와 같은 뜻. 답 → 행동 · 답 끝 = 아래 「기능 · AI 행동」 · 「AI 답 속도」와 같은 뜻.</p>
-      <p>지금 = 5분 · 15분 · 1시간 안에 활동한 사람. 오늘 = 한국 시간 0시부터.</p>
-      <p>시험 계정(운영 설정 ops.test_users 목록)은 이 페이지의 모든 사람 · 건수에서 빼요. AI 답 속도 · 갈래별 표는 사람 칸이 없는 익명 기록이라 그대로예요.</p>
-    </div>
-    <div class="live"><span class="label">지금 쓰는 사람</span><span><span class="num" id="a5">–</span>명</span><span>15분 <b id="a15">–</b> · 1시간 <b id="a60">–</b> · 1시간 물어본 사람 <b id="qa1">–</b></span></div>
-    <div class="kpis" id="kpis" role="list" aria-label="오늘 숫자와 최근 14일 추세"></div>
-    <div class="line">구독 중 <b id="subNow">–</b>명 · 월간 <b id="subM">–</b> · 연간 <b id="subY">–</b></div>
-    <div class="line" id="tuLine" hidden>시험 계정 <b id="tuN">–</b>명 제외 · AI 답 속도 · 갈래별 표(익명)는 그대로</div>
-    <div class="chart">
-      <div class="chart-head"><div class="label">오늘 시간별 질문</div><div class="sub" id="chHrcap">&nbsp;</div></div>
-      <svg id="chHr" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="오늘 0시부터 시간별 질문 수 막대 그래프"></svg>
-    </div>
-  </section>
-
-  <section class="card block" aria-labelledby="hRev">
-    <div class="hrow"><h2 id="hRev">수익</h2><button class="info" type="button" aria-expanded="false" aria-controls="dRev" aria-label="수익 도움말">ⓘ</button></div>
-    <div class="defs" id="dRev" hidden>
-      <p>수익 = 애플 가격(월 9,800원 · 연 98,000원) × 결제 건 · 순수익 = 애플 수수료 15%(소규모 사업자) 뺀 값 · 환불은 빼지 않고 따로 셈. 예상 = 체험 중이고 자동 갱신이 켜진 구독이 체험 끝에 모두 결제될 때.</p>
-    </div>
-    <div class="label">이번 달 예상 순수익</div>
-    <div class="hero"><span class="num" id="revHero">–</span><span class="unit">원</span></div>
-    <div class="sub">결제 <b id="revPaid">–</b> · 예상 <b id="revExp">–</b> · 총액 <b id="revGross">–</b></div>
-    <div class="pair">
-      <div>
-        <div class="label">월 반복 매출</div>
-        <div class="mid"><span class="num" id="mrr">–</span><span class="unit">원</span></div>
-        <div class="sub">총액 <b id="mrrGross">–</b></div>
-      </div>
-      <div>
-        <div class="label">결제 중</div>
-        <div class="mid"><span class="num" id="paying">–</span><span class="unit">명</span></div>
-        <div class="sub">월간 <b id="payM">–</b> · 연간 <b id="payY">–</b></div>
-      </div>
-    </div>
-    <div class="chart">
-      <div class="chart-head"><div class="label">달별 순수익</div><div class="sub" id="chRevcap">&nbsp;</div></div>
-      <div class="legend"><span class="key"><i class="sw"></i>결제됨</span><span class="key"><i class="sw exp"></i>예상</span></div>
-      <svg id="chRev" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 6달 순수익 막대 그래프 — 결제됨과 예상"></svg>
-      <details>
-        <summary>표로 보기</summary>
-        <table><thead><tr><th>달</th><th>결제 건</th><th>새 결제</th><th>순수익</th><th>예상</th></tr></thead><tbody id="tRev"></tbody></table>
-      </details>
-    </div>
-  </section>
-
-  <section class="card block" aria-labelledby="hKeep">
-    <div class="hrow"><h2 id="hKeep">유지</h2><button class="info" type="button" aria-expanded="false" aria-controls="dKeep" aria-label="유지 도움말">ⓘ</button></div>
-    <div class="defs" id="dKeep" hidden>
-      <p>체험→결제 = 최근 30일 안에 체험이 끝난 것 중 결제된 비율 · 체험 중 해지 = 최근 30일 시작한 체험 중 끝나기 전에 자동 갱신을 끈 비율. 10월 16일 전 구독은 알림 기록이 없어 구독 시작을 체험 시작으로 봐요.</p>
-      <p>재방문 = 가입 다음 날(D1) · 7일째(D7) · 30일째(D30)에 AI를 쓴 사람(UTC 날짜 · 주는 월요일 시작 · 앱만 열고 AI를 안 쓴 날은 빠짐). 그날이 아직 안 온 사람은 빼고 계산 · 비어 있으면 아직 그날이 안 온 것.</p>
-      <p>결제 유지 = 첫 결제 달별로 1·2·3달 뒤에도 결제가 이어진 비율(환불 제외 · 연간은 낸 1년 동안 이어진 것으로 셈) · 「–」 = 아직 그 차례가 안 옴.</p>
-    </div>
-    <div class="tiles">
-      <div class="tile">
-        <div class="label">체험→결제</div>
-        <div class="mid"><span class="num" id="conv">–</span></div>
-        <div class="sub" id="convSub">&nbsp;</div>
-      </div>
-      <div class="tile">
-        <div class="label">체험 중 해지</div>
-        <div class="mid"><span class="num" id="cancel">–</span></div>
-        <div class="sub" id="cancelSub">&nbsp;</div>
-      </div>
-      <div class="tile">
-        <div class="label">다음 날 재방문</div>
-        <div class="mid"><span class="num" id="d1">–</span></div>
-        <div class="sub" id="d1Sub">&nbsp;</div>
-      </div>
-    </div>
-    <div class="line">체험 중 <b id="trialNow">–</b>명 · 자동 갱신 켜짐 <b id="trialOn">–</b>명 · 환불 <b id="refunds">–</b>건(30일)</div>
-    <div class="chart">
-      <div class="chart-head"><div class="label">가입 주별 재방문</div><div class="sub" id="chRetcap">&nbsp;</div></div>
-      <div class="legend"><span class="key"><i class="ln"></i>다음 날</span><span class="key"><i class="ln s2"></i>7일째</span><span class="key"><i class="ln s3"></i>30일째<span id="d30note"></span></span></div>
-      <svg id="chRet" viewBox="0 0 336 130" role="img" tabindex="0" aria-label="가입한 주별 다음 날 · 7일째 · 30일째 재방문 비율 선 그래프"></svg>
-      <details>
-        <summary>표로 보기</summary>
-        <table><thead><tr><th>가입 주</th><th>가입</th><th>다음 날</th><th>7일째</th><th>30일째</th></tr></thead><tbody id="tRet"></tbody></table>
-      </details>
-    </div>
-    <div class="chart">
-      <div class="chart-head"><div class="label">결제 유지 · 첫 결제 달 기준</div><div class="sub" id="paidSum">&nbsp;</div></div>
-      <table id="paidTable"><thead><tr><th>첫 결제</th><th>명</th><th>1달 뒤</th><th>2달 뒤</th><th>3달 뒤</th></tr></thead><tbody id="tPaid"></tbody></table>
-      <p class="empty" id="paidEmpty"></p>
-    </div>
-    <div class="chart">
-      <div class="chart-head"><div class="label">체험 시작 · 30일</div><div class="sub" id="chTrcap">&nbsp;</div></div>
-      <svg id="chTr" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 30일 날마다 체험 시작 수 막대 그래프"></svg>
-    </div>
-  </section>
-
-  <section class="card block" aria-labelledby="hFlow">
-    <div class="hrow"><h2 id="hFlow">유입</h2><button class="info" type="button" aria-expanded="false" aria-controls="dFlow" aria-label="유입 도움말">ⓘ</button></div>
-    <div class="defs" id="dFlow" hidden>
-      <p>흐름 = 최근 7일 가입한 사람 중 한 번이라도 그 단계를 한 사람. 첫 질문 · 첫 할 일은 서버에 남은 기록 기준이라 조금 덜 셀 수 있어요. 오늘 = 한국 시간 0시부터.</p>
-      <p>Apple Ads 귀속 = 1.1.6 출시(10월 21일 21:26) 뒤 새 가입(게스트 포함 · 시험 계정 빼고 · 맥 앱 보류 중이라 iOS · iPad) 중 앱이 보낸 Apple 광고 귀속 행이 있는 몫 · 진짜 귀속 = Apple이 광고 설치라고 답함 · 광고 아님 = Apple이 광고가 아니라고 답함(false) · 흉내(test) 행은 「행 있음」에만 들어가요. 7일 = 한국 시간 6일 전 0시부터(출시 앞은 잘라요) · 서버가 몇 분 늦게 다시 묻기도 해서 막 가입한 사람은 늦게 차요. 숫자만(캠페인 · 키워드 · 사람 없음). Apple 설치 대비는 중계 보고로.</p>
-    </div>
-    <div class="chart chart-top">
-      <div class="chart-head"><div class="label">가입 · 30일</div><div class="sub" id="chSucap">&nbsp;</div></div>
-      <div class="legend"><span class="key"><i class="sw"></i>애플</span><span class="key"><i class="sw s2"></i>게스트</span></div>
-      <svg id="chSu" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 30일 날마다 가입 수 막대 그래프 — 애플과 게스트"></svg>
-    </div>
-    <div class="chart">
-      <div class="chart-head"><div class="label">최근 7일 가입한 사람의 흐름</div></div>
-      <svg id="chFun" viewBox="0 0 336 240" role="img" aria-label="최근 7일 가입자 단계별 사람 수"></svg>
-      <details>
-        <summary>표로 보기</summary>
-        <table><thead><tr><th>날</th><th>애플</th><th>게스트</th><th>체험 시작</th></tr></thead><tbody id="tDay"></tbody></table>
-      </details>
-    </div>
-    <div class="chart">
-      <div class="chart-head"><div class="label">Apple Ads 귀속</div><div class="sub" id="adCap">&nbsp;</div></div>
-      <table><thead><tr><th>새 가입(1.1.6 뒤)</th><th>오늘</th><th>7일</th></tr></thead><tbody id="tAd"></tbody></table>
-    </div>
-  </section>
+  <div class="vt block" id="vtop">
+    <section class="vsec" aria-labelledby="vhToday">
+      <h2 id="vhToday">오늘</h2>
+      <div class="vgrid" id="vTiles"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhWeek">
+      <h2 id="vhWeek">지난 7일<small>그 전 7일과 견줌</small></h2>
+      <div class="card" id="vWeek"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhSu">
+      <h2 id="vhSu">가입<small>30일 · 하루씩</small></h2>
+      <div class="card" id="vSu"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhUsers">
+      <h2 id="vhUsers">쓰는 사람<small>하루 · 같은 단위(사람)</small></h2>
+      <div class="card" id="vUsers"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhTrial">
+      <h2 id="vhTrial">체험 → 구독<small>30일</small></h2>
+      <div class="card" id="vTrial"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhNew">
+      <h2 id="vhNew">새 사람 첫 7일<small>가입한 사람 중</small></h2>
+      <div class="card" id="vNew"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhBack">
+      <h2 id="vhBack">다음 날 다시 오나<small>첫날 한 일별 · D1</small></h2>
+      <div class="card" id="vBack"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhSpeed">
+      <h2 id="vhSpeed">AI 답 속도<small id="vSpeedSub">24시간</small></h2>
+      <div class="vgrid" id="vSpeed"></div>
+    </section>
+    <h2 class="vmore-h" id="vhMore">자세히</h2>
+  </div>
+  <details class="vmore block" id="mConv"><summary><span>결제 전환 · 입구별</span><span>7일 · 본 → 누름 → 구매</span></summary>
 
   <section class="card block" aria-labelledby="hConv">
     <div class="hrow"><h2 id="hConv">결제 전환 · 할인</h2><button class="info" type="button" aria-expanded="false" aria-controls="dConv" aria-label="결제 전환 · 할인 도움말">ⓘ</button></div>
@@ -424,6 +422,9 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <table><thead><tr><th>할인</th><th>7일</th><th>30일</th><th>결제 · 30일</th></tr></thead><tbody id="tOc"></tbody></table>
     </div>
   </section>
+  </details>
+
+  <details class="vmore block" id="mUse"><summary><span>앱 사용 · 화면별 UX</span><span>펼치기</span></summary>
 
   <section class="card block" aria-labelledby="hUse">
     <div class="hrow"><h2 id="hUse">앱 사용</h2><button class="info" type="button" aria-expanded="false" aria-controls="dUse" aria-label="앱 사용 도움말">ⓘ</button></div>
@@ -649,6 +650,9 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <table><thead><tr><th>지표</th><th>7일</th><th>지난 7일</th><th>어제</th></tr></thead><tbody id="tRm"></tbody></table>
     </div>
   </section>
+  </details>
+
+  <details class="vmore block" id="mNdg"><summary><span>채팅 권유 · 피로</span><span>펼치기</span></summary>
 
   <section class="card block" aria-labelledby="hNdg">
     <div class="hrow"><h2 id="hNdg">채팅 권유 · 피로</h2><button class="info" type="button" aria-expanded="false" aria-controls="dNdg" aria-label="채팅 권유 · 피로 도움말">ⓘ</button></div>
@@ -669,6 +673,9 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       <p class="empty" id="ngCkNote">「알림 · 기분 체크인」은 앱 450 이하만 — 451부터 아침 · 저녁 알림이 기분 체크인 대신 오늘 브리핑 · 하루 정리라 0이 정상이에요. 451+ 아침·저녁 알림 = briefing · dayReview 로 셈(「제안 수락 · 앱 흐름」 알림 표 브리핑 줄). 날 요약에 앱 판 칸이 없어 판별로는 못 나눠요.</p>
     </div>
   </section>
+  </details>
+
+  <details class="vmore block" id="mFeat"><summary><span>기능 · AI 행동 · 막히는 곳</span><span>펼치기</span></summary>
 
   <section class="card block" aria-labelledby="hFeat">
     <div class="hrow"><h2 id="hFeat">기능 · AI 행동</h2><button class="info" type="button" aria-expanded="false" aria-controls="dFeat" aria-label="기능 · AI 행동 도움말">ⓘ</button></div>
@@ -786,6 +793,82 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
       </div>
     </div>
   </section>
+  </details>
+
+  <details class="vmore block" id="mFlow"><summary><span>유입 · 광고 귀속</span><span>펼치기</span></summary>
+
+  <section class="card block" aria-labelledby="hFlow">
+    <div class="hrow"><h2 id="hFlow">유입</h2><button class="info" type="button" aria-expanded="false" aria-controls="dFlow" aria-label="유입 도움말">ⓘ</button></div>
+    <div class="defs" id="dFlow" hidden>
+      <p>흐름 = 최근 7일 가입한 사람 중 한 번이라도 그 단계를 한 사람. 첫 질문 · 첫 할 일은 서버에 남은 기록 기준이라 조금 덜 셀 수 있어요. 오늘 = 한국 시간 0시부터.</p>
+      <p>Apple Ads 귀속 = 1.1.6 출시(10월 21일 21:26) 뒤 새 가입(게스트 포함 · 시험 계정 빼고 · 맥 앱 보류 중이라 iOS · iPad) 중 앱이 보낸 Apple 광고 귀속 행이 있는 몫 · 진짜 귀속 = Apple이 광고 설치라고 답함 · 광고 아님 = Apple이 광고가 아니라고 답함(false) · 흉내(test) 행은 「행 있음」에만 들어가요. 7일 = 한국 시간 6일 전 0시부터(출시 앞은 잘라요) · 서버가 몇 분 늦게 다시 묻기도 해서 막 가입한 사람은 늦게 차요. 숫자만(캠페인 · 키워드 · 사람 없음). Apple 설치 대비는 중계 보고로.</p>
+    </div>
+    <div class="chart chart-top">
+      <div class="chart-head"><div class="label">가입 · 30일</div><div class="sub" id="chSucap">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="sw"></i>애플</span><span class="key"><i class="sw s2"></i>게스트</span></div>
+      <svg id="chSu" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 30일 날마다 가입 수 막대 그래프 — 애플과 게스트"></svg>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">최근 7일 가입한 사람의 흐름</div></div>
+      <svg id="chFun" viewBox="0 0 336 240" role="img" aria-label="최근 7일 가입자 단계별 사람 수"></svg>
+      <details>
+        <summary>표로 보기</summary>
+        <table><thead><tr><th>날</th><th>애플</th><th>게스트</th><th>체험 시작</th></tr></thead><tbody id="tDay"></tbody></table>
+      </details>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">Apple Ads 귀속</div><div class="sub" id="adCap">&nbsp;</div></div>
+      <table><thead><tr><th>새 가입(1.1.6 뒤)</th><th>오늘</th><th>7일</th></tr></thead><tbody id="tAd"></tbody></table>
+    </div>
+  </section>
+  </details>
+
+  <details class="vmore block" id="mKeep"><summary><span>유지 · 주차별</span><span>펼치기</span></summary>
+
+  <section class="card block" aria-labelledby="hKeep">
+    <div class="hrow"><h2 id="hKeep">유지</h2><button class="info" type="button" aria-expanded="false" aria-controls="dKeep" aria-label="유지 도움말">ⓘ</button></div>
+    <div class="defs" id="dKeep" hidden>
+      <p>체험→결제 = 최근 30일 안에 체험이 끝난 것 중 결제된 비율 · 체험 중 해지 = 최근 30일 시작한 체험 중 끝나기 전에 자동 갱신을 끈 비율. 10월 16일 전 구독은 알림 기록이 없어 구독 시작을 체험 시작으로 봐요.</p>
+      <p>재방문 = 가입 다음 날(D1) · 7일째(D7) · 30일째(D30)에 AI를 쓴 사람(UTC 날짜 · 주는 월요일 시작 · 앱만 열고 AI를 안 쓴 날은 빠짐). 그날이 아직 안 온 사람은 빼고 계산 · 비어 있으면 아직 그날이 안 온 것.</p>
+      <p>결제 유지 = 첫 결제 달별로 1·2·3달 뒤에도 결제가 이어진 비율(환불 제외 · 연간은 낸 1년 동안 이어진 것으로 셈) · 「–」 = 아직 그 차례가 안 옴.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <div class="label">체험→결제</div>
+        <div class="mid"><span class="num" id="conv">–</span></div>
+        <div class="sub" id="convSub">&nbsp;</div>
+      </div>
+      <div class="tile">
+        <div class="label">체험 중 해지</div>
+        <div class="mid"><span class="num" id="cancel">–</span></div>
+        <div class="sub" id="cancelSub">&nbsp;</div>
+      </div>
+      <div class="tile">
+        <div class="label">다음 날 재방문</div>
+        <div class="mid"><span class="num" id="d1">–</span></div>
+        <div class="sub" id="d1Sub">&nbsp;</div>
+      </div>
+    </div>
+    <div class="line">체험 중 <b id="trialNow">–</b>명 · 자동 갱신 켜짐 <b id="trialOn">–</b>명 · 환불 <b id="refunds">–</b>건(30일)</div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">가입 주별 재방문</div><div class="sub" id="chRetcap">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="ln"></i>다음 날</span><span class="key"><i class="ln s2"></i>7일째</span><span class="key"><i class="ln s3"></i>30일째<span id="d30note"></span></span></div>
+      <svg id="chRet" viewBox="0 0 336 130" role="img" tabindex="0" aria-label="가입한 주별 다음 날 · 7일째 · 30일째 재방문 비율 선 그래프"></svg>
+      <details>
+        <summary>표로 보기</summary>
+        <table><thead><tr><th>가입 주</th><th>가입</th><th>다음 날</th><th>7일째</th><th>30일째</th></tr></thead><tbody id="tRet"></tbody></table>
+      </details>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">결제 유지 · 첫 결제 달 기준</div><div class="sub" id="paidSum">&nbsp;</div></div>
+      <table id="paidTable"><thead><tr><th>첫 결제</th><th>명</th><th>1달 뒤</th><th>2달 뒤</th><th>3달 뒤</th></tr></thead><tbody id="tPaid"></tbody></table>
+      <p class="empty" id="paidEmpty"></p>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">체험 시작 · 30일</div><div class="sub" id="chTrcap">&nbsp;</div></div>
+      <svg id="chTr" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 30일 날마다 체험 시작 수 막대 그래프"></svg>
+    </div>
+  </section>
 
   <section class="card block" aria-labelledby="hVal">
     <div class="hrow"><h2 id="hVal">유지 · 가치</h2><button class="info" type="button" aria-expanded="false" aria-controls="dVal" aria-label="유지 · 가치 도움말">ⓘ</button></div>
@@ -859,9 +942,69 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     </div>
     </div>
   </section>
+  </details>
+
+  <details class="vmore block" id="mRev"><summary><span>수익 · 달별</span><span>펼치기</span></summary>
+
+  <section class="card block" aria-labelledby="hRev">
+    <div class="hrow"><h2 id="hRev">수익</h2><button class="info" type="button" aria-expanded="false" aria-controls="dRev" aria-label="수익 도움말">ⓘ</button></div>
+    <div class="defs" id="dRev" hidden>
+      <p>수익 = 애플 가격(월 9,800원 · 연 98,000원) × 결제 건 · 순수익 = 애플 수수료 15%(소규모 사업자) 뺀 값 · 환불은 빼지 않고 따로 셈. 예상 = 체험 중이고 자동 갱신이 켜진 구독이 체험 끝에 모두 결제될 때.</p>
+    </div>
+    <div class="label">이번 달 예상 순수익</div>
+    <div class="hero"><span class="num" id="revHero">–</span><span class="unit">원</span></div>
+    <div class="sub">결제 <b id="revPaid">–</b> · 예상 <b id="revExp">–</b> · 총액 <b id="revGross">–</b></div>
+    <div class="pair">
+      <div>
+        <div class="label">월 반복 매출</div>
+        <div class="mid"><span class="num" id="mrr">–</span><span class="unit">원</span></div>
+        <div class="sub">총액 <b id="mrrGross">–</b></div>
+      </div>
+      <div>
+        <div class="label">결제 중</div>
+        <div class="mid"><span class="num" id="paying">–</span><span class="unit">명</span></div>
+        <div class="sub">월간 <b id="payM">–</b> · 연간 <b id="payY">–</b></div>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">달별 순수익</div><div class="sub" id="chRevcap">&nbsp;</div></div>
+      <div class="legend"><span class="key"><i class="sw"></i>결제됨</span><span class="key"><i class="sw exp"></i>예상</span></div>
+      <svg id="chRev" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="최근 6달 순수익 막대 그래프 — 결제됨과 예상"></svg>
+      <details>
+        <summary>표로 보기</summary>
+        <table><thead><tr><th>달</th><th>결제 건</th><th>새 결제</th><th>순수익</th><th>예상</th></tr></thead><tbody id="tRev"></tbody></table>
+      </details>
+    </div>
+  </section>
+  </details>
+
+  <details class="vmore block" id="mNow"><summary><span>지금 · 추세 줄</span><span>펼치기</span></summary>
+
+  <section class="card block" aria-labelledby="hNow">
+    <div class="hrow"><h2 id="hNow">지금 · 오늘</h2><button class="info" type="button" aria-expanded="false" aria-controls="dNow" aria-label="지금 · 오늘 도움말">ⓘ</button></div>
+    <div class="defs" id="dNow" hidden>
+      <p>숫자만 보여요. 이름·이메일·대화 내용은 없어요. 1분마다 새로 고침 — 열면 이 기기에 저장된 마지막 숫자를 먼저(시각 표시) 보여 주고 새 숫자로 바꿔요.</p>
+      <p>추세 줄 = 최근 14일 날마다(오른쪽 끝 = 오늘 · 점선 = 아직 도는 중). 전일 = 오늘 지금까지 ÷ 어제 같은 시각까지 · 전주 = 지난주 같은 요일 같은 시각까지 · 7일 = 최근 7일 합 ÷ 그 앞 7일(DAU · WAU · MAU · 고착도는 꽉 찬 최근 7일(어제까지) 평균 ÷ 그 앞 7일 평균). 비교 바탕이 10 밑이면 % 대신 차이(▲2). 답 → 행동은 %p 차이 · 답 끝은 초 차이(7일 = 날마다 값을 답 수로 묶은 것). 초록 = 좋아짐 · 주황 = 나빠짐.</p>
+      <p>DAU · WAU · MAU = 그날 · 그날까지 7일 · 30일(한국 날짜) 동안 한 번이라도 앱을 열어 로그인 토큰이 갱신됐거나 AI를 썼거나 질문한 서로 다른 사람(유지 · 가치 고착도와 같은 숫자 · 5분마다 새로 셈 · 지난 창의 AI 요청은 그날 마지막 시각만 남아 조금 덜 셀 수 있어요). 고착도 = DAU ÷ MAU(MAU 5명 밑은 가림).</p>
+      <p>질문 = 동기화된 채팅 질문(구독자 포함 · 지운 대화도 셈 · 대화 동기화를 끈 사람은 빠져요). 체험 시작 = 수익 · 유지와 같은 뜻. 답 → 행동 · 답 끝 = 아래 「기능 · AI 행동」 · 「AI 답 속도」와 같은 뜻.</p>
+      <p>지금 = 5분 · 15분 · 1시간 안에 활동한 사람. 오늘 = 한국 시간 0시부터.</p>
+      <p>시험 계정(운영 설정 ops.test_users 목록)은 이 페이지의 모든 사람 · 건수에서 빼요. AI 답 속도 · 갈래별 표는 사람 칸이 없는 익명 기록이라 그대로예요.</p>
+    </div>
+    <div class="live"><span class="label">지금 쓰는 사람</span><span><span class="num" id="a5">–</span>명</span><span>15분 <b id="a15">–</b> · 1시간 <b id="a60">–</b> · 1시간 물어본 사람 <b id="qa1">–</b></span></div>
+    <div class="kpis" id="kpis" role="list" aria-label="오늘 숫자와 최근 14일 추세"></div>
+    <div class="line">구독 중 <b id="subNow">–</b>명 · 월간 <b id="subM">–</b> · 연간 <b id="subY">–</b></div>
+    <div class="line" id="tuLine" hidden>시험 계정 <b id="tuN">–</b>명 제외 · AI 답 속도 · 갈래별 표(익명)는 그대로</div>
+    <div class="chart">
+      <div class="chart-head"><div class="label">오늘 시간별 질문</div><div class="sub" id="chHrcap">&nbsp;</div></div>
+      <svg id="chHr" viewBox="0 0 336 120" role="img" tabindex="0" aria-label="오늘 0시부터 시간별 질문 수 막대 그래프"></svg>
+    </div>
+  </section>
+  </details>
+
 
   <div class="foot"><button id="logout" class="link" type="button">이 기기에서 잠그기</button></div>
 </main>
+<div id="vtip" role="status" aria-live="polite"></div>
 <script>
 (() => {
   "use strict";
@@ -2642,17 +2785,368 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (fresh.has("turn")) kpiEmpty("kL", "못 불러왔어요");
   }
 
+  // ── 맨 위 한눈에(OPSVIZ458 · 10-23 22:06 회장님 「관2」) ─────────────────────────────────────────────
+  // 차례(시선 한 길) = 오늘(타일 넷 · 14일 작은 추세선) → 지난 7일 vs 그 전 7일 → 가입 30일(+ 설치당 광고비) → 쓰는 사람(+ 앱 판) →
+  //   체험 → 구독(+ 날마다 매출) → 새 사람 첫 7일(+ 24시간 안 첫 질문 비율) → 다음 날 다시 오나 → AI 답 속도. 그 아래 「자세히」 = 예전 덩어리 그대로(접힘).
+  // 손 SVG(바깥 0) · 파랑 s1 / 주황 s2 · 같은 단위만 한 그림 · 오늘(진행 중) = 점선(+ 작은 추세선은 빈 원) · 숫자 글 = 글 잉크 · 누르면/올리면 값(data-tip → #vtip).
+  // 칸 = 응답 그대로 · undefined(옛 함수 · 처음) = 「–」 · null(못 불러옴) = 「… 못 불러왔어요.」 · DOM 으로만 짓는다(textContent).
+  const VW = 340;
+  const isNum = (x) => typeof x === "number" && isFinite(x);
+  const n0 = (x) => (isNum(x) ? fmt(Math.round(x)) : "–");
+  const p1 = (r, d) => (isNum(r) ? (r * 100).toFixed(d || 0) + "%" : "–");
+  const wonV = (x) => (isNum(x) ? "₩" + fmt(Math.round(x)) : "–");
+  const wonT = (x) => (x >= 10000 ? "₩" + man(x) : "₩" + fmt(Math.round(x)));
+  const nf2 = new Intl.NumberFormat("ko-KR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const usdV = (x) => (isNum(x) ? "$" + nf2.format(x) : "–");
+  const usdT = (x) => "$" + (x >= 10 || x === 0 ? fmt(Math.round(x)) : x.toFixed(1));
+  const secV = (ms) => (isNum(ms) ? (ms / 1000).toFixed(1) + "초" : "–");
+  const mdOf = (from, i) => { const d = dayAt(from, i); return d.m + "/" + d.d; };
+  const niceMax = (m) => { const p = Math.pow(10, Math.floor(Math.log10(m))); for (const k of [1, 2, 2.5, 5, 10]) if (k * p >= m) return k * p; return 10 * p; };
+  // x 눈금 이름 — 칸 step 마다 + 맨 끝(오른쪽 맞춤) · 맨 끝과 44 안쪽(겹침)은 건너뜀.
+  function xTicks(s, labels, xAt, lastX, y, every) {
+    const n = labels.length;
+    labels.forEach((lab, i) => {
+      if (i === n - 1) { txt(s, lastX, y, lab, "vax", "end"); return; }
+      if (i % every === 0 && lastX - xAt(i) >= 44) txt(s, xAt(i), y, lab, "vax", "middle");
+    });
+  }
+  function hn(tag, cls, parent, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function vSvg(parent, w, h, cls, label) {
+    const s = el("svg", { viewBox: "0 0 " + w + " " + h, class: cls }, parent);
+    if (label) { s.setAttribute("role", "img"); s.setAttribute("aria-label", label); } else s.setAttribute("aria-hidden", "true");
+    return s;
+  }
+  function legend(parent, items) {
+    const lg = hn("div", "vlegend", parent);
+    for (const [c, t] of items) { const sp = hn("span", "", lg); hn("i", c, sp); sp.appendChild(document.createTextNode(t)); }
+  }
+  function facts(parent, items) {
+    const f = hn("div", "vfacts", parent);
+    for (const [k, v] of items) { const sp = hn("span", "", f, k + " "); hn("b", "", sp, v); }
+    return f;
+  }
+  function subHead(parent, label, cap) {
+    const sub = hn("div", "vsub", parent), h = hn("div", "vsubh", sub);
+    hn("span", "vlab", h, label);
+    hn("span", "vcap", h, cap);
+    return sub;
+  }
+  // 작은 추세선 — 마지막 점(오늘 · 진행 중)은 점선 + 빈 원.
+  function vSpark(parent, vals) {
+    const W = 160, SH = 34, P = 3, s = vSvg(parent, W, SH, "vspark");
+    s.setAttribute("preserveAspectRatio", "none");
+    if (!Array.isArray(vals) || vals.length < 2) return s;
+    const v = vals.map((x) => (isNum(x) ? x : 0)), max = Math.max(1, ...v), step = (W - P * 2) / (v.length - 1);
+    const xy = v.map((x, i) => [P + i * step, SH - P - (x / max) * (SH - P * 2)]);
+    const at = (q) => q[0].toFixed(1) + "," + q[1].toFixed(1);
+    const a = xy[xy.length - 2], b = xy[xy.length - 1];
+    el("path", { d: xy.slice(0, -1).map((q, i) => (i ? "L" : "M") + at(q)).join(""), class: "vln vk1", "vector-effect": "non-scaling-stroke" }, s);
+    el("path", { d: "M" + at(a) + "L" + at(b), class: "vln vk1", "stroke-dasharray": "3 3", "vector-effect": "non-scaling-stroke" }, s);
+    el("circle", { cx: b[0].toFixed(1), cy: b[1].toFixed(1), r: 3, class: "vdot vk1", "vector-effect": "non-scaling-stroke" }, s);
+    return s;
+  }
+  // 막대(하나 또는 쌓기) — 2px 사이 · 위 끝 4px 둥글게 · 오늘(맨 끝)은 옅게 · 왼쪽 눈금 셋(0 · 반 · 위) · 칸마다 값(data-tip).
+  function vBars(parent, labels, series, o) {
+    const W = VW, BH = o.height || 150, L = o.left || 26, B = 18, T = 8, n = labels.length, fv = o.fmt || n0, ft = o.tick || n0;
+    const s = vSvg(parent, W, BH, "vchart", o.label);
+    const tot = labels.map((_, i) => series.reduce((a, z) => a + (isNum(z.vals[i]) ? z.vals[i] : 0), 0));
+    const max = niceMax(Math.max(1, ...tot)), bw = (W - L) / Math.max(1, n), gap = 2, plot = BH - T - B;
+    for (const t of [0, 0.5, 1]) {
+      const y = T + plot * (1 - t);
+      el("line", { x1: L, x2: W, y1: y, y2: y, class: "vgl" }, s);
+      txt(s, L - 4, y + 3, ft(max * t), "vax", "end");
+    }
+    labels.forEach((lab, i) => {
+      const x = L + i * bw + gap / 2, w = Math.max(1, bw - gap), today = i === n - 1;
+      let y = BH - B;
+      series.forEach((z, k) => {
+        const v = isNum(z.vals[i]) ? z.vals[i] : 0;
+        if (!(v > 0)) return;
+        const h = plot * v / max;
+        y -= h;
+        const top = !series.slice(k + 1).some((q) => isNum(q.vals[i]) && q.vals[i] > 0);
+        const r = top ? Math.min(4, w / 2, h) : 0;
+        const p = el("path", { d: "M" + x + "," + (y + h) + "V" + (y + r) + "Q" + x + "," + y + " " + (x + r) + "," + y + "H" + (x + w - r) +
+          "Q" + (x + w) + "," + y + " " + (x + w) + "," + (y + r) + "V" + (y + h) + "Z", class: z.cls }, s);
+        if (today) p.setAttribute("opacity", "0.45");
+      });
+      const tip = lab + " · " + series.map((z) => z.name + " " + fv(isNum(z.vals[i]) ? z.vals[i] : 0)).join(" · ") +
+        (series.length > 1 ? " · 합 " + fv(tot[i]) : "") + (o.tipMore ? o.tipMore(i) : "") + (today ? " (오늘 진행 중)" : "");
+      el("rect", { x: L + i * bw, y: T, width: bw, height: plot, class: "vhit", "data-tip": tip }, s);
+    });
+    xTicks(s, labels, (i) => L + i * bw + bw / 2, W - gap / 2, BH - 5, Math.ceil(n / 6));
+    return s;
+  }
+  // 선(같은 단위끼리) — 2px · 빈 값은 끊고 홀로 선 값은 점 · o.dash 칸부터(진행 중) 점선 · 끝 = 꽉 찬 원 + 이름 · 값 · 칸마다 값(data-tip).
+  function vLines(parent, labels, series, o) {
+    const W = VW, LH2 = o.height || 160, L = o.left || 30, R = o.right || 72, B = 18, T = 10, n = labels.length, fv = o.fmt || n0, ft = o.tick || n0;
+    const dash = o.dash === undefined ? n - 1 : o.dash;
+    const s = vSvg(parent, W, LH2, "vchart", o.label);
+    const all = [];
+    series.forEach((z) => z.vals.forEach((v) => { if (isNum(v)) all.push(v); }));
+    const max = o.max ? o.max(Math.max(0, ...all)) : niceMax(Math.max(1, ...all));
+    const X = (i) => L + (W - L - R) * i / Math.max(1, n - 1), Y = (v) => T + (LH2 - T - B) * (1 - Math.min(v, max) / max);
+    for (const t of [0, 0.5, 1]) {
+      const y = Y(max * t);
+      el("line", { x1: L, x2: W - R, y1: y, y2: y, class: "vgl" }, s);
+      txt(s, L - 4, y + 3, ft(max * t), "vax", "end");
+    }
+    const ends = [];
+    series.forEach((z) => {
+      const path = (from, to) => {
+        let d = "", pen = false;
+        for (let i = from; i <= to; i++) {
+          const v = z.vals[i];
+          if (!isNum(v)) { pen = false; continue; }
+          d += (pen ? "L" : "M") + X(i).toFixed(1) + "," + Y(v).toFixed(1);
+          pen = true;
+        }
+        return d;
+      };
+      const d1 = path(0, Math.min(dash, n) - 1), d2 = dash < n ? path(Math.max(0, dash - 1), n - 1) : "";
+      if (d1) el("path", { d: d1, class: "vln " + z.k }, s);
+      if (d2) el("path", { d: d2, class: "vln " + z.k, "stroke-dasharray": "3 3" }, s);
+      z.vals.forEach((v, i) => { if (isNum(v) && !isNum(z.vals[i - 1]) && !isNum(z.vals[i + 1])) el("circle", { cx: X(i), cy: Y(v), r: 2.5, class: z.f }, s); });
+      let li = -1;
+      z.vals.forEach((v, i) => { if (isNum(v)) li = i; });
+      if (li < 0) return;
+      el("circle", { cx: X(li), cy: Y(z.vals[li]), r: 4, class: "vpt " + z.f }, s);
+      ends.push({ x: X(li) + 8, y: Y(z.vals[li]) + 4, t: z.name + " " + fv(z.vals[li]) });
+    });
+    ends.sort((a, b) => a.y - b.y);
+    for (let j = 1; j < ends.length; j++) if (ends[j].y - ends[j - 1].y < 12) ends[j].y = ends[j - 1].y + 12;
+    for (const e of ends) txt(s, e.x, Math.min(LH2 - B, e.y), e.t, "vend");
+    const band = (W - L - R) / Math.max(1, n);
+    labels.forEach((lab, i) => {
+      const tip = o.tip ? o.tip(i) : lab + " · " + series.map((z) => z.name + " " + fv(z.vals[i])).join(" · ");
+      el("rect", { x: X(i) - band / 2, y: T, width: band, height: LH2 - T - B, class: "vhit", "data-tip": tip }, s);
+    });
+    xTicks(s, labels, X, X(n - 1), LH2 - 5, Math.ceil(n / 5));
+    return s;
+  }
+  // 가로 막대 — 이름 · 막대(바탕 대비) · 값 + 작은 %.
+  function vHbars(parent, rows) {
+    for (const r of rows) {
+      const row = hn("div", "vhbar", parent);
+      hn("span", "k", row, r.k);
+      const fill = hn("div", "fill" + (r.base ? " base" : ""), hn("span", "tr", row));
+      fill.style.width = Math.max(isNum(r.w) && r.w > 0 ? 1 : 0, Math.min(100, 100 * (isNum(r.w) ? r.w : 0))) + "%";
+      const v = hn("span", "v", row, r.v);
+      if (r.sm) { v.appendChild(document.createTextNode(" ")); hn("small", "", v, r.sm); }
+      if (r.tip) row.setAttribute("data-tip", r.tip);
+    }
+  }
+  const failNote = (parent, x, what) => hn("p", "vnote", parent, x === null ? what + " 숫자를 못 불러왔어요." : "–");
+
+  // ① 오늘 — 가입 · 질문한 사람 · 체험 중 · 월 반복 매출
+  function vToday(s) {
+    const box = $("vTiles");
+    clear(box);
+    const tr = s ? s.trend : undefined, bz = s ? s.biz : undefined, T = bz ? bz.trials : null, R = bz ? bz.revenue : null;
+    const tile = (k, v, c, sp, extra) => {
+      const t = hn("div", "card vtile", box);
+      hn("div", "k", t, k);
+      hn("div", "v num", t, v);
+      hn("div", "c", t, c);
+      if (extra === undefined) vSpark(t, sp); else hn("div", "c vx", t, extra);
+    };
+    tile("가입", n0(s && s.signups ? s.signups.total : undefined), tr ? "어제 이맘때 " + n0(tr.signups.y) + " · 지난주 " + n0(tr.signups.wk) : "–", tr ? tr.signups.daily : null);
+    tile("질문한 사람", n0(s && s.chat ? s.chat.askers_today : undefined),
+      "질문 " + n0(s && s.chat ? s.chat.questions : undefined) + " · 어제 이맘때 " + (tr ? n0(tr.askers.y) + "명" : "–"), tr ? tr.askers.daily : null);
+    tile("체험 중", n0(T ? T.now : undefined), T ? "갱신 켬 " + n0(T.now_renew_on) + " · 30일 취소 " + p1(T.cancel_rate) + " · 선 = 하루 시작" :
+      bz === null ? "사업 숫자를 못 불러왔어요." : "–", T ? T.daily.slice(-14) : null);
+    tile("월 반복 매출", R ? wonV(R.mrr.gross) : "–", T ? "체험 끝 결제 예정 " + wonV(T.expected.gross) : "–", null,
+      R ? "결제 중 " + n0(R.mrr.monthly_subs + R.mrr.yearly_subs) + "명 · 이번 달 " + wonV(R.this_month.gross) : "–");
+    const tu = s && typeof s.test_users === "number" && s.test_users > 0 ? s.test_users : 0;
+    setText("dayNote", s && s.at ? " · " + kstClock(s.at).slice(0, 5) + " 기준" + (tu ? " · 시험 계정 " + fmt(tu) + " 제외" : "") + " · 점선 끝 = 오늘(진행 중)" : "");
+  }
+
+  // ② 지난 7일 vs 그 전 7일 — 막대 둘 · ▲▼
+  function vWeek(s) {
+    const box = $("vWeek");
+    clear(box);
+    const tr = s ? s.trend : undefined, wrap = hn("div", "vwk", box);
+    for (const [k, key] of [["가입", "signups"], ["질문한 사람", "askers"], ["질문", "questions"]]) {
+      const o = tr ? tr[key] : null, row = hn("div", "vwkrow", wrap);
+      hn("span", "k", row, k);
+      const right = hn("div", "", row), bars = hn("div", "vbars", right), m = o ? Math.max(o.r7, o.p7, 1) : 1;
+      hn("div", "vb now", bars).style.width = (o ? (100 * o.r7) / m : 0) + "%";
+      hn("div", "vb", bars).style.width = (o ? (100 * o.p7) / m : 0) + "%";
+      const nn = hn("div", "n", right), dd = o && o.p7 > 0 ? (o.r7 - o.p7) / o.p7 : null;
+      hn("b", "", nn, o ? n0(o.r7) : "–");
+      nn.appendChild(document.createTextNode(" · 그 전 " + (o ? n0(o.p7) : "–") + " · " + (dd === null ? "–" : (dd >= 0 ? "▲ " : "▼ ") + p1(Math.abs(dd)))));
+      if (o) row.setAttribute("data-tip", k + " · 지난 7일 " + n0(o.r7) + " · 그 전 7일 " + n0(o.p7));
+    }
+    hn("p", "vnote", box, tr === null ? "추세 숫자를 못 불러왔어요." : "파랑 = 지난 7일 · 회색 = 그 전 7일");
+  }
+
+  // ③ 가입 30일(Apple · 게스트 쌓기) + 설치당 광고비(adcost · 0072 · Apple · Meta)
+  function vSignup(s) {
+    const box = $("vSu");
+    clear(box);
+    const bz = s ? s.biz : undefined, sd = bz ? bz.signups_daily : null, f = bz ? bz.funnel_7d : null, ad = s ? s.ads : undefined;
+    legend(box, [["c1", "Apple 로그인"], ["c2", "게스트"]]);
+    vBars(box, sd ? sd.apple.map((_, i) => mdOf(sd.days_from, i)) : [], [{ name: "Apple", vals: sd ? sd.apple : [], cls: "vf1" }, { name: "게스트", vals: sd ? sd.guest : [], cls: "vf2" }],
+      { label: "최근 30일 날마다 가입 — Apple 로그인과 게스트 쌓은 막대" });
+    facts(box, [["지난 7일", f ? n0(f.signups) : "–"], ["Apple", f && f.signups > 0 ? p1(f.apple / f.signups) : "–"], ["광고로 온 가입(7일 · 귀속)", ad && ad.d7 ? n0(ad.d7.real) : "–"]]);
+    if (bz === null) hn("p", "vnote", box, "사업 숫자를 못 불러왔어요.");
+    const ac = s ? s.adcost : undefined, sub = subHead(box, "설치당 광고비", "하루 · USD");
+    if (ac === null) { failNote(sub, null, "광고 비용"); return; }
+    if (!ac || !ac.channels) { failNote(sub, undefined); return; }
+    if (!(ac.rows > 0)) { hn("p", "vnote", sub, "광고 비용이 아직 없어요."); return; }
+    const A0 = ac.channels.apple, M0 = ac.channels.meta, nAll = A0.spend.length;
+    let first = nAll;
+    for (let i = 0; i < nAll; i++) if (isNum(A0.spend[i]) || isNum(M0.spend[i])) { first = i; break; }
+    const from = Math.max(0, Math.min(first, nAll - 14)), cut = (c) => ({ spend: c.spend.slice(from), installs: c.installs.slice(from), cpi: c.cpi.slice(from), d7: c.d7 });
+    const A = cut(A0), M = cut(M0), labs = A.cpi.map((_, i) => mdOf(ac.days_from, from + i));
+    legend(sub, [["c1", "Apple Ads"], ["c2", "Meta"]]);
+    const one = (nm, c, i) => nm + " " + (isNum(c.cpi[i]) ? usdV(c.cpi[i]) + "(지출 " + usdV(c.spend[i]) + " · 설치 " + n0(c.installs[i]) + ")" : isNum(c.spend[i]) ? "설치 0 · 지출 " + usdV(c.spend[i]) : "–");
+    vLines(sub, labs, [{ name: "Apple", vals: A.cpi, k: "vk1", f: "vf1" }, { name: "Meta", vals: M.cpi, k: "vk2", f: "vf2" }],
+      { height: 130, fmt: usdV, tick: usdT, dash: labs.length, left: 34, label: "날마다 설치당 광고비 — Apple Ads와 Meta(USD)", tip: (i) => labs[i] + " · " + one("Apple", A, i) + " · " + one("Meta", M, i) });
+    facts(sub, [["Apple 7일", usdV(A.d7.cpi)], ["Meta 7일", usdV(M.d7.cpi)], ["지출 7일", usdV(A.d7.spend + M.d7.spend)], ["설치 7일", n0(A.d7.installs + M.d7.installs)]]);
+    hn("p", "vnote", sub, "날 = 광고 콘솔의 날(Apple = UTC) · 운영자가 넣은 지출 ÷ 설치" + (ac.last ? " · 마지막 입력 " + mdOf(new Date(Date.parse(ac.last) + 9 * 3600000).toISOString().slice(0, 10), 0) : ""));
+  }
+
+  // ④ 쓰는 사람(앱 연 사람 · 질문한 사람 · 같은 단위) + 앱 판(viz.versions)
+  const verName = (v) => (v === "old" ? "1.1.4 이하" : v === "other" ? "기타" : v);
+  function vUsers(s) {
+    const box = $("vUsers");
+    clear(box);
+    const rc = s ? s.reach : undefined, tr = s ? s.trend : undefined;
+    legend(box, [["c1", "앱을 연 사람"], ["c2", "질문한 사람"]]);
+    const dl = rc ? rc.dau.daily.map((_, i) => mdOf(rc.days_from, i)) : [];
+    const off = rc && tr ? Math.round((Date.parse(tr.days_from + "T00:00:00Z") - Date.parse(rc.days_from + "T00:00:00Z")) / 86400000) : 0;
+    const ask = dl.map((_, i) => (tr && i - off >= 0 && isNum(tr.askers.daily[i - off]) ? tr.askers.daily[i - off] : null));
+    vLines(box, dl, [{ name: "연 사람", vals: rc ? rc.dau.daily : [], k: "vk1", f: "vf1" }, { name: "질문", vals: ask, k: "vk2", f: "vf2" }],
+      { label: "최근 15일 날마다 앱을 연 사람과 질문한 사람" });
+    facts(box, [["주간", rc ? n0(rc.wau.today) : "–"], ["월간", rc ? n0(rc.mau.today) : "–"], ["하루/월", rc ? p1(rc.stick.today) : "–"]]);
+    if (rc === null) hn("p", "vnote", box, "DAU 숫자를 못 불러왔어요.");
+    const v = s ? s.viz : undefined, vr = v ? v.versions : null;
+    const sub = subHead(box, "앱 판", vr ? "오늘 포함 " + vr.days + "일 · 판을 아는 사람" : "7일 · 판을 아는 사람");
+    if (!vr) { failNote(sub, v, "새 칸"); return; }
+    const P = vr.people, A = vr.ai;
+    if (!P.total && !A.total) { hn("p", "vnote", sub, "최근 7일 판 기록이 없어요."); return; }
+    vHbars(sub, P.rows.map((r) => ({ k: verName(r.v), w: r.share, v: n0(r.n) + "명", sm: p1(r.share), tip: verName(r.v) + " · " + n0(r.n) + "명 · " + p1(r.share, 1) })));
+    facts(sub, [["판을 아는 사람", n0(P.total) + "명"], ["주간 쓰는 사람", rc ? n0(rc.wau.today) + "명" : "–"]]);
+    hn("p", "vnote", sub, "AI 요청(익명 · " + n0(A.total) + "건): " + (A.rows.length ? A.rows.map((r) => verName(r.v) + " " + p1(r.share)).join(" · ") : "–"));
+    hn("p", "vnote", sub, "사람 = 결제 화면 · 권유 · 답 평가 기록의 마지막 판(그 기록이 없는 사람은 빠져요).");
+  }
+
+  // ⑤ 체험 → 구독 30일(하루 체험 시작) + 날마다 매출(viz.revenue · 정가 결제 총액)
+  function vTrial(s) {
+    const box = $("vTrial");
+    clear(box);
+    const bz = s ? s.biz : undefined, T = bz ? bz.trials : null, R = bz ? bz.revenue : null;
+    vBars(box, T ? T.daily.map((_, i) => mdOf(T.days_from, i)) : [], [{ name: "체험 시작", vals: T ? T.daily : [], cls: "vf1" }],
+      { height: 120, label: "최근 30일 날마다 무료 체험 시작 막대" });
+    facts(box, [["30일 시작", T ? n0(T.started_30d) : "–"], ["체험 중 취소", T ? p1(T.cancel_rate) : "–"], ["끝나서 결제", T ? n0(T.converted_30d) + "/" + n0(T.ended_30d) : "–"],
+      ["지금 결제 중", R ? n0(R.mrr.monthly_subs + R.mrr.yearly_subs) : "–"]]);
+    hn("p", "vnote", box, bz === null ? "사업 숫자를 못 불러왔어요." : "체험은 7일 · 이번 주 체험이 끝나는 다음 주부터 「끝나서 결제」가 쌓여요.");
+    const v = s ? s.viz : undefined, rv = v ? v.revenue : null, sub = subHead(box, "매출 · 하루씩", "정가 결제 · 총액");
+    if (!rv) { failNote(sub, v, "새 칸"); return; }
+    vBars(sub, rv.gross.map((_, i) => mdOf(rv.days_from, i)), [{ name: "매출", vals: rv.gross, cls: "vf1" }],
+      { height: 110, left: 38, fmt: wonV, tick: wonT, label: "최근 30일 날마다 매출(정가 결제 총액)",
+        tipMore: (i) => (rv.monthly[i] + rv.yearly[i] > 0 ? " · 월간 " + n0(rv.monthly[i]) + " · 연간 " + n0(rv.yearly[i]) : "") });
+    facts(sub, [["30일", wonV(rv.sum30.gross) + "(" + n0(rv.sum30.charges) + "건)"], ["순", wonV(rv.sum30.net)], ["이번 달", R ? wonV(R.this_month.gross) : "–"]]);
+    hn("p", "vnote", sub, "애플 가격 × 결제 건(수익 덩어리와 같은 셈) · 할인 결제는 값을 몰라 빠져요 · 순 = 수수료 15% 뺀 값.");
+  }
+
+  // ⑥ 새 사람 첫 7일(깔때기) + 24시간 안 첫 질문 비율(viz.first_ask · 가입한 날별)
+  function vNew(s) {
+    const box = $("vNew");
+    clear(box);
+    const bz = s ? s.biz : undefined, f = bz ? bz.funnel_7d : null, base = f ? f.signups : 0;
+    const rows = [["가입", f ? f.signups : null, true], ["AI 동의", f ? f.consent : null], ["첫 질문", f ? f.asked : null], ["할 일 하나", f ? f.task : null],
+      ["결제 화면 봄", f ? f.paywall : null], ["체험 시작", f ? f.trial : null]];
+    vHbars(box, rows.map(([k, v, b]) => ({ k: k, w: base > 0 && isNum(v) ? v / base : 0, v: n0(v), sm: b || !(base > 0) || !isNum(v) ? "" : p1(v / base), base: !!b })));
+    if (bz === null) hn("p", "vnote", box, "사업 숫자를 못 불러왔어요.");
+    const v = s ? s.viz : undefined, fa = v ? v.first_ask : null, sub = subHead(box, "24시간 안 첫 질문", "가입한 날별 · 30일");
+    if (!fa) { failNote(sub, v, "새 칸"); return; }
+    const labs = fa.rate.map((_, i) => mdOf(fa.days_from, i)), FA_MIN = 5;
+    const rate = fa.rate.map((r, i) => (fa.base[i] >= FA_MIN ? r : null));
+    let dash = fa.pending.indexOf(true);
+    if (dash < 0) dash = labs.length;
+    vLines(sub, labs, [{ name: "첫 질문", vals: rate, k: "vk1", f: "vf1" }], {
+      height: 120, fmt: (x) => p1(x), tick: (x) => p1(x), dash: dash, max: (m) => Math.min(1, niceMax(Math.max(0.1, m))),
+      label: "최근 30일 가입한 날별 24시간 안에 첫 질문을 한 사람 비율",
+      tip: (i) => labs[i] + " · " + (fa.base[i] > 0 ? p1(fa.rate[i]) + "(" + n0(fa.asked[i]) + "/" + n0(fa.base[i]) + "명)" + (fa.base[i] < FA_MIN ? " 표본 적음" : "") : "–") + " · 가입 " + n0(fa.signups[i]) +
+        (fa.pending[i] ? " · 24시간 안 지남 " + n0(fa.signups[i] - fa.base[i]) + "명 빠짐" : ""),
+    });
+    facts(sub, [["끝난 최근 7일", p1(fa.r7.rate) + "(" + n0(fa.r7.asked) + "/" + n0(fa.r7.base) + "명)"]]);
+    hn("p", "vnote", sub, "가입 뒤 24시간 안에 채팅으로 처음 물어본 몫 · 24시간이 안 지난 가입은 빼요(점선 = 아직 도는 날) · 모수 5명 밑인 날은 비워요.");
+  }
+
+  // ⑦ 다음 날 다시 오나 — 첫날 한 일별 D1
+  const AHA_TOP = [["all", "전체"], ["asked", "첫날 질문함"], ["task_ai", "AI로 할 일 만듦"], ["task_done", "할 일 끝냄"], ["routine", "루틴 만듦"], ["none", "아무것도 안 함"]];
+  function vBack(s) {
+    const box = $("vBack");
+    clear(box);
+    const va = s ? s.value : undefined, groups = va && va.aha && Array.isArray(va.aha.groups) ? va.aha.groups : [];
+    const by = {};
+    for (const g of groups) by[g.key] = g;
+    vHbars(box, AHA_TOP.filter(([k]) => by[k] || !groups.length).map(([k, nm]) => {
+      const g = by[k] ? by[k].d1 : null;
+      return { k: nm, w: g && isNum(g.rate) ? g.rate : 0, v: g ? p1(g.rate) : "–", sm: g ? n0(g.base) + "명" : "", base: k === "all",
+        tip: g ? nm + " · 다음 날 다시 옴 " + p1(g.rate, 1) + "(" + n0(g.back) + "/" + n0(g.base) + "명)" : "" };
+    }));
+    const bz = s ? s.biz : undefined;
+    hn("p", "vnote", box, va === null ? "유지 · 가치 숫자를 못 불러왔어요." :
+      "7일째 다시 옴 = 전체 " + (bz && bz.retention ? p1(bz.retention.d7.rate, 1) : "–") + " · 질문한 사람 " + (by.asked ? p1(by.asked.d7.rate, 1) : "–"));
+  }
+
+  // ⑧ AI 답 속도 — 24시간 타일 넷
+  function vSpeed(s) {
+    const box = $("vSpeed");
+    clear(box);
+    const tu = s ? s.turn : undefined, h = tu && tu.h24 && tu.h24.n > 0 ? tu.h24 : null;
+    setText("vSpeedSub", "24시간 · 목표 " + (tu && tu.goal_ms ? secV(tu.goal_ms.final) : "2.0초") + " 안");
+    const tile = (k, v, c) => { const t = hn("div", "card vtile", box); hn("div", "k", t, k); hn("div", "v num", t, v); hn("div", "c", t, c); };
+    tile("답 다 받음(중간)", h ? secV(h.total.p50) : "–", h ? "느린 10% " + secV(h.total.p90) : tu === null ? "속도 숫자를 못 불러왔어요." : "–");
+    tile("첫 글자(중간)", h ? secV(h.first_byte.p50) : "–", h ? "느린 10% " + secV(h.first_byte.p90) : "–");
+    tile("목표 넘은 답", h ? p1(h.over2s_rate) : "–", h ? n0(h.n) + "개 중 " + n0(h.over2s) : "–");
+    tile("오류 · 끊김", h ? p1((h.error_rate || 0) + (h.cut_rate || 0), 1) : "–", tu && tu.d7 ? "7일 끊김 " + n0(tu.d7.cuts) : "–");
+  }
+
+  const TOP_ALL = [vToday, vWeek, vSignup, vUsers, vTrial, vNew, vBack, vSpeed];
+  const TOP_OF = { snap: [vToday], trend: [vToday, vWeek, vUsers], reach: [vUsers], biz: [vToday, vSignup, vTrial, vNew, vBack], ads: [vSignup], adcost: [vSignup],
+    viz: [vUsers, vTrial, vNew], value: [vBack], turn: [vSpeed] };
+  // 값 띄우기 — 누르거나 올리면 그 칸(data-tip) 글 · 떠나면 숨김.
+  {
+    const tip = $("vtip"), top = $("vtop");
+    const show = (ev) => {
+      const t = ev.target && ev.target.closest ? ev.target.closest("[data-tip]") : null;
+      if (!t || !t.getAttribute("data-tip")) { tip.style.opacity = "0"; return; }
+      tip.textContent = t.getAttribute("data-tip");
+      tip.style.opacity = "1";
+      tip.style.left = Math.max(8, Math.min(window.innerWidth - tip.offsetWidth - 8, ev.clientX + 10)) + "px";
+      tip.style.top = Math.max(8, ev.clientY - 34) + "px";
+    };
+    top.addEventListener("pointermove", show);
+    top.addEventListener("pointerdown", show);
+    top.addEventListener("pointerleave", () => { tip.style.opacity = "0"; });
+    window.addEventListener("scroll", () => { tip.style.opacity = "0"; }, { passive: true });
+  }
+
   // ── 덩어리 → 카드 그리기 ──────────────────────────────────────────────
-  const CARD_OF = { hNow: null, hRev: null, hKeep: null, hFlow: null, hConv: null, hUse: null, hSug: null, hAiq: null, hUx8: null, hNdg: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
+  const CARD_OF = { vhToday: null, vhWeek: null, vhSu: null, vhUsers: null, vhTrial: null, vhNew: null, vhBack: null, vhSpeed: null, hNow: null, hRev: null, hKeep: null, hFlow: null, hConv: null, hUse: null, hSug: null, hAiq: null, hUx8: null, hNdg: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
-    snap: ["hNow"], trend: ["hNow"], reach: ["hNow"], biz: ["hNow", "hRev", "hKeep", "hFlow"], turn: ["hNow", "hSpeed"], ux: ["hNow", "hFeat"],
-    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], m453: ["hUx8"], ads: ["hFlow"], promo: ["hConv"], value: ["hVal"], fric: ["hFric"],
+    snap: ["hNow", "vhToday"], trend: ["hNow", "vhToday", "vhWeek", "vhUsers"], reach: ["hNow", "vhUsers"], biz: ["hNow", "hRev", "hKeep", "hFlow", "vhToday", "vhSu", "vhTrial", "vhNew", "vhBack"],
+    turn: ["hNow", "hSpeed", "vhSpeed"], ux: ["hNow", "hFeat"],
+    usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], m453: ["hUx8"], ads: ["hFlow", "vhSu"], promo: ["hConv"],
+    viz: ["vhUsers", "vhTrial", "vhNew"], adcost: ["vhSu"], value: ["hVal", "vhBack"], fric: ["hFric"],
   };
-  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo", "value", "fric"];
+  const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo", "viz", "adcost", "value", "fric"];
   // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
-  const LATE = ["m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo"];
-  const CARD_NEEDS = { hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz", "ads"], hConv: ["promo"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448", "m453"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
+  const LATE = ["m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo", "viz", "adcost"];
+  const CARD_NEEDS = { vhToday: ["snap", "trend", "biz"], vhWeek: ["trend"], vhSu: ["biz", "ads", "adcost"], vhUsers: ["reach", "trend", "viz"], vhTrial: ["biz", "viz"], vhNew: ["biz", "viz"],
+    vhBack: ["value", "biz"], vhSpeed: ["turn"], hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz", "ads"], hConv: ["promo"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448", "m453"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -2701,6 +3195,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
     else if (k === "turn") renderTurn(s.turn || null);
     else if (k === "fric") renderFric(s.fric || null);
     if (k === "snap" || k === "trend" || k === "reach" || k === "biz" || k === "ux" || k === "turn") renderKpis();
+    if (TOP_OF[k]) for (const f of TOP_OF[k]) f(s); // 맨 위 한눈에(OPSVIZ458)
   }
   function paint(k) {
     const cards = PART_CARDS[k].map((h) => CARD_OF[h]);
@@ -2872,6 +3367,7 @@ body[data-state="cached"] .dot { background: var(--s1-exp); }
   renderM453(undefined);
   renderAds(undefined);
   renderPromo(undefined);
+  for (const f of TOP_ALL) f(null); // 맨 위 — 칸 이름 + 「–」(새 숫자가 오면 채움)
   session = regToken ? null : readSession();
   if (session) { document.body.dataset.view = "stats"; boot(); load(); } else lockUI("");
 })();
