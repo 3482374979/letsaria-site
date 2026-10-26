@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-VdJiUizc8Ln44b9UixiUBOrI4Ms6vBWWlGwKZk9wlYg='; style-src 'sha256-yoyDcH/X3WwahEZu9cX5tHU0yN/ebhjjSFEW4kdaKg8='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bvBa1pObr+sl9Z7LRDfZsrt+3u0dXwR2cviGg2E8x04='; style-src 'sha256-yoyDcH/X3WwahEZu9cX5tHU0yN/ebhjjSFEW4kdaKg8='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -2944,7 +2944,7 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   }
   const failNote = (parent, x, what) => hn("p", "vnote", parent, x === null ? what + " 숫자를 못 불러왔어요." : "–");
 
-  // ① 오늘 — 가입 · 질문한 사람 · 체험 중 · 월 반복 매출
+  // ① 오늘 — 가입 · 질문한 사람 · 체험 중 · 구독 중(결제 중)
   function vToday(s) {
     const box = $("vTiles");
     clear(box);
@@ -2961,8 +2961,10 @@ details.vmore[open] > summary { margin-bottom: 10px; }
       "질문 " + n0(s && s.chat ? s.chat.questions : undefined) + " · 어제 이맘때 " + (tr ? n0(tr.askers.y) + "명" : "–"), tr ? tr.askers.daily : null);
     tile("체험 중", n0(T ? T.now : undefined), T ? "갱신 켬 " + n0(T.now_renew_on) + " · 30일 취소 " + p1(T.cancel_rate) + " · 선 = 하루 시작" :
       bz === null ? "사업 숫자를 못 불러왔어요." : "–", T ? T.daily.slice(-14) : null);
-    tile("월 반복 매출", R ? wonV(R.mrr.gross) : "–", T ? "체험 끝 결제 예정 " + wonV(T.expected.gross) : "–", null,
-      R ? "결제 중 " + n0(R.mrr.monthly_subs + R.mrr.yearly_subs) + "명 · 이번 달 " + wonV(R.this_month.gross) : "–");
+    // 10-26 23:35 회장님 「관리자페이지도 체험중, 구독중(결제중) 으로 업데이트 필요」 — 체험 중 옆 = 구독 중(결제 중) 사람 수 · 월 반복 매출은 아랫줄로.
+    tile("구독 중(결제 중)", R ? n0(R.mrr.monthly_subs + R.mrr.yearly_subs) : "–",
+      R ? "월간 " + n0(R.mrr.monthly_subs) + " · 연간 " + n0(R.mrr.yearly_subs) + " · 월 반복 매출 " + wonV(R.mrr.gross) : bz === null ? "사업 숫자를 못 불러왔어요." : "–", null,
+      R ? "이번 달 " + wonV(R.this_month.gross) + (T ? " · 체험 끝 결제 예정 " + wonV(T.expected.gross) : "") : "–");
     const tu = s && typeof s.test_users === "number" && s.test_users > 0 ? s.test_users : 0;
     setText("dayNote", s && s.at ? " · " + kstClock(s.at).slice(0, 5) + " 기준" + (tu ? " · 시험 계정 " + fmt(tu) + " 제외" : "") + " · 점선 끝 = 오늘(진행 중)" : "");
   }
