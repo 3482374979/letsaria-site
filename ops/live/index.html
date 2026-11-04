@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-UB802P+Ojmgu5INi3wB8o1291frpg0W2hpxJKlzSYZY='; style-src 'sha256-lKRm5oLKWftyz0CXOHXj8glZiLeXfv8BuZRPQ8H5rB0='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-fQzUnpf0laAUOzTkdHWIin0xN0QLC8j6rM2jCPPIwHg='; style-src 'sha256-xuyZf8zdcoGPOJlYa2u4zzanGGrrTCDvC8CkcVfxLGc='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -38,7 +38,7 @@
   --good: #1f9d55;
   --bad: #c2410c;
   --spark: #aeaeb2;
-  --band: rgba(42, 120, 214, 0.09);
+  --band: rgba(92, 153, 255, 0.26);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -65,7 +65,7 @@
     --good: #30d158;
     --bad: #ff8a4c;
     --spark: #636366;
-    --band: rgba(255, 255, 255, 0.08);
+    --band: rgba(92, 153, 255, 0.2);
   }
 }
 :root[data-theme="dark"] {
@@ -92,7 +92,7 @@
   --good: #30d158;
   --bad: #ff8a4c;
   --spark: #636366;
-  --band: rgba(255, 255, 255, 0.08);
+  --band: rgba(92, 153, 255, 0.2);
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -116,8 +116,8 @@ h2 { margin: 0 0 10px; font-size: 20px; font-weight: 700; letter-spacing: -0.01e
 .day { margin: 2px 0 16px; color: var(--ink-2); font-size: 13px; min-height: 18px; }
 .status {
   display: inline-flex; align-items: center; gap: 6px;
-  border: 0; border-radius: 999px; padding: 6px 10px;
-  background: var(--card); color: var(--ink-2);
+  border: 0; border-radius: 0; padding: 6px 0;
+  background: none; color: var(--ink-2);
   font: inherit; font-size: 13px; font-variant-numeric: tabular-nums;
   cursor: pointer; white-space: nowrap;
 }
@@ -248,20 +248,24 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .dg { color: var(--good); font-weight: 600; }
 .db { color: var(--bad); font-weight: 600; }
 .df { color: var(--ink-2); }
-/* 불러오는 동안 — 카드 크기 그대로 · 위 → 아래로 흐르는 밝은 띠(회색 막대 없음). 저장된 숫자는 흐리게 들고 있다가 새 숫자로. */
+/* 불러오는 동안(스켈레톤 · U9 🔒 빛 흐름 · 11-04 「로딩 중일 때 표시」) — 도착할 카드와 같은 판 · 같은 곡률 · 지난번 높이 위로 옅은 파란 빛 띠가 위 → 아래로 흐름
+   (회색 막대 · 좌→우 반짝임 · 스피너 0). 저장된 숫자(wait)는 흐리게 들고 같은 빛이 흐르다가 새 숫자로. 도착 = 글 · 그림이 같은 0.25s ease 로 한 번에. */
 .card > *, .kpi { transition: opacity 0.25s ease; }
-.card.skel { overflow: hidden; }
-.card.skel > :not(.hrow), .kpi.pend { opacity: 0; }
-.card.wait > :not(.hrow) { opacity: 0.55; }
-.card.skel::after {
+.card.skel, .card.wait, .vsec.skel .card, .vsec.wait .card { overflow: hidden; }
+.card.skel > :not(.hrow), .kpi.pend, .vsec.skel .card > * { opacity: 0; }
+.card.wait > :not(.hrow), .vsec.wait .card > * { opacity: 0.55; }
+.card.skel::after, .card.wait::after, .vsec.skel .card::after, .vsec.wait .card::after {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 45%; pointer-events: none;
   background: linear-gradient(180deg, transparent, var(--band) 50%, transparent);
   animation: band 1.6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
 @keyframes band { from { transform: translateY(-100%); } to { transform: translateY(223%); } }
+.card.reveal > :not(.hrow), .vsec.reveal .card > * { animation: skin 0.25s ease both; }
+@keyframes skin { from { opacity: 0; } to { opacity: 1; } }
 .card.grow { overflow: hidden; transition: height 0.28s ease; }
 @media (prefers-reduced-motion: reduce) {
-  .card.skel::after { animation: none; height: 100%; }
+  .card.skel::after, .card.wait::after, .vsec.skel .card::after, .vsec.wait .card::after { animation: none; height: 100%; }
+  .card.reveal > :not(.hrow), .vsec.reveal .card > * { animation: none; }
   .card.grow { transition: none; }
 }
 body[data-state="cached"] .dot { background: var(--s1-exp); }
@@ -332,18 +336,10 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   position: fixed; left: 0; top: 0; z-index: 9; pointer-events: none; opacity: 0; transition: opacity 0.1s;
   padding: 5px 8px; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: 12px; white-space: nowrap;
 }
-/* 스켈레톤 · 저장된 숫자 — 맨 위 덩어리는 칸(section) 단위로 카드마다 띠 */
-.vsec.skel .card { overflow: hidden; }
-.vsec.skel .card > * { opacity: 0; }
-.vsec.wait .card > * { opacity: 0.55; }
-.vsec.skel .card::after {
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 45%; pointer-events: none;
-  background: linear-gradient(180deg, transparent, var(--band) 50%, transparent);
-  animation: band 1.6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
-}
+/* 높이 — 맨 위 덩어리는 칸(section) 단위(스켈레톤 · 저장된 숫자는 위 한 벌) */
 .vsec.grow { overflow: hidden; transition: height 0.28s ease; }
+.vgrid + .card { margin-top: 10px; }
 @media (prefers-reduced-motion: reduce) {
-  .vsec.skel .card::after { animation: none; height: 100%; }
   .vsec.grow { transition: none; }
 }
 </style>
@@ -368,6 +364,10 @@ details.vmore[open] > summary { margin-bottom: 10px; }
       <h2 id="vhToday">오늘</h2>
       <div class="vgrid" id="vTiles"></div>
     </section>
+    <section class="vsec" aria-labelledby="vhUsers">
+      <h2 id="vhUsers">쓰는 사람<small>하루 · 같은 단위(사람)</small></h2>
+      <div class="card" id="vUsers"></div>
+    </section>
     <section class="vsec" aria-labelledby="vhWeek">
       <h2 id="vhWeek">지난 7일<small>그 전 7일과 견줌</small></h2>
       <div class="card" id="vWeek"></div>
@@ -375,14 +375,6 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     <section class="vsec" aria-labelledby="vhSu">
       <h2 id="vhSu">가입<small>30일 · 하루씩</small></h2>
       <div class="card" id="vSu"></div>
-    </section>
-    <section class="vsec" aria-labelledby="vhUsers">
-      <h2 id="vhUsers">쓰는 사람<small>하루 · 같은 단위(사람)</small></h2>
-      <div class="card" id="vUsers"></div>
-    </section>
-    <section class="vsec" aria-labelledby="vhTrial">
-      <h2 id="vhTrial">체험 → 구독<small>30일</small></h2>
-      <div class="card" id="vTrial"></div>
     </section>
     <section class="vsec" aria-labelledby="vhNew">
       <h2 id="vhNew">새 사람 첫 7일<small>가입한 사람 중</small></h2>
@@ -395,6 +387,11 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     <section class="vsec" aria-labelledby="vhSpeed">
       <h2 id="vhSpeed">AI 답 속도<small id="vSpeedSub">24시간</small></h2>
       <div class="vgrid" id="vSpeed"></div>
+    </section>
+    <section class="vsec" aria-labelledby="vhTrial">
+      <h2 id="vhTrial">매출 현황<small>구독 · 체험 → 구독 30일</small></h2>
+      <div class="vgrid" id="vMoney"></div>
+      <div class="card" id="vTrial"></div>
     </section>
     <h2 class="vmore-h" id="vhMore">자세히</h2>
   </div>
@@ -2812,8 +2809,9 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   }
 
   // ── 맨 위 한눈에(OPSVIZ458 · 10-23 22:06 회장님 「관2」) ─────────────────────────────────────────────
-  // 차례(시선 한 길) = 오늘(타일 넷 · 14일 작은 추세선) → 지난 7일 vs 그 전 7일 → 가입 30일(+ 설치당 광고비) → 쓰는 사람(+ 앱 판) →
-  //   체험 → 구독(+ 날마다 매출) → 새 사람 첫 7일(+ 24시간 안 첫 질문 비율) → 다음 날 다시 오나 → AI 답 속도. 그 아래 「자세히」 = 예전 덩어리 그대로(접힘).
+  // 차례(시선 한 길 · 11-04 앱 활성도 먼저) = 오늘(가입 · 지금 쓰는 사람 · 오늘 앱 연 사람 · 질문한 사람) → 쓰는 사람(+ 앱 판) → 지난 7일 vs 그 전 7일 →
+  //   가입 30일(+ 설치당 광고비) → 새 사람 첫 7일(+ 24시간 안 첫 질문 비율) → 다음 날 다시 오나 → AI 답 속도 →
+  //   매출 현황(구독 중 · 체험 중 + 체험 → 구독 + 날마다 매출). 그 아래 「자세히」 = 예전 덩어리 그대로(접힘).
   // 손 SVG(바깥 0) · 파랑 s1 / 주황 s2 · 같은 단위만 한 그림 · 오늘(진행 중) = 점선(+ 작은 추세선은 빈 원) · 숫자 글 = 글 잉크 · 누르면/올리면 값(data-tip → #vtip).
   // 칸 = 응답 그대로 · undefined(옛 함수 · 처음) = 「–」 · null(못 불러옴) = 「… 못 불러왔어요.」 · DOM 으로만 짓는다(textContent).
   const VW = 340;
@@ -2970,11 +2968,12 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   }
   const failNote = (parent, x, what) => hn("p", "vnote", parent, x === null ? what + " 숫자를 못 불러왔어요." : "–");
 
-  // ① 오늘 — 가입 · 질문한 사람 · 체험 중 · 구독 중(결제 중)
+  // ① 오늘 — 앱 활성도(11-04 회장님 「상단에는 최근 가입, 활성 사용자 등 앱 활성도 위주로」): 가입 · 지금 쓰는 사람 · 오늘 앱 연 사람 · 질문한 사람.
+  //   체험 중 · 구독 중(결제 중)은 맨 위에서 빼 「매출 현황」(vMoney)으로.
   function vToday(s) {
     const box = $("vTiles");
     clear(box);
-    const tr = s ? s.trend : undefined, bz = s ? s.biz : undefined, T = bz ? bz.trials : null, R = bz ? bz.revenue : null;
+    const tr = s ? s.trend : undefined, rc = s ? s.reach : undefined, A = s ? s.active : undefined;
     const tile = (k, v, c, sp, extra) => {
       const t = hn("div", "card vtile", box);
       hn("div", "k", t, k);
@@ -2983,14 +2982,12 @@ details.vmore[open] > summary { margin-bottom: 10px; }
       if (extra === undefined) vSpark(t, sp); else hn("div", "c vx", t, extra);
     };
     tile("가입", n0(s && s.signups ? s.signups.total : undefined), tr ? "어제 이맘때 " + n0(tr.signups.y) + " · 지난주 " + n0(tr.signups.wk) : "–", tr ? tr.signups.daily : null);
+    tile("지금 쓰는 사람", n0(A ? A.m5 : undefined), A ? "5분 · 15분 " + n0(A.m15) + " · 1시간 " + n0(A.h1) : "–", null,
+      s && s.chat ? "1시간 안 질문한 사람 " + n0(s.chat.askers_1h) : "–");
+    tile("오늘 앱 연 사람", n0(rc ? rc.dau.today : undefined), rc ? "어제 이맘때 " + n0(rc.dau.y) + " · 지난주 " + n0(rc.dau.wk) : rc === null ? "DAU 숫자를 못 불러왔어요." : "–",
+      rc ? rc.dau.daily.slice(-14) : null);
     tile("질문한 사람", n0(s && s.chat ? s.chat.askers_today : undefined),
       "질문 " + n0(s && s.chat ? s.chat.questions : undefined) + " · 어제 이맘때 " + (tr ? n0(tr.askers.y) + "명" : "–"), tr ? tr.askers.daily : null);
-    tile("체험 중", n0(T ? T.now : undefined), T ? "갱신 켬 " + n0(T.now_renew_on) + " · 30일 취소 " + p1(T.cancel_rate) + " · 선 = 하루 시작" :
-      bz === null ? "사업 숫자를 못 불러왔어요." : "–", T ? T.daily.slice(-14) : null);
-    // 10-26 23:35 회장님 「관리자페이지도 체험중, 구독중(결제중) 으로 업데이트 필요」 — 체험 중 옆 = 구독 중(결제 중) 사람 수 · 월 반복 매출은 아랫줄로.
-    tile("구독 중(결제 중)", R ? n0(R.mrr.monthly_subs + R.mrr.yearly_subs) : "–",
-      R ? "월간 " + n0(R.mrr.monthly_subs) + " · 연간 " + n0(R.mrr.yearly_subs) + " · 월 반복 매출 " + wonV(R.mrr.gross) : bz === null ? "사업 숫자를 못 불러왔어요." : "–", null,
-      R ? "이번 달 " + wonV(R.this_month.gross) + (T ? " · 체험 끝 결제 예정 " + wonV(T.expected.gross) : "") : "–");
     const tu = s && typeof s.test_users === "number" && s.test_users > 0 ? s.test_users : 0;
     setText("dayNote", s && s.at ? " · " + kstClock(s.at).slice(0, 5) + " 기준" + (tu ? " · 시험 계정 " + fmt(tu) + " 제외" : "") + " · 점선 끝 = 오늘(진행 중)" : "");
   }
@@ -3069,14 +3066,29 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   }
 
   // ⑤ 체험 → 구독 30일(하루 체험 시작) + 날마다 매출(viz.revenue · 정가 결제 총액)
+  // ⑧ 매출 현황 — 구독 중(결제 중) · 체험 중(맨 위 「오늘」에서 옮김) + 체험 → 구독(+ 날마다 매출)
   function vTrial(s) {
-    const box = $("vTrial");
+    const box = $("vTrial"), tb = $("vMoney");
     clear(box);
+    clear(tb);
     const bz = s ? s.biz : undefined, T = bz ? bz.trials : null, R = bz ? bz.revenue : null;
+    const tile = (k, v, c, sp, extra) => {
+      const t = hn("div", "card vtile", tb);
+      hn("div", "k", t, k);
+      hn("div", "v num", t, v);
+      hn("div", "c", t, c);
+      if (extra === undefined) vSpark(t, sp); else hn("div", "c vx", t, extra);
+    };
+    // 10-26 23:35 회장님 「관리자페이지도 체험중, 구독중(결제중) 으로 업데이트 필요」 — 이름 그대로.
+    tile("구독 중(결제 중)", R ? n0(R.mrr.monthly_subs + R.mrr.yearly_subs) : "–",
+      R ? "월간 " + n0(R.mrr.monthly_subs) + " · 연간 " + n0(R.mrr.yearly_subs) + " · 월 반복 매출 " + wonV(R.mrr.gross) : bz === null ? "사업 숫자를 못 불러왔어요." : "–", null,
+      R ? "이번 달 " + wonV(R.this_month.gross) + (T ? " · 체험 끝 결제 예정 " + wonV(T.expected.gross) : "") : "–");
+    tile("체험 중", n0(T ? T.now : undefined), T ? "갱신 켬 " + n0(T.now_renew_on) + " · 30일 취소 " + p1(T.cancel_rate) + " · 선 = 하루 시작" :
+      bz === null ? "사업 숫자를 못 불러왔어요." : "–", T ? T.daily.slice(-14) : null);
+    legend(box, [["c1", "체험 시작"]]);
     vBars(box, T ? T.daily.map((_, i) => mdOf(T.days_from, i)) : [], [{ name: "체험 시작", vals: T ? T.daily : [], cls: "vf1" }],
       { height: 120, label: "최근 30일 날마다 무료 체험 시작 막대" });
-    facts(box, [["30일 시작", T ? n0(T.started_30d) : "–"], ["체험 중 취소", T ? p1(T.cancel_rate) : "–"], ["끝나서 결제", T ? n0(T.converted_30d) + "/" + n0(T.ended_30d) : "–"],
-      ["지금 결제 중", R ? n0(R.mrr.monthly_subs + R.mrr.yearly_subs) : "–"]]);
+    facts(box, [["30일 시작", T ? n0(T.started_30d) : "–"], ["체험 중 취소", T ? p1(T.cancel_rate) : "–"], ["끝나서 결제", T ? n0(T.converted_30d) + "/" + n0(T.ended_30d) : "–"]]);
     hn("p", "vnote", box, bz === null ? "사업 숫자를 못 불러왔어요." : "체험은 7일 · 이번 주 체험이 끝나는 다음 주부터 「끝나서 결제」가 쌓여요.");
     const v = s ? s.viz : undefined, rv = v ? v.revenue : null, sub = subHead(box, "매출 · 하루씩", "정가 결제 · 총액");
     if (!rv) { failNote(sub, v, "새 칸"); return; }
@@ -3143,8 +3155,8 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     tile("오류 · 끊김", h ? p1((h.error_rate || 0) + (h.cut_rate || 0), 1) : "–", tu && tu.d7 ? "7일 끊김 " + n0(tu.d7.cuts) : "–");
   }
 
-  const TOP_ALL = [vToday, vWeek, vSignup, vUsers, vTrial, vNew, vBack, vSpeed];
-  const TOP_OF = { snap: [vToday], trend: [vToday, vWeek, vUsers], reach: [vUsers], biz: [vToday, vSignup, vTrial, vNew, vBack], ads: [vSignup], adcost: [vSignup],
+  const TOP_ALL = [vToday, vUsers, vWeek, vSignup, vNew, vBack, vSpeed, vTrial];
+  const TOP_OF = { snap: [vToday], trend: [vToday, vWeek, vUsers], reach: [vToday, vUsers], biz: [vSignup, vTrial, vNew, vBack], ads: [vSignup], adcost: [vSignup],
     viz: [vUsers, vTrial, vNew], value: [vBack], turn: [vSpeed] };
   // 값 띄우기 — 누르거나 올리면 그 칸(data-tip) 글 · 떠나면 숨김.
   {
@@ -3167,7 +3179,7 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   const CARD_OF = { vhToday: null, vhWeek: null, vhSu: null, vhUsers: null, vhTrial: null, vhNew: null, vhBack: null, vhSpeed: null, hNow: null, hRev: null, hKeep: null, hFlow: null, hConv: null, hUse: null, hSug: null, hAiq: null, hUx8: null, hNdg: null, hFeat: null, hSpeed: null, hFric: null, hVal: null };
   for (const h in CARD_OF) CARD_OF[h] = $(h).closest("section");
   const PART_CARDS = {
-    snap: ["hNow", "vhToday"], trend: ["hNow", "vhToday", "vhWeek", "vhUsers"], reach: ["hNow", "vhUsers"], biz: ["hNow", "hRev", "hKeep", "hFlow", "vhToday", "vhSu", "vhTrial", "vhNew", "vhBack"],
+    snap: ["hNow", "vhToday"], trend: ["hNow", "vhToday", "vhWeek", "vhUsers"], reach: ["hNow", "vhToday", "vhUsers"], biz: ["hNow", "hRev", "hKeep", "hFlow", "vhSu", "vhTrial", "vhNew", "vhBack"],
     turn: ["hNow", "hSpeed", "vhSpeed"], ux: ["hNow", "hFeat"],
     usage: ["hUse"], m117: ["hSug"], m448: ["hAiq", "hUx8"], nudge: ["hNdg"], island: ["hAiq"], payflow: ["hUse"], offer50: ["hUse"], m453: ["hUx8"], ads: ["hFlow", "vhSu"], promo: ["hConv"],
     viz: ["vhUsers", "vhTrial", "vhNew"], adcost: ["vhSu"], value: ["hVal", "vhBack"], fric: ["hFric"],
@@ -3175,7 +3187,7 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   const PARTS = ["snap", "trend", "reach", "biz", "turn", "ux", "usage", "m117", "m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo", "viz", "adcost", "value", "fric"];
   // 늦게 생긴 덩어리 — 옛 함수(롤백) · 옛 저장 숫자엔 열쇠가 없다 → 그리지 않고 카드는 「–」 그대로.
   const LATE = ["m448", "nudge", "island", "payflow", "offer50", "m453", "ads", "promo", "viz", "adcost"];
-  const CARD_NEEDS = { vhToday: ["snap", "trend", "biz"], vhWeek: ["trend"], vhSu: ["biz", "ads", "adcost"], vhUsers: ["reach", "trend", "viz"], vhTrial: ["biz", "viz"], vhNew: ["biz", "viz"],
+  const CARD_NEEDS = { vhToday: ["snap", "trend", "reach"], vhWeek: ["trend"], vhSu: ["biz", "ads", "adcost"], vhUsers: ["reach", "trend", "viz"], vhTrial: ["biz", "viz"], vhNew: ["biz", "viz"],
     vhBack: ["value", "biz"], vhSpeed: ["turn"], hNow: ["snap", "trend"], hRev: ["biz"], hKeep: ["biz"], hFlow: ["biz", "ads"], hConv: ["promo"], hUse: ["usage", "payflow", "offer50"], hSug: ["m117"], hAiq: ["m448", "island"], hUx8: ["m448", "m453"], hNdg: ["nudge"], hFeat: ["ux"], hSpeed: ["turn"], hFric: ["fric"], hVal: ["value"] };
   let cur = null, lastOkAt = 0, timer = 0, busy = false;
   let fresh = new Set();
@@ -3232,7 +3244,7 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     const hs = cards.map((c) => c.offsetHeight);
     draw(k);
     cards.forEach((c, i) => settle(c, hs[i]));
-    for (const h of PART_CARDS[k]) if (CARD_NEEDS[h].every((p) => fresh.has(p))) CARD_OF[h].classList.remove("skel", "wait");
+    for (const h of PART_CARDS[k]) if (CARD_NEEDS[h].every((p) => fresh.has(p))) reveal(CARD_OF[h]);
   }
   // 받은 덩어리 하나. snap = 맨 위 칸(펼침) · 나머지 = 그 열쇠.
   function onFrame(k, v) {
@@ -3289,6 +3301,15 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     return ended;
   }
   function allCards() { return Object.keys(CARD_OF).map((h) => CARD_OF[h]); }
+  // 스켈레톤 → 숫자: 막대를 빼고 글 · 그림을 같은 결(0.25s ease)로 한 번에. 저장된 숫자(wait)는 흐림만 푼다.
+  function reveal(card) {
+    const was = card.classList.contains("skel");
+    card.classList.remove("skel", "wait");
+    if (!was || reduceMotion) return;
+    card.classList.add("reveal");
+    clearTimeout(card._rev);
+    card._rev = setTimeout(() => card.classList.remove("reveal"), 300);
+  }
   // 처음(저장된 숫자 없음) — 카드마다 지난번 높이 그대로 · 흐르는 띠.
   function skeleton() {
     let hm = null;
@@ -3308,7 +3329,7 @@ details.vmore[open] > summary { margin-bottom: 10px; }
   }
   // 못 받은 카드는 띠를 멈추고 「–」 그대로(연결 끊김 표시는 위 상태 줄).
   function unskel() {
-    for (const c of allCards()) { c.classList.remove("skel", "wait"); c.style.minHeight = ""; }
+    for (const c of allCards()) { reveal(c); c.style.minHeight = ""; }
     for (const k of KPI) $(k.id).classList.remove("pend");
   }
   function clearView() {
