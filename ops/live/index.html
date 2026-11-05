@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-fQzUnpf0laAUOzTkdHWIin0xN0QLC8j6rM2jCPPIwHg='; style-src 'sha256-xuyZf8zdcoGPOJlYa2u4zzanGGrrTCDvC8CkcVfxLGc='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-dByGTuXzGxHVM/KvT7dKq4+QVVhKM74lfDjdXh/AoAk='; style-src 'sha256-xuyZf8zdcoGPOJlYa2u4zzanGGrrTCDvC8CkcVfxLGc='; connect-src https://chcxqojugeuzusmjspdp.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="color-scheme" content="light dark">
@@ -381,7 +381,7 @@ details.vmore[open] > summary { margin-bottom: 10px; }
       <div class="card" id="vNew"></div>
     </section>
     <section class="vsec" aria-labelledby="vhBack">
-      <h2 id="vhBack">다음 날 다시 오나<small>첫날 한 일별 · D1</small></h2>
+      <h2 id="vhBack">다음 날 다시 오나<small>첫날 한 일별 · D1 · 백그라운드 포함</small></h2>
       <div class="card" id="vBack"></div>
     </section>
     <section class="vsec" aria-labelledby="vhSpeed">
@@ -983,7 +983,7 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     <div class="defs" id="dNow" hidden>
       <p>숫자만 보여요. 이름·이메일·대화 내용은 없어요. 1분마다 새로 고침 — 열면 이 기기에 저장된 마지막 숫자를 먼저(시각 표시) 보여 주고 새 숫자로 바꿔요.</p>
       <p>추세 줄 = 최근 14일 날마다(오른쪽 끝 = 오늘 · 점선 = 아직 도는 중). 전일 = 오늘 지금까지 ÷ 어제 같은 시각까지 · 전주 = 지난주 같은 요일 같은 시각까지 · 7일 = 최근 7일 합 ÷ 그 앞 7일(DAU · WAU · MAU · 고착도는 꽉 찬 최근 7일(어제까지) 평균 ÷ 그 앞 7일 평균). 비교 바탕이 10 밑이면 % 대신 차이(▲2). 답 → 행동은 %p 차이 · 답 끝은 초 차이(7일 = 날마다 값을 답 수로 묶은 것). 초록 = 좋아짐 · 주황 = 나빠짐.</p>
-      <p>DAU · WAU · MAU = 그날 · 그날까지 7일 · 30일(한국 날짜) 동안 한 번이라도 앱을 열어 로그인 토큰이 갱신됐거나 AI를 썼거나 질문한 서로 다른 사람(유지 · 가치 고착도와 같은 숫자 · 5분마다 새로 셈 · 지난 창의 AI 요청은 그날 마지막 시각만 남아 조금 덜 셀 수 있어요). 고착도 = DAU ÷ MAU(MAU 5명 밑은 가림).</p>
+      <p>DAU · WAU · MAU = 그날 · 그날까지 7일 · 30일(한국 날짜) 동안 한 번이라도 로그인 토큰이 갱신됐거나 AI를 썼거나 질문한 서로 다른 사람(유지 · 가치 고착도와 같은 숫자 · 5분마다 새로 셈 · 지난 창의 AI 요청은 그날 마지막 시각만 남아 조금 덜 셀 수 있어요). 토큰은 백그라운드 새로고침 · 아침 자동 브리핑에서도 갱신돼 앱을 안 연 날도 세요 = 맨 위 「설치 남은 사람」. 앞에서 쓴 사람은 맨 위 「사용자」(앞에서 연 사람 또는 질문한 사람). 고착도 = DAU ÷ MAU(MAU 5명 밑은 가림).</p>
       <p>질문 = 동기화된 채팅 질문(구독자 포함 · 지운 대화도 셈 · 대화 동기화를 끈 사람은 빠져요). 체험 시작 = 수익 · 유지와 같은 뜻. 답 → 행동 · 답 끝 = 아래 「기능 · AI 행동」 · 「AI 답 속도」와 같은 뜻.</p>
       <p>지금 = 5분 · 15분 · 1시간 안에 활동한 사람. 오늘 = 한국 시간 0시부터.</p>
       <p>시험 계정(운영 설정 ops.test_users 목록)은 이 페이지의 모든 사람 · 건수에서 빼요. AI 답 속도 · 갈래별 표는 사람 칸이 없는 익명 기록이라 그대로예요.</p>
@@ -2933,7 +2933,8 @@ details.vmore[open] > summary { margin-bottom: 10px; }
         }
         return d;
       };
-      const d1 = path(0, Math.min(dash, n) - 1), d2 = dash < n ? path(Math.max(0, dash - 1), n - 1) : "";
+      const zd = z.dash === undefined ? dash : z.dash;
+      const d1 = path(0, Math.min(zd, n) - 1), d2 = zd < n ? path(Math.max(0, zd - 1), n - 1) : "";
       if (d1) el("path", { d: d1, class: "vln " + z.k }, s);
       if (d2) el("path", { d: d2, class: "vln " + z.k, "stroke-dasharray": "3 3" }, s);
       z.vals.forEach((v, i) => { if (isNum(v) && !isNum(z.vals[i - 1]) && !isNum(z.vals[i + 1])) el("circle", { cx: X(i), cy: Y(v), r: 2.5, class: z.f }, s); });
@@ -2981,15 +2982,27 @@ details.vmore[open] > summary { margin-bottom: 10px; }
       hn("div", "c", t, c);
       if (extra === undefined) vSpark(t, sp); else hn("div", "c vx", t, extra);
     };
-    tile("가입", n0(s && s.signups ? s.signups.total : undefined), tr ? "어제 이맘때 " + n0(tr.signups.y) + " · 지난주 " + n0(tr.signups.wk) : "–", tr ? tr.signups.daily : null);
+    // growth1105(표 14 13번 줄) — 가입 = 온보딩 끝 · 사용자 = 앞에서 연 사람 ∪ 질문한 사람(reach.front). 앱 보고는 다음 날 올라와 오늘 칸이 없다(null) →
+    //   사용자 · 앞에서 연 사람 = 어제(덜 참) · 이튿날 다시 = 그제 끝낸 사람. 옛 DAU(토큰 갱신 포함)는 「설치 남은 사람」으로 이름만 바꿔 맨 끝.
+    const fr = rc ? rc.front : undefined, fn = fr ? fr.done.length : 0;
+    const d1r = (i) => (fr && fr.done[i] > 0 && isNum(fr.d1[i]) ? fr.d1[i] / fr.done[i] : null);
+    tile("가입 · 온보딩 끝", n0(fr ? fr.done[fn - 1] : undefined), fr ? "어제 " + n0(fr.done[fn - 2]) + " · 첫 실행(설치) " + n0(s && s.signups ? s.signups.total : undefined) : "–",
+      fr ? fr.done.slice(-14) : null);
     tile("지금 쓰는 사람", n0(A ? A.m5 : undefined), A ? "5분 · 15분 " + n0(A.m15) + " · 1시간 " + n0(A.h1) : "–", null,
       s && s.chat ? "1시간 안 질문한 사람 " + n0(s.chat.askers_1h) : "–");
-    tile("오늘 앱 연 사람", n0(rc ? rc.dau.today : undefined), rc ? "어제 이맘때 " + n0(rc.dau.y) + " · 지난주 " + n0(rc.dau.wk) : rc === null ? "DAU 숫자를 못 불러왔어요." : "–",
-      rc ? rc.dau.daily.slice(-14) : null);
+    tile("사용자 · 어제", n0(fr ? fr.user[fn - 2] : undefined), fr ? "덜 참 · 그제 " + n0(fr.user[fn - 3]) : rc === null ? "DAU 숫자를 못 불러왔어요." : "–",
+      fr ? fr.user.slice(-15, -1) : null);
     tile("질문한 사람", n0(s && s.chat ? s.chat.askers_today : undefined),
       "질문 " + n0(s && s.chat ? s.chat.questions : undefined) + " · 어제 이맘때 " + (tr ? n0(tr.askers.y) + "명" : "–"), tr ? tr.askers.daily : null);
+    tile("첫 질문", n0(fr ? fr.q1[fn - 1] : undefined), fr ? "어제 " + n0(fr.q1[fn - 2]) : "–", fr ? fr.q1.slice(-14) : null);
+    tile("이튿날 다시", p1(d1r(fn - 3)), fr ? "그제 끝낸 " + n0(fr.done[fn - 3]) + "명 중 " + n0(fr.d1[fn - 3]) + " · 덜 참" : "–",
+      fr ? fr.done.map((_, i) => d1r(i)).slice(-16, -2) : null);
+    tile("앞에서 연 사람 · 어제", n0(fr ? fr.open[fn - 2] : undefined), fr ? "덜 참 · 그제 " + n0(fr.open[fn - 3]) : "–", fr ? fr.open.slice(-15, -1) : null);
+    tile("설치 남은 사람", n0(rc ? rc.dau.today : undefined), rc ? "백그라운드 포함 · 어제 이맘때 " + n0(rc.dau.y) + " · 지난주 " + n0(rc.dau.wk) : rc === null ? "DAU 숫자를 못 불러왔어요." : "–",
+      rc ? rc.dau.daily.slice(-14) : null);
     const tu = s && typeof s.test_users === "number" && s.test_users > 0 ? s.test_users : 0;
-    setText("dayNote", s && s.at ? " · " + kstClock(s.at).slice(0, 5) + " 기준" + (tu ? " · 시험 계정 " + fmt(tu) + " 제외" : "") + " · 점선 끝 = 오늘(진행 중)" : "");
+    setText("dayNote", s && s.at ? " · " + kstClock(s.at).slice(0, 5) + " 기준" + (tu ? " · 시험 계정 " + fmt(tu) + " 제외" : "") +
+      " · 점선 끝 = 아직 차는 날(앱 보고는 다음 날 올라와 오늘 칸이 없어요)" : "");
   }
 
   // ② 지난 7일 vs 그 전 7일 — 막대 둘 · ▲▼
@@ -3044,14 +3057,15 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     const box = $("vUsers");
     clear(box);
     const rc = s ? s.reach : undefined, tr = s ? s.trend : undefined;
-    legend(box, [["c1", "앱을 연 사람"], ["c2", "질문한 사람"]]);
+    legend(box, [["c1", "사용자"], ["c2", "질문한 사람"]]);
     const dl = rc ? rc.dau.daily.map((_, i) => mdOf(rc.days_from, i)) : [];
     const off = rc && tr ? Math.round((Date.parse(tr.days_from + "T00:00:00Z") - Date.parse(rc.days_from + "T00:00:00Z")) / 86400000) : 0;
     const ask = dl.map((_, i) => (tr && i - off >= 0 && isNum(tr.askers.daily[i - off]) ? tr.askers.daily[i - off] : null));
-    vLines(box, dl, [{ name: "연 사람", vals: rc ? rc.dau.daily : [], k: "vk1", f: "vf1" }, { name: "질문", vals: ask, k: "vk2", f: "vf2" }],
-      { label: "최근 15일 날마다 앱을 연 사람과 질문한 사람" });
-    facts(box, [["주간", rc ? n0(rc.wau.today) : "–"], ["월간", rc ? n0(rc.mau.today) : "–"], ["하루/월", rc ? p1(rc.stick.today) : "–"]]);
-    if (rc === null) hn("p", "vnote", box, "DAU 숫자를 못 불러왔어요.");
+    vLines(box, dl, [{ name: "사용자", vals: rc && rc.front ? rc.front.user : [], k: "vk1", f: "vf1", dash: dl.length - 2 }, { name: "질문", vals: ask, k: "vk2", f: "vf2" }],
+      { label: "최근 15일 날마다 사용자(앞에서 연 사람과 질문한 사람)와 질문한 사람" });
+    facts(box, [["설치 남은 사람 주간", rc ? n0(rc.wau.today) : "–"], ["월간", rc ? n0(rc.mau.today) : "–"], ["하루/월", rc ? p1(rc.stick.today) : "–"]]);
+    hn("p", "vnote", box, rc === null ? "DAU 숫자를 못 불러왔어요." :
+      "사용자 = 앞에서 연 사람(앱 보고 · 다음 날 올라와 오늘은 비고 어제는 덜 참) 또는 질문한 사람(겹치면 한 명) · 설치 남은 사람 = 토큰 갱신 · AI 요청 · 질문(백그라운드 새로고침 포함)");
     const v = s ? s.viz : undefined, vr = v ? v.versions : null;
     // 회장님 10-24 13:50:17 「오늘 사용자보다 최신버전 업데이트가 더 적은데」 — 사람 칸은 결제 화면 · 평가를 본 사람만이라 「쓰는 사람」과 견주면 틀려 보인다.
     // 먼저 = AI 요청 판 비율(쓰는 판에 가장 가까움) · 사람 칸은 「결제 화면 · 평가 본 사람만」 이름을 박아 뒤로. 사람별 판 전부는 1.1.8+ 기기 줄로 459 뒤.
@@ -3060,9 +3074,9 @@ details.vmore[open] > summary { margin-bottom: 10px; }
     const P = vr.people, A = vr.ai;
     if (!P.total && !A.total) { hn("p", "vnote", sub, "최근 7일 판 기록이 없어요."); return; }
     vHbars(sub, A.rows.map((r) => ({ k: verName(r.v), w: r.share, v: n0(r.n) + "건", sm: p1(r.share), tip: verName(r.v) + " · " + n0(r.n) + "건 · " + p1(r.share, 1) })));
-    facts(sub, [["AI 요청", n0(A.total) + "건"], ["주간 쓰는 사람", rc ? n0(rc.wau.today) + "명" : "–"]]);
+    facts(sub, [["AI 요청", n0(A.total) + "건"], ["주간 설치 남은 사람", rc ? n0(rc.wau.today) + "명" : "–"]]);
     hn("p", "vnote", sub, "결제 화면 · 평가 본 사람만(" + n0(P.total) + "명 · 일부): " + (P.rows.length ? P.rows.map((r) => verName(r.v) + " " + n0(r.n) + "명").join(" · ") : "–"));
-    hn("p", "vnote", sub, "모든 사람의 판을 남기는 표가 아직 없어요 — 위 막대는 요청 수 · 아래 사람 수는 결제 화면 · 권유 · 답 평가를 본 사람만이라 「주간 쓰는 사람」과 같은 단위가 아니에요.");
+    hn("p", "vnote", sub, "모든 사람의 판을 남기는 표가 아직 없어요 — 위 막대는 요청 수 · 아래 사람 수는 결제 화면 · 권유 · 답 평가를 본 사람만이라 「주간 설치 남은 사람」과 같은 단위가 아니에요.");
   }
 
   // ⑤ 체험 → 구독 30일(하루 체험 시작) + 날마다 매출(viz.revenue · 정가 결제 총액)
