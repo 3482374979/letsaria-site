@@ -10,5 +10,8 @@
         ]
       }
     ]
+  },
+  "webcredentials": {
+    "apps": ["7AX6U4DAYN.ko.aria.app"]
   }
 }
